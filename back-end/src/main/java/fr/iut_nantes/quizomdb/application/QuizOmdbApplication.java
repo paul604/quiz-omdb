@@ -1,4 +1,4 @@
-package fr.iut_nantes.quizomdb;
+package fr.iut_nantes.quizomdb.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
