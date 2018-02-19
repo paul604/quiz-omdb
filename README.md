@@ -10,3 +10,9 @@ Projet LP MiAR
  
 Quiz-OMDB est une application génératrice de questions aléatoires à partir de l'API de OMDB.
 Sur cette application, on pourra créer un compte et répondre à ces questions. Le nombre de bonnes réponses sera enregistré.
+
+#
+| | License |
+|:---:|:-----:|
+| Repot GitHub | [MIT](http://www.opensource.org/licenses/mit-license.php) |
+| [OMDB](https://www.omdbapi.com/) | [![cc-BY-NC](https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg)](https://creativecommons.org/licenses/by-nc/4.0/)|
