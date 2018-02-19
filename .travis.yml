@@ -15,9 +15,13 @@ os:
 jobs:
   include:
     - stage: Test
-      script: "mvn test"
+      script:
+        - cd back-end
+        - mvn test
     - stage: codecov
-      script: "mvn -P codecov cobertura:cobertura"
+      script:
+        - cd back-end
+        - mvn -P codecov cobertura:cobertura
       after_success:
         - bash <(curl -s https://codecov.io/bash)
 
