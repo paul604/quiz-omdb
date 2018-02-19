@@ -1,0 +1,28 @@
+language: java
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2
+
+jdk:
+  - oraclejdk8
+
+os:
+  - linux
+
+jobs:
+  include:
+    - stage: Test
+      script: "mvn test"
+    - stage: codecov
+      script: "mvn -P codecov cobertura:cobertura"
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
+
+
+branches:
+  only:
+    - master
+    - dev
