@@ -28,6 +28,7 @@ hs_err_pid*
 *.iml
 out
 gen
+target/
 
 ##
 .pdf
@@ -35,3 +36,6 @@ gen
 # eclipse
 .metadata
 RemoteSystemsTempFiles
+.settings
+.classpath
+.project
