@@ -1,21 +1,52 @@
 package fr.iut_nantes.quizomdb.entite;
 
 public class Gamer {
+	private String login;
+	private int goodAnswers;
+	private int answers;
 	
-	public String login(String login, String password){
-		String token = null;
-		//TODO
-		return token;
+	
+	public Gamer(String login, String password) {
+		login(login, password);
+	}
+
+
+	private void login(String login, String password){	
+		//TODO connexion à la base données et complétion des attributs
+		this.login=login;
+		this.goodAnswers=0;
+		this.answers=0;
+	}
+
+
+	public String getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+
+	public int getGoodAnswers() {
+		return goodAnswers;
+	}
+
+
+	public void setGoodAnswers(int goodAnswers) {
+		this.goodAnswers = goodAnswers;
+	}
+
+
+	public int getAnswers() {
+		return answers;
+	}
+
+
+	public void setAnswers(int answers) {
+		this.answers = answers;
 	}
 	
-	public int getGoodAnswers(){
-		//TODO
-		return 0;
-	}
-	
-	public int getAnswers(){
-		//TODO
-		return 0;
-	}
 
 }
