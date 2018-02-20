@@ -39,3 +39,4 @@ RemoteSystemsTempFiles
 .settings
 .classpath
 .project
+bin/
