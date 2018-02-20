@@ -31,3 +31,7 @@ gen
 
 ##
 .pdf
+
+# eclipse
+.metadata
+RemoteSystemsTempFiles
