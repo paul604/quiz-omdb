@@ -9,4 +9,6 @@ public class QuizOmdbApplication {
     public static void main(String[] args) {
         SpringApplication.run(QuizOmdbApplication.class, args);
     }
+    
+    
 }
