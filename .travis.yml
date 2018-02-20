@@ -28,9 +28,9 @@ jobs:
     - stage: SonarCloud
       addons:
         sonarcloud:
-          organization: key
+          organization: $key
           token:
-            secure: token
+            secure: $token
       script:
         - cd back-end
         - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
