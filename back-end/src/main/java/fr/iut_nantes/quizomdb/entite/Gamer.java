@@ -47,6 +47,14 @@ public class Gamer {
 	public void setAnswers(int answers) {
 		this.answers = answers;
 	}
-	
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Gamer)) return false;
+
+		Gamer gamer = (Gamer) o;
+
+		return login.equals(gamer.login);
+	}
 }
