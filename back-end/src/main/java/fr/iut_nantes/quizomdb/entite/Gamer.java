@@ -1,60 +1,60 @@
 package fr.iut_nantes.quizomdb.entite;
 
 public class Gamer {
-	private String login;
-	private int goodAnswers;
-	private int answers;
-	
-	
-	public Gamer(String login, String password) throws Exception {
-		login(login, password);
-	}
+    private String login;
+    private int goodAnswers;
+    private int answers;
 
 
-	private void login(String login, String password) throws Exception{	
-		//TODO connexion à la base données et complétion des attributs
-		this.login=login;
-		this.goodAnswers=0;
-		this.answers=0;
-	}
+    public Gamer(String login, String password) throws Exception {
+        login(login, password);
+    }
 
 
-	public String getLogin() {
-		return login;
-	}
+    private void login(String login, String password) throws Exception {
+        //TODO connexion à la base données et complétion des attributs
+        this.login = login;
+        this.goodAnswers = 0;
+        this.answers = 0;
+    }
 
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public String getLogin() {
+        return login;
+    }
 
 
-	public int getGoodAnswers() {
-		return goodAnswers;
-	}
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
 
-	public void setGoodAnswers(int goodAnswers) {
-		this.goodAnswers = goodAnswers;
-	}
+    public int getGoodAnswers() {
+        return goodAnswers;
+    }
 
 
-	public int getAnswers() {
-		return answers;
-	}
+    public void setGoodAnswers(int goodAnswers) {
+        this.goodAnswers = goodAnswers;
+    }
 
 
-	public void setAnswers(int answers) {
-		this.answers = answers;
-	}
+    public int getAnswers() {
+        return answers;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Gamer)) return false;
 
-		Gamer gamer = (Gamer) o;
+    public void setAnswers(int answers) {
+        this.answers = answers;
+    }
 
-		return login.equals(gamer.login);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Gamer)) return false;
+
+        Gamer gamer = (Gamer) o;
+
+        return login.equals(gamer.login);
+    }
 }

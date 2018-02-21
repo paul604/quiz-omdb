@@ -1,11 +1,7 @@
 package fr.iut_nantes.quizomdb.controler;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
 public class TestControlerGeneral {
-	/*
+    /*
 	@Test
 	public void testGetQuestion() {
 		fail("Not yet implemented"); // TODO
@@ -41,13 +37,6 @@ public class TestControlerGeneral {
 		fail("Not yet implemented"); // TODO
 	}
 	*/
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 }

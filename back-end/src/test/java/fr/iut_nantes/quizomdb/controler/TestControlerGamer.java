@@ -1,13 +1,8 @@
 package fr.iut_nantes.quizomdb.controler;
 
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-
 public class TestControlerGamer {
-	ControlerGamer control;
-	/*    
+    ControlerGamer control;
+    /*
 	 @Before 
 	 public void initialize() {   
 		 control = new ControlerGamer();
