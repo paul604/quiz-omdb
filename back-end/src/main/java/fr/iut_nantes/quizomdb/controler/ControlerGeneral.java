@@ -1,6 +1,6 @@
 package fr.iut_nantes.quizomdb.controler;
 
-import fr.iut_nantes.quizomdb.entite.DataJwt;
+import fr.iut_nantes.quizomdb.entite.Constants;
 import io.jsonwebtoken.Jwts;
 
 public class ControlerGeneral {
@@ -43,7 +43,7 @@ public class ControlerGeneral {
 	
 	public boolean validateToken(String token){
 		for (String login : this.gamer.getLogins()) {
-			assert Jwts.parser().setSigningKey(DataJwt.key).parseClaimsJws(token).getBody().getSubject().equals(login);
+			assert Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals(login);
 			return true;
 		}
 		return false;		

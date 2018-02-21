@@ -5,7 +5,7 @@ import java.util.Set;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import fr.iut_nantes.quizomdb.entite.DataJwt;
+import fr.iut_nantes.quizomdb.entite.Constants;
 import fr.iut_nantes.quizomdb.entite.Gamer;
 
 public class ControlerGamer {
@@ -21,7 +21,7 @@ public class ControlerGamer {
 		this.gamers.put(login, gamer);				
 		return Jwts.builder()
 				.setSubject(login)
-				.signWith(SignatureAlgorithm.HS512, DataJwt.key)
+				.signWith(SignatureAlgorithm.HS512, Constants.key)
 				.compact();
 	}
 	
