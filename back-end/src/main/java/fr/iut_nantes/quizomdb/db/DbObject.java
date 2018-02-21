@@ -1,21 +1,24 @@
 package fr.iut_nantes.quizomdb.db;
 
+import fr.iut_nantes.quizomdb.application.QuizOmdbApplication;
 import fr.iut_nantes.quizomdb.entite.Gamer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
- * Created by Paul on 20/02/18.
+ * @version 1.0
+ * @see fr.iut_nantes.quizomdb.db.Idb
+ * @since 1.0
  */
 public class DbObject implements Idb {
 
-    Map<String, Gamer> listGamers;
+    private Map<String, Gamer> listGamers;
 
     public DbObject() {
+        QuizOmdbApplication.log.debug("create DB Object");
         listGamers = new HashMap<>();
     }
 
