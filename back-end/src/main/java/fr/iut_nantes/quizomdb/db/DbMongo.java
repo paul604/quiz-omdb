@@ -27,6 +27,9 @@ public class DbMongo implements Idb {
     private MongoDatabase database;
     private MongoCollection<Document> gamerCollection;
 
+    /**
+     * init mongoDb
+     */
     public DbMongo() {
         log.debug("create mongodb");
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
@@ -34,6 +37,13 @@ public class DbMongo implements Idb {
         gamerCollection = database.getCollection("Gamer");
     }
 
+    /**
+     * transform gamer in object for MongoDb
+     *
+     * @param gamer Gamer to transform
+     * @param pwd   password of gamer
+     * @return equivalent to gamer
+     */
     private static Document toDocument(Gamer gamer, String pwd) {
         return new Document(DB_GAMER_LOGIN, gamer.getLogin())
                 .append(DB_GAMER_PWD, pwd)
@@ -41,6 +51,12 @@ public class DbMongo implements Idb {
                 .append(DB_GAMER_ANSWERS, gamer.getAnswers());
     }
 
+    /**
+     * transform object for MongoDb in gamer
+     *
+     * @param Document equivalent to gamer
+     * @return the gamer
+     */
     private static Gamer toObject(Document Document) {
         Gamer gamer = null;
         try {
