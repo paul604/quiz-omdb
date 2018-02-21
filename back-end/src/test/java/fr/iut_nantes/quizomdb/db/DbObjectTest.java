@@ -38,27 +38,13 @@ public class DbObjectTest {
     }
 
     /**
-     * add gamer whit {@link DbObject#addGamer(Gamer)}
-     *
-     * @throws Exception
-     * @since 1.0
-     */
-    @Test
-    public void addGamerDirectly() throws Exception {
-        Gamer gamer = new Gamer("test", "pwdTest");
-        db.addGamer(gamer);
-        assertFalse("List gamers is empty", db.getAllGamer().isEmpty());
-        assertEquals("Object gamer is not equals", gamer, db.getGamer(gamer.getLogin()));
-    }
-
-    /**
      * add gamer whit {@link DbObject#addGamer(String, String)}
      *
      * @throws Exception
      * @since 1.0
      */
     @Test
-    public void addGamerIndirectly() throws Exception {
+    public void addGamer() throws Exception {
         String name = "test";
         Gamer gamer = new Gamer(name, "pwdTest");
         db.addGamer(name, "pwdTest");
