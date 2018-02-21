@@ -42,12 +42,6 @@ public class DbObject implements Idb {
     }
 
     @Override
-    public boolean addGamer(Gamer gamer) {
-        listGamers.put(gamer.getLogin(), gamer);
-        return true;
-    }
-
-    @Override
     public int getAnswers(String pseudo) {
         return listGamers.get(pseudo).getAnswers();
     }
