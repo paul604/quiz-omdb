@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestControlerGeneral {
-
+	/*
 	@Test
 	public void testGetQuestion() {
 		fail("Not yet implemented"); // TODO
@@ -40,6 +40,7 @@ public class TestControlerGeneral {
 	public void testGetAnswers() {
 		fail("Not yet implemented"); // TODO
 	}
+	*/
 	
 	
 	

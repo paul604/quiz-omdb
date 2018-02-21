@@ -26,13 +26,14 @@ public interface Idb {
     /**
      * @param pseudo name of gamer
      * @param pwd password
+     * @throws Exception 
      */
-    boolean addGamer(String pseudo, String pwd);
+    boolean addGamer(String pseudo, String pwd) throws Exception;
 
     /**
      * @param gamer gamer
      */
-    boolean addGamer(Gamer gamer);
+    boolean addGamer(Gamer gamer) throws Exception;
 
 
     /**

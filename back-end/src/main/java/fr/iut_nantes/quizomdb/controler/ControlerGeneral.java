@@ -1,5 +1,8 @@
 package fr.iut_nantes.quizomdb.controler;
 
+import fr.iut_nantes.quizomdb.entite.DataJwt;
+import io.jsonwebtoken.Jwts;
+
 public class ControlerGeneral {
 	private ControlerOMDB omdb;
 	private ControlerGamer gamer;
@@ -19,7 +22,11 @@ public class ControlerGeneral {
 	}
 
 	public String login(String login, String password) {
-		return this.gamer.login(login, password);
+		try {
+			return this.gamer.login(login, password);
+		} catch (Exception e) {
+			return "Login or password invalid.";
+		}
 	}
 
 	public void disconnect(String token) {
@@ -27,10 +34,19 @@ public class ControlerGeneral {
 	}
 
 	public int getGoodAnswers(String token) {
-		return this.gamer.getGoodAnswers(token);
+		return this.gamer.getGamer(token).getGoodAnswers();
 	}
 
 	public int getAnswers(String token) {
-		return this.gamer.getAnswers(token);
+		return this.gamer.getGamer(token).getAnswers();
 	}
+	
+	public boolean validateToken(String token){
+		for (String login : this.gamer.getLogins()) {
+			assert Jwts.parser().setSigningKey(DataJwt.key).parseClaimsJws(token).getBody().getSubject().equals(login);
+			return true;
+		}
+		return false;		
+	}
+	
 }
