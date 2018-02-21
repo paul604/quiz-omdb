@@ -28,18 +28,23 @@ public interface Idb {
 
     /**
      * @param pseudo name of gamer
+<<<<<<< HEAD
+     * @param pwd password
+     * @throws Exception 
+=======
      * @param pwd    password
      * @return true if ok
      * @since 1.0
+>>>>>>> 31811f00e2b42a1511a46067333f97c79e44eaa2
      */
-    boolean addGamer(String pseudo, String pwd);
+    boolean addGamer(String pseudo, String pwd) throws Exception;
 
     /**
      * @param gamer gamer
      * @return true if ok
      * @since 1.0
      */
-    boolean addGamer(Gamer gamer);
+    boolean addGamer(Gamer gamer) throws Exception;
 
 
     /**

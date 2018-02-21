@@ -1,7 +1,11 @@
 package fr.iut_nantes.quizomdb.controler;
 
 import java.util.HashMap;
+import java.util.Set;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import fr.iut_nantes.quizomdb.entite.DataJwt;
 import fr.iut_nantes.quizomdb.entite.Gamer;
 
 public class ControlerGamer {
@@ -12,29 +16,26 @@ public class ControlerGamer {
 		this.gamers = new HashMap<>();
 	}
 
-	public String login(String login, String password){
-		Gamer gamer = new Gamer(login, password);
-		String token="err";
-		if (gamer==null){
-			System.out.println("Connexion échoué.");
-			//TODO correction du system de token
-		}else{
-			token = login; //TODO correction du system de token
-			this.gamers.put(token, gamer);
-		}		
-		return token;
+	public String login(String login, String password) throws Exception{
+		Gamer gamer = new Gamer(login, password); // can throw exception
+		this.gamers.put(login, gamer);				
+		return Jwts.builder()
+				.setSubject(login)
+				.signWith(SignatureAlgorithm.HS512, DataJwt.key)
+				.compact();
 	}
 	
 	public void disconnect(String token){
 		this.gamers.remove(token);
 	}
 	
-	public int getGoodAnswers(String token){
-		return this.gamers.get(token).getGoodAnswers();
-	}
 	
-	public int getAnswers(String token){
-		return this.gamers.get(token).getAnswers();
+	public Gamer getGamer(String token) {
+		return this.gamers.get(token);
+	}
+
+	public Set<String> getLogins() {
+		return this.gamers.keySet();
 	}
 	
 	

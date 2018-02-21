@@ -6,12 +6,12 @@ public class Gamer {
 	private int answers;
 	
 	
-	public Gamer(String login, String password) {
+	public Gamer(String login, String password) throws Exception {
 		login(login, password);
 	}
 
 
-	private void login(String login, String password){	
+	private void login(String login, String password) throws Exception{	
 		//TODO connexion à la base données et complétion des attributs
 		this.login=login;
 		this.goodAnswers=0;

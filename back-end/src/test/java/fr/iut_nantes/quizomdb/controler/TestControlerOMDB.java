@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestControlerOMDB {
-
+	/*
 	@Test
 	public void testGetQuestion() {
 		fail("Not yet implemented"); // TODO
@@ -15,6 +15,7 @@ public class TestControlerOMDB {
 	public void testGetAnswers() {
 		fail("Not yet implemented"); // TODO
 	}
+	*/
 	
 
 }
