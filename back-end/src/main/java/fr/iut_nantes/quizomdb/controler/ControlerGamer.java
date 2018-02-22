@@ -40,10 +40,17 @@ public class ControlerGamer {
         if (!db.connect(login, password)){
             throw new Exception();
         }
-        int answers, goodAnswers;
-        answers = db.getAnswers(login);
-        goodAnswers = db.getAnswers(login);
+        return addGamer(login, db.getAnswers(login), db.getGoodAnswers(login));
+    }
 
+    /**
+     * Add a user in the local memory
+     * @param login
+     * @param answers
+     * @param goodAnswers
+     * @return the token of the user
+     */
+    public String addGamer(String login, int answers, int goodAnswers){
         Gamer gamer = new Gamer(login, answers, goodAnswers);
         this.gamers.put(login, gamer);
         return Jwts.builder()
@@ -53,21 +60,21 @@ public class ControlerGamer {
     }
 
     /** Delete the user from the local memory
-     * @param token of the user
+     * @param login of the user
      * @since 1.0
      */
-    public void disconnect(String token) {
-        this.gamers.remove(token);
+    public void disconnect(String login) {
+        this.gamers.remove(login);
     }
 
 
     /**
-     * @param token of the user
+     * @param login of the user
      * @return a user
      * @since 1.0
      */
-    public Gamer getGamer(String token) {
-        return this.gamers.get(token);
+    public Gamer getGamer(String login) {
+        return this.gamers.get(login);
     }
 
     /**

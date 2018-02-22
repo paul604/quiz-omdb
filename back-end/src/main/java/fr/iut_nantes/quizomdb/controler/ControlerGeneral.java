@@ -59,7 +59,7 @@ public class ControlerGeneral {
      * @param token of the user
      */
     public void disconnect(String token) {
-        this.gamer.disconnect(token);
+        this.gamer.disconnect(getLoginFromToken(token));
     }
 
     /**
@@ -68,29 +68,29 @@ public class ControlerGeneral {
      * @return the number of good answers of the user
      */
     public int getGoodAnswers(String token) {
-        return this.gamer.getGamer(token).getGoodAnswers();
+        return this.gamer.getGamer(getLoginFromToken(token)).getGoodAnswers();
     }
 
     /**
      *
-     * @param token
+     * @param token of the user
      * @return the number of answers of the user
      */
     public int getAnswers(String token) {
-        return this.gamer.getGamer(token).getAnswers();
+        return this.gamer.getGamer(getLoginFromToken(token)).getAnswers();
     }
 
     /**
-     * Check if the token is correct
+     * get the login associated to the token
      * @param token of the user
-     * @return true if successful, else false
+     * @return the login if successful, else null
      */
-    public boolean isCorrectToken(String token) {
+    public String getLoginFromToken(String token) {
         for (String login : this.gamer.getLogins()) {
-            assert Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals(login);
-            return true;
+            boolean isValid = Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals(login);
+            if (isValid) return login;
         }
-        return false;
+        return null;
     }
 
 }

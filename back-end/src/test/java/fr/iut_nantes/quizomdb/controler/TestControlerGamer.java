@@ -1,35 +1,38 @@
 package fr.iut_nantes.quizomdb.controler;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 public class TestControlerGamer {
     ControlerGamer control;
-    /*
-	 @Before 
+
+	 @Before
 	 public void initialize() {   
 		 control = new ControlerGamer();
 	    }
 	
 	
 	@Test
-	public void testLogin() throws Exception{
-		String token = control.login("cc", "yeah");
-		assertNotNull(control.getGamer(token));
+	public void testAddGamerAndDisconnect(){
+		assertNull(control.getGamer("login"));
+		control.addGamer("login", 0,0);
+        assertNotNull(control.getGamer("login"));
+        control.disconnect("login");
+        assertNull(control.getGamer("login"));
 	}
-	
-	@Test
-	public void testGetGoodAnswers(){
-		fail("Not yet implemented"); // TODO
-	}
-	
-	@Test
-	public void testGetAnswers(){
-		fail("Not yet implemented"); // TODO
-	}
-	
-	@Test
-	public void testDisconnect(){
-		fail("Not yet implemented"); // TODO
-		
-	}
-	*/
+
+    @Test
+    public void testGetLogins(){
+        assertTrue(!control.getLogins().contains("login"));
+        control.addGamer("login", 0,0);
+        assertTrue(control.getLogins().contains("login"));
+
+    }
+
+    //TODO testLogin()
 
 }
