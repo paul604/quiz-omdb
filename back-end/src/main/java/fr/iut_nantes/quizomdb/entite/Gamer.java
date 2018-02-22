@@ -40,7 +40,7 @@ public class Gamer {
     /**
      * Add 1 to number of good answers
      */
-    public void IncrementGoodAnswers() {
+    public void incrementGoodAnswers() {
         this.goodAnswers +=1;
     }
 
@@ -56,7 +56,7 @@ public class Gamer {
     /**
      * Add 1 to number of good answers
      */
-    public void IncrementAnswers() {
+    public void incrementAnswers() {
         this.answers += 1;
     }
 
