@@ -1,28 +1,43 @@
 package fr.iut_nantes.quizomdb.entite;
 
+/**
+ * @version 1.0
+ * @since 1.0
+ */
 public class Quizz {
     private String question;
     private String answers;
 
+    /**
+     *
+     * @return the question
+     */
     public String getQuestion() {
         return question;
     }
 
+    /**
+     * Setter of question
+     * @param question, the new question
+     */
     public void setQuestion(String question) {
         this.question = question;
     }
 
+    /**
+     *
+     * @return the answers
+     */
     public String getAnswers() {
         return answers;
     }
 
+    /**
+     * Setter of answers
+     * @param answers, the answers
+     */
     public void setAnswers(String answers) {
         this.answers = answers;
-    }
-
-    public String generateQuestion() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 
