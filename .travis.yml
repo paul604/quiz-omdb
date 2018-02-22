@@ -22,8 +22,8 @@ addons:
 script:
   - cd back-end
   - mvn test
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
   - mvn -P codecov cobertura:cobertura
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
