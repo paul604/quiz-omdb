@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jwts;
 
 /**
  * @version 1.0
- * @see fr.iut_nantes.quizomdb.controler.ControlerGeneral
  * @since 1.0
  */
 public class ControlerGeneral {

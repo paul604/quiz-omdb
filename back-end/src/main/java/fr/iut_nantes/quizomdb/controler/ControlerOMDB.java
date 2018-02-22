@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 /**
  * @version 1.0
- * @see fr.iut_nantes.quizomdb.controler.ControlerOMDB
  * @since 1.0
  */
 public class ControlerOMDB {
