@@ -1,5 +1,7 @@
 package fr.iut_nantes.quizomdb.controler;
 
+import fr.iut_nantes.quizomdb.db.DbMongo;
+import fr.iut_nantes.quizomdb.db.Idb;
 import fr.iut_nantes.quizomdb.entite.Constants;
 import fr.iut_nantes.quizomdb.entite.Gamer;
 import io.jsonwebtoken.Jwts;
@@ -15,6 +17,7 @@ import java.util.Set;
 public class ControlerGamer {
 
     private HashMap<String, Gamer> gamers;
+    private Idb db;
 
     /**
      * @version 1.0
@@ -34,7 +37,14 @@ public class ControlerGamer {
      * @since 1.0
      */
     public String login(String login, String password) throws Exception {
-        Gamer gamer = new Gamer(login, password); // can throw exception
+        if (!db.connect(login, password)){
+            throw new Exception();
+        }
+        int answers, goodAnswers;
+        answers = db.getAnswers(login);
+        goodAnswers = db.getAnswers(login);
+
+        Gamer gamer = new Gamer(login, answers, goodAnswers);
         this.gamers.put(login, gamer);
         return Jwts.builder()
                 .setSubject(login)

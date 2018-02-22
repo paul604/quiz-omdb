@@ -34,7 +34,7 @@ public interface Idb {
      * @since 1.0
      */
     boolean addGamer(String pseudo, String pwd) throws Exception;
-
+    //TODO addGamer(Gamer gamer)
 
     /**
      * @param pseudo name of gamer
@@ -50,18 +50,6 @@ public interface Idb {
      */
     int getGoodAnswers(String pseudo);
 
-    /**
-     * @param pseudo name of gamer
-     * @return Gamer if exist, null other
-     * @since 1.0
-     */
-    Gamer getGamer(String pseudo);
-
-    /**
-     * @return all gamer
-     * @since 1.0
-     */
-    List<Gamer> getAllGamer();
 
     /**
      * @param login name of gamer

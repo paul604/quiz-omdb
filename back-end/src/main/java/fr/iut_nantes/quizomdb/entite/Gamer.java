@@ -13,13 +13,13 @@ public class Gamer {
     /**
      * Class constructor
      * @param login
-     * @param password
-     * @throws Exception if can't find the user in the database
+     * @param goodAnswers
+     * @param answers
      */
-    public Gamer(String login, String password) throws Exception {
+    public Gamer(String login, int goodAnswers, int answers){
         this.login = login;
-        this.goodAnswers = 0;
-        this.answers = 0;
+        this.goodAnswers = goodAnswers;
+        this.answers = answers;
     }
 
     /**
@@ -28,16 +28,6 @@ public class Gamer {
     public String getLogin() {
         return login;
     }
-
-
-    /**
-     * Set the login
-     * @param login, the new login
-     */
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
 
     /**
      * @return the number of good answers
@@ -48,11 +38,10 @@ public class Gamer {
 
 
     /**
-     * Set the number of answers
-     * @param goodAnswers
+     * Add 1 to number of good answers
      */
-    public void setGoodAnswers(int goodAnswers) {
-        this.goodAnswers = goodAnswers;
+    public void IncrementGoodAnswers() {
+        this.goodAnswers +=1;
     }
 
 
@@ -65,11 +54,10 @@ public class Gamer {
 
 
     /**
-     * Set the number of answers
-     * @param answers, the new number of answers
+     * Add 1 to number of good answers
      */
-    public void setAnswers(int answers) {
-        this.answers = answers;
+    public void IncrementAnswers() {
+        this.answers += 1;
     }
 
     /**

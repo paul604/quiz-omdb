@@ -24,20 +24,18 @@ public class DbObject implements Idb {
 
     @Override
     public boolean setAnswers(String pseudo, int val) {
-        listGamers.get(pseudo).setAnswers(val);
         return true;
     }
 
     @Override
     public boolean setGoodAnswers(String pseudo, int val) {
-        listGamers.get(pseudo).setGoodAnswers(val);
         return true;
     }
 
     @Override
     public boolean addGamer(String pseudo, String pwd) throws Exception {
-        Gamer gamer = new Gamer(pseudo, pwd);
-        listGamers.put(pseudo, gamer);
+        //Gamer gamer = new Gamer(pseudo, pwd);
+        //listGamers.put(pseudo, gamer);
         return true;
     }
 
@@ -49,16 +47,6 @@ public class DbObject implements Idb {
     @Override
     public int getGoodAnswers(String pseudo) {
         return listGamers.get(pseudo).getGoodAnswers();
-    }
-
-    @Override
-    public Gamer getGamer(String pseudo) {
-        return listGamers.get(pseudo);
-    }
-
-    @Override
-    public List<Gamer> getAllGamer() {
-        return new ArrayList<>(listGamers.values());
     }
 
     @Override

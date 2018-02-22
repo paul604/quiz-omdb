@@ -51,26 +51,6 @@ public class DbMongo implements Idb {
                 .append(DB_GAMER_ANSWERS, gamer.getAnswers());
     }
 
-    /**
-     * transform object for MongoDb in gamer
-     *
-     * @param Document equivalent to gamer
-     * @return the gamer
-     */
-    private static Gamer toObject(Document Document) {
-        Gamer gamer = null;
-        try {
-            gamer = new Gamer(String.valueOf(Document.get(DB_GAMER_LOGIN)),
-                    String.valueOf(Document.get(DB_GAMER_PWD)));
-            gamer.setGoodAnswers((Integer) Document.get(DB_GAMER_GOOD_ANSWERS));
-            gamer.setAnswers((Integer) Document.get(DB_GAMER_ANSWERS));
-        } catch (Exception e) {
-            log.error("Error toObject", e);
-            return null;
-        }
-        return gamer;
-    }
-
     @Override
     public boolean setAnswers(String pseudo, int val) {
         Document documents = gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first();
@@ -105,12 +85,12 @@ public class DbMongo implements Idb {
 
     @Override
     public boolean addGamer(String pseudo, String pwd) {
-        try {
-            Document document = toDocument(new Gamer(pseudo, pwd), pwd);
-            gamerCollection.insertOne(document);
-        } catch (Exception e) {
-            log.error("error add gamer in DB", e);
-        }
+//        try {
+//            Document document = toDocument(new Gamer(pseudo, pwd), pwd);
+//            gamerCollection.insertOne(document);
+//        } catch (Exception e) {
+//            log.error("error add gamer in DB", e);
+//        }
         return true;
     }
 
@@ -123,19 +103,6 @@ public class DbMongo implements Idb {
     public int getGoodAnswers(String pseudo) {
 
         return (int) gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first().get(DB_GAMER_GOOD_ANSWERS);
-    }
-
-    @Override
-    public Gamer getGamer(String pseudo) {
-        return toObject(gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first());
-    }
-
-    @Override
-    public List<Gamer> getAllGamer() {
-        FindIterable<Document> documents = gamerCollection.find();
-        List<Gamer> out = new ArrayList<>();
-        documents.iterator().forEachRemaining(document -> out.add(toObject(document)));
-        return out;
     }
 
     @Override
