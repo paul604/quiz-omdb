@@ -25,30 +25,4 @@ public class DbObjectTest {
     public void setUp() throws Exception {
         db = new DbObject();
     }
-
-    /**
-     * test if after init, list of gamer is empty
-     *
-     * @throws Exception
-     * @since 1.0
-     */
-    @Test
-    public void listGamerIsEmpty() throws Exception {
-        assertTrue("list Gamer Is not Empty", db.getAllGamer().isEmpty());
-    }
-
-    /**
-     * add gamer whit {@link DbObject#addGamer(String, String)}
-     *
-     * @throws Exception
-     * @since 1.0
-     */
-    @Test
-    public void addGamer() throws Exception {
-        String name = "test";
-        Gamer gamer = new Gamer(name, "pwdTest");
-        db.addGamer(name, "pwdTest");
-        assertFalse("List gamers is empty", db.getAllGamer().isEmpty());
-        assertEquals("Object gamer is not equals", gamer, db.getGamer(name));
-    }
 }
