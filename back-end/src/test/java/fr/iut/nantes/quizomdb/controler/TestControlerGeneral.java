@@ -1,4 +1,4 @@
-package fr.iut_nantes.quizomdb.controler;
+package fr.iut.nantes.quizomdb.controler;
 
 public class TestControlerGeneral {
     /*

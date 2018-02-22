@@ -1,4 +1,4 @@
-package fr.iut_nantes.quizomdb.entite;
+package fr.iut.nantes.quizomdb.entite;
 
 import io.jsonwebtoken.impl.crypto.MacProvider;
 

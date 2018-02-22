@@ -1,6 +1,6 @@
-package fr.iut_nantes.quizomdb.controler;
+package fr.iut.nantes.quizomdb.controler;
 
-import fr.iut_nantes.quizomdb.entite.Constants;
+import fr.iut.nantes.quizomdb.entite.Constants;
 import io.jsonwebtoken.Jwts;
 
 /**

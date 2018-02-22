@@ -1,9 +1,8 @@
-package fr.iut_nantes.quizomdb.controler;
+package fr.iut.nantes.quizomdb.controler;
 
-import fr.iut_nantes.quizomdb.db.DbMongo;
-import fr.iut_nantes.quizomdb.db.Idb;
-import fr.iut_nantes.quizomdb.entite.Constants;
-import fr.iut_nantes.quizomdb.entite.Gamer;
+import fr.iut.nantes.quizomdb.db.Idb;
+import fr.iut.nantes.quizomdb.entite.Constants;
+import fr.iut.nantes.quizomdb.entite.Gamer;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -21,7 +20,7 @@ public class ControlerGamer {
 
     /**
      * @version 1.0
-     * @see fr.iut_nantes.quizomdb.controler.ControlerGamer
+     * @see ControlerGamer
      * @since 1.0
      */
     public ControlerGamer() {

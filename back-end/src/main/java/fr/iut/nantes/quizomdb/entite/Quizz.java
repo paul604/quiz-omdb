@@ -1,4 +1,4 @@
-package fr.iut_nantes.quizomdb.entite;
+package fr.iut.nantes.quizomdb.entite;
 
 /**
  * @version 1.0

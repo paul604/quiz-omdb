@@ -1,4 +1,4 @@
-package fr.iut_nantes.quizomdb.application;
+package fr.iut.nantes.quizomdb.application;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class QuizOmdbApplication {
      *
      * @since 1.0
      */
-    public static Logger log = LoggerFactory.getLogger("QuizOmdb");
+    public static final Logger log = LoggerFactory.getLogger("QuizOmdb");
 
     /**
      * @param args argument of application

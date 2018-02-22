@@ -1,6 +1,6 @@
-package fr.iut_nantes.quizomdb.controler;
+package fr.iut.nantes.quizomdb.controler;
 
-import fr.iut_nantes.quizomdb.entite.Quizz;
+import fr.iut.nantes.quizomdb.entite.Quizz;
 
 import java.util.HashMap;
 
