@@ -74,4 +74,12 @@ public class Gamer {
 
         return login.equals(gamer.login);
     }
+
+    @Override
+    public int hashCode() {
+        int result = login.hashCode();
+        result = 31 * result + goodAnswers;
+        result = 31 * result + answers;
+        return result;
+    }
 }
