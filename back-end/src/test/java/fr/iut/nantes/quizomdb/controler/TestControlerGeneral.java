@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -30,6 +31,21 @@ public class TestControlerGeneral {
         assertTrue(Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals("login"));
         assertTrue(!Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals("log"));
     }
+
+    @Test
+    public void loginFailed(){
+        assertEquals("err", control.login("",""));
+    }
+
+    //TODO reste des requetes en attente de la BD
+
+
+
+
+
+
+
+
 
 
 
