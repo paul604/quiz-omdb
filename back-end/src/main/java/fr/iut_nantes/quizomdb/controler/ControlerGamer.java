@@ -17,6 +17,8 @@ public class ControlerGamer {
     private HashMap<String, Gamer> gamers;
 
     /**
+     * @version 1.0
+     * @see fr.iut_nantes.quizomdb.controler.ControlerGamer
      * @since 1.0
      */
     public ControlerGamer() {
