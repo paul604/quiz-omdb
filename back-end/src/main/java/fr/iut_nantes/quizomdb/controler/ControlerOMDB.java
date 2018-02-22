@@ -11,34 +11,59 @@ import java.util.HashMap;
 public class ControlerOMDB {
     private HashMap<String, Quizz> actualsQuizz;
 
+    public ControlerOMDB() {
+        this.actualsQuizz = new HashMap<>();
+    }
+
     /**
      * Change the currents question/answers of the user
-     * @param token of the user
+     * @param login of the user
      * @return the new question
      */
-    public String generateQuestion(String token) {
+    public String generateQuestion(String login) {
         // TODO
         return null;
     }
 
-    public void addQuizz(String token, String question, String answers){
-        this.actualsQuizz.put(token, new Quizz(question, answers));
+    /**
+     * Ajoute un quizz dans la mémoire locale
+     * @param login
+     * @param question
+     * @param answers
+     */
+    public void addQuizz(String login, String question, String answers){
+        this.actualsQuizz.put(login, new Quizz(question, answers));
     }
 
     /**
-     * @param token of the user
+     * retire un quizz de la mémoire locale
+     * @param login
+     */
+    public void disconnect(String login){
+        this.actualsQuizz.remove(login);
+    }
+
+
+
+    /**
+     * @param login of the user
      * @return the actual question of the user
      */
-    public String getQuestion(String token) {
-        return this.actualsQuizz.get(token).getQuestion();
+    public String getQuestion(String login) {
+        Quizz quizz = this.actualsQuizz.get(login);
+        if (quizz != null) return quizz.getQuestion();
+        return  null;
+
     }
 
     /**
-     * @param token of the user
+     * @param login of the user
      * @return the actual answers
      */
-    public String getAnswers(String token) {
-        return this.actualsQuizz.get(token).getAnswers();
+    public String getAnswers(String login) {
+        Quizz quizz = this.actualsQuizz.get(login);
+        if (quizz != null) return quizz.getAnswers();
+        return  null;
     }
 
 

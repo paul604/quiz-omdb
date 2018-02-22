@@ -17,7 +17,7 @@ public class ControlerGeneral {
      * @return the actual question of the user
      */
     public String getQuestion(String token) {
-        return this.omdb.getQuestion(token);
+        return this.omdb.getQuestion(getLoginFromToken(token));
     }
 
     /**
@@ -26,7 +26,7 @@ public class ControlerGeneral {
      * @return the new question
      */
     public String generateQuestion(String token) {
-        return this.omdb.generateQuestion(token);
+        return this.omdb.generateQuestion(getLoginFromToken(token));
     }
 
     /**
