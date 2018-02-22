@@ -9,6 +9,16 @@ public class Quizz {
     private String answers;
 
     /**
+     * Class constructor
+     * @param question
+     * @param answers
+     */
+    public Quizz(String question, String answers) {
+        this.question=question;
+        this.answers=answers;
+    }
+
+    /**
      *
      * @return the question
      */

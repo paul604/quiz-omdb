@@ -21,6 +21,10 @@ public class ControlerOMDB {
         return null;
     }
 
+    public void addQuizz(String token, String question, String answers){
+        this.actualsQuizz.put(token, new Quizz(question, answers));
+    }
+
     /**
      * @param token of the user
      * @return the actual question of the user
