@@ -24,9 +24,10 @@ public class ControlerGamer {
     }
 
     /**
-     * @param login    login of gamer
-     * @param password password of gamer
-     * @return
+     * Try to authenticate the user
+     * @param login gamer
+     * @param password gamer
+     * @return the token of the user
      * @throws Exception
      * @since 1.0
      */
@@ -39,8 +40,8 @@ public class ControlerGamer {
                 .compact();
     }
 
-    /**
-     * @param token
+    /** Delete the user from the local memory
+     * @param token of the user
      * @since 1.0
      */
     public void disconnect(String token) {
@@ -49,8 +50,8 @@ public class ControlerGamer {
 
 
     /**
-     * @param token
-     * @return
+     * @param token of the user
+     * @return a user
      * @since 1.0
      */
     public Gamer getGamer(String token) {
@@ -58,7 +59,7 @@ public class ControlerGamer {
     }
 
     /**
-     * @return
+     * @return the gamers in the local memory
      * @since 1.0
      */
     public Set<String> getLogins() {
