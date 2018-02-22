@@ -1,5 +1,6 @@
 package fr.iut.nantes.quizomdb.controler;
 
+import fr.iut.nantes.quizomdb.db.DbMongo;
 import fr.iut.nantes.quizomdb.db.Idb;
 import fr.iut.nantes.quizomdb.entite.Constants;
 import fr.iut.nantes.quizomdb.entite.Gamer;
@@ -25,6 +26,7 @@ public class ControlerGamer {
      */
     public ControlerGamer() {
         this.gamers = new HashMap<>();
+        this.db = new DbMongo();
     }
 
     /**
