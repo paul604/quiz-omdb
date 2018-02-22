@@ -8,9 +8,8 @@ import io.jsonwebtoken.Jwts;
  * @since 1.0
  */
 public class ControlerGeneral {
-    private ControlerOMDB omdb;
-    private ControlerGamer gamer;
-
+    private ControlerOMDB omdb = new ControlerOMDB();
+    private ControlerGamer gamer = new ControlerGamer();
 
     /**
      * @param token

@@ -33,6 +33,6 @@ public class TestControlerGamer {
 
     }
 
-    //TODO testLogin()
+    //TODO testLogin(), test return of AddGamer()
 
 }
