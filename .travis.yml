@@ -19,6 +19,9 @@ addons:
     token:
       secure: $token
 
+services:
+  - mongodb
+
 script:
   - mvn -f ./back-end/pom.xml test
   - mvn -f ./back-end/pom.xml org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
