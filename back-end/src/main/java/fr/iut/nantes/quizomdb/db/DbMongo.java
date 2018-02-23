@@ -9,6 +9,7 @@ import fr.iut.nantes.quizomdb.entite.Gamer;
 import org.bson.Document;
 
 import static com.mongodb.client.model.Filters.eq;
+import static fr.iut.nantes.quizomdb.application.QuizOmdbApplication.config;
 import static fr.iut.nantes.quizomdb.application.QuizOmdbApplication.log;
 import static fr.iut.nantes.quizomdb.entite.Constants.*;
 
@@ -28,9 +29,9 @@ public class DbMongo implements Idb {
      */
     public DbMongo() {
         log.debug("create mongodb");
-        mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
-        database = mongoClient.getDatabase("DbQuizOmdb");
-        gamerCollection = database.getCollection("Gamer");
+        mongoClient = new MongoClient(new MongoClientURI("mongodb://"+config.getMongo_url()+":"+config.getMongo_port()));
+        database = mongoClient.getDatabase(config.getMongo_db_name());
+        gamerCollection = database.getCollection(config.getMongo_collection_gamer());
     }
 
     /**
