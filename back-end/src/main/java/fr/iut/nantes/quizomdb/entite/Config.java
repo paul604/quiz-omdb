@@ -12,11 +12,11 @@ import java.util.Properties;
  */
 public class Config {
 
-    private static String DB="";
-    private static String mongo_url="";
-    private static String mongo_port="";
-    private static String mongo_db_name="";
-    private static String mongo_collection_gamer="";
+    private String DB = "";
+    private String mongo_url = "";
+    private String mongo_port = "";
+    private String mongo_db_name = "";
+    private String mongo_collection_gamer = "";
 
     public Config(String url) {
         try {
@@ -32,23 +32,23 @@ public class Config {
         }
     }
 
-    public static String getDB() {
+    public String getDB() {
         return DB;
     }
 
-    public static String getMongo_url() {
+    public String getMongo_url() {
         return mongo_url;
     }
 
-    public static String getMongo_port() {
+    public String getMongo_port() {
         return mongo_port;
     }
 
-    public static String getMongo_db_name() {
+    public String getMongo_db_name() {
         return mongo_db_name;
     }
 
-    public static String getMongo_collection_gamer() {
+    public String getMongo_collection_gamer() {
         return mongo_collection_gamer;
     }
 }
