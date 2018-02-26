@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -46,13 +47,15 @@ public class QuizOmdbApplication {
     @RequestMapping("/question")
     @ResponseBody
     String generateQuestion(String token) {
-        return "The question : " + control.generateQuestion(token);
+        return control.generateQuestion(token);
     }
 
     @RequestMapping("/response")
     @ResponseBody
-    String sendResponse(String token, String response) {
-        return "The response is correct : "+control.isCorrectResponse(token, response);
+    String sendResponse(String token, @RequestParam("response") String response) {
+        return "{ " +
+                "\"result\" : \""+ control.isCorrectResponse(token, response)
+                +"\" }";
     }
 
     @RequestMapping("/login")
