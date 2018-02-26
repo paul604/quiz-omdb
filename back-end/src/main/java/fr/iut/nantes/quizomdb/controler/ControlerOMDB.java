@@ -22,7 +22,7 @@ public class ControlerOMDB {
      */
     public String generateQuestion(String login) {
         // TODO
-        return null;
+        return "NOOT NOOT ?";
     }
 
     /**
