@@ -23,7 +23,7 @@ services:
   - mongodb
 
 before_script:
-  - mkdir /data/db
+  - mkdir -p /data/db
   - mongod --port 27017
 
 script:
