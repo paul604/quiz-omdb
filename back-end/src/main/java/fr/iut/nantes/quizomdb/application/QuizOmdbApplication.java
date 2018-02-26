@@ -1,5 +1,6 @@
 package fr.iut.nantes.quizomdb.application;
 
+import fr.iut.nantes.quizomdb.controler.ControlerGeneral;
 import fr.iut.nantes.quizomdb.entite.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 @Controller
 public class QuizOmdbApplication {
+    ControlerGeneral control= new ControlerGeneral();
 
     /**
      * log of application
@@ -41,18 +44,68 @@ public class QuizOmdbApplication {
     }
 
 
-    // TODO method that have meaning...
-    @RequestMapping("/bonjour")
+    @RequestMapping("/question")
     @ResponseBody
-    String home() {
-        return "Hello World!";
+    String generateQuestion(String token) {
+        return control.generateQuestion(token);
     }
 
-    @RequestMapping("/bonjour2")
+    @RequestMapping("/response")
     @ResponseBody
-    String home2() {
-        return "NNOOOON!";
+    String sendResponse(String token, @RequestParam("response") String response) {
+        return "{ " +
+                "\"result\" : \""+ control.isCorrectResponse(token, response)
+                +"\" }";
     }
+
+    @RequestMapping("/login")
+    @ResponseBody
+    String login(String login,  String password) {
+        return "Your token : "+control.login(login, password);
+    }
+
+    @RequestMapping("/disconnect")
+    @ResponseBody
+    String disconnect(String token) {
+        control.disconnect(token);
+        return "You have been disconnected.";
+    }
+
+    @RequestMapping("/goodanswers")
+    @ResponseBody
+    String getGoodAnswers(String token) {
+        return "Number of good answers : " + control.getGoodAnswers(token);
+    }
+
+    @RequestMapping("/answers")
+    @ResponseBody
+    String getAnswers(String token) {
+        return "Number of answers : " + control.getAnswers(token);
+    }
+
+    @RequestMapping("/")
+    @ResponseBody
+    String home() {
+        return "<h1>Welcome !</h1>";
+    }
+
+    @RequestMapping("/register")
+    @ResponseBody
+    String register() {
+        return "<h1>Inscription page</h1>";
+    }
+
+    @RequestMapping("/quizz")
+    @ResponseBody
+    String quizz() {
+        return "<h1>Quizz page</h1>";
+    }
+
+
+
+
+
+
 
 
 }

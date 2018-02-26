@@ -35,8 +35,7 @@ public class ControlerGeneral {
      * @return true of false
      */
     public boolean isCorrectResponse(String token, String response) {
-        // TODO
-        return false;
+        return response.equalsIgnoreCase("pingu");
     }
 
     /**
