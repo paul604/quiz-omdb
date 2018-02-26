@@ -1,4 +1,4 @@
-package fr.iut_nantes.quizomdb.controler;
+package fr.iut.nantes.quizomdb.controler;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +33,6 @@ public class TestControlerGamer {
 
     }
 
-    //TODO testLogin()
+    //TODO testLogin(), test return of AddGamer()
 
 }

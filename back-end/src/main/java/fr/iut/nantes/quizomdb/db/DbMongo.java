@@ -1,24 +1,21 @@
-package fr.iut_nantes.quizomdb.db;
+package fr.iut.nantes.quizomdb.db;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.UpdateResult;
-import fr.iut_nantes.quizomdb.entite.Gamer;
+import fr.iut.nantes.quizomdb.entite.Gamer;
 import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.mongodb.client.model.Filters.eq;
-import static fr.iut_nantes.quizomdb.application.QuizOmdbApplication.log;
-import static fr.iut_nantes.quizomdb.entite.Constants.*;
+import static fr.iut.nantes.quizomdb.application.QuizOmdbApplication.config;
+import static fr.iut.nantes.quizomdb.application.QuizOmdbApplication.log;
+import static fr.iut.nantes.quizomdb.entite.Constants.*;
 
 /**
  * @version 1.0
- * @see fr.iut_nantes.quizomdb.db.Idb
+ * @see Idb
  * @since 1.0
  */
 public class DbMongo implements Idb {
@@ -32,9 +29,9 @@ public class DbMongo implements Idb {
      */
     public DbMongo() {
         log.debug("create mongodb");
-        mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
-        database = mongoClient.getDatabase("DbQuizOmdb");
-        gamerCollection = database.getCollection("Gamer");
+        mongoClient = new MongoClient(new MongoClientURI("mongodb://"+config.getMongo_url()+":"+config.getMongo_port()));
+        database = mongoClient.getDatabase(config.getMongo_db_name());
+        gamerCollection = database.getCollection(config.getMongo_collection_gamer());
     }
 
     /**

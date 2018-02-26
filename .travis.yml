@@ -13,28 +13,25 @@ jdk:
 os:
   - linux
 
-jobs:
-  include:
-    - stage: Test
-      script:
-        - cd back-end
-        - mvn test
-    - stage: codecov
-      script:
-        - cd back-end
-        - mvn -P codecov cobertura:cobertura
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
-    - stage: SonarCloud
-      addons:
-        sonarcloud:
-          organization: $key
-          token:
-            secure: $token
-      script:
-        - cd back-end
-        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+addons:
+  sonarcloud:
+    organization: $key
+    token:
+      secure: $token
 
+services:
+  - mongodb
+
+before_script:
+  - mongod --port 27017
+
+script:
+  - mvn -f ./back-end/pom.xml test
+  - mvn -f ./back-end/pom.xml org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+  - mvn -f ./back-end/pom.xml -P codecov cobertura:cobertura
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 branches:
   only:

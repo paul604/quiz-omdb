@@ -1,4 +1,4 @@
-package fr.iut_nantes.quizomdb.entite;
+package fr.iut.nantes.quizomdb.entite;
 
 /**
  * @version 1.0
@@ -73,5 +73,13 @@ public class Gamer {
         Gamer gamer = (Gamer) o;
 
         return login.equals(gamer.login);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = login.hashCode();
+        result = 31 * result + goodAnswers;
+        result = 31 * result + answers;
+        return result;
     }
 }

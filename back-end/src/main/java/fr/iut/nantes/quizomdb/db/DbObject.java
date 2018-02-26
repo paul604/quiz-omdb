@@ -1,16 +1,14 @@
-package fr.iut_nantes.quizomdb.db;
+package fr.iut.nantes.quizomdb.db;
 
-import fr.iut_nantes.quizomdb.application.QuizOmdbApplication;
-import fr.iut_nantes.quizomdb.entite.Gamer;
+import fr.iut.nantes.quizomdb.application.QuizOmdbApplication;
+import fr.iut.nantes.quizomdb.entite.Gamer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @version 1.0
- * @see fr.iut_nantes.quizomdb.db.Idb
+ * @see Idb
  * @since 1.0
  */
 public class DbObject implements Idb {

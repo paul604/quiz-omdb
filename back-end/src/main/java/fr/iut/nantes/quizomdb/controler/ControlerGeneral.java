@@ -1,6 +1,6 @@
-package fr.iut_nantes.quizomdb.controler;
+package fr.iut.nantes.quizomdb.controler;
 
-import fr.iut_nantes.quizomdb.entite.Constants;
+import fr.iut.nantes.quizomdb.entite.Constants;
 import io.jsonwebtoken.Jwts;
 
 /**
@@ -8,9 +8,8 @@ import io.jsonwebtoken.Jwts;
  * @since 1.0
  */
 public class ControlerGeneral {
-    private ControlerOMDB omdb;
-    private ControlerGamer gamer;
-
+    private ControlerOMDB omdb = new ControlerOMDB();
+    private ControlerGamer gamer = new ControlerGamer();
 
     /**
      * @param token
@@ -36,8 +35,7 @@ public class ControlerGeneral {
      * @return true of false
      */
     public boolean isCorrectResponse(String token, String response) {
-        // TODO
-        return false;
+        return response.equalsIgnoreCase("pingu");
     }
 
     /**

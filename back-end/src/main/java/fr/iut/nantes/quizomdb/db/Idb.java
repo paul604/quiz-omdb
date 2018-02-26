@@ -1,8 +1,4 @@
-package fr.iut_nantes.quizomdb.db;
-
-import fr.iut_nantes.quizomdb.entite.Gamer;
-
-import java.util.List;
+package fr.iut.nantes.quizomdb.db;
 
 /**
  * @version 1.0

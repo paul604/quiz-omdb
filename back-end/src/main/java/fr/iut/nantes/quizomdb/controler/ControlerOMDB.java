@@ -1,6 +1,6 @@
-package fr.iut_nantes.quizomdb.controler;
+package fr.iut.nantes.quizomdb.controler;
 
-import fr.iut_nantes.quizomdb.entite.Quizz;
+import fr.iut.nantes.quizomdb.entite.Quizz;
 
 import java.util.HashMap;
 
@@ -21,8 +21,21 @@ public class ControlerOMDB {
      * @return the new question
      */
     public String generateQuestion(String login) {
-        // TODO
-        return null;
+        String image , question , answers;
+
+        question = "What is the year of released of this movie ?";
+        image = "http://vignette2.wikia.nocookie.net/pingufan/images/2/2e/Pingu_the_movie_xxlg.png/revision/latest?cb=20170221164619";
+        answers = "Pingu";
+
+
+        String json = "{ " +
+                "\"question\" : \""+ question +"\", " +
+                "\"image\" : \""+ image +
+                "\"}";
+
+
+        this.addQuizz(login, json , answers);
+        return json;
     }
 
     /**
