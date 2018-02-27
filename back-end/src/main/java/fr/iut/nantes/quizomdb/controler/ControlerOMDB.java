@@ -32,10 +32,10 @@ public class ControlerOMDB {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
         String poster="" , question , answers, movie;
-
+        // get a random movie
         movie = this.randomMovie();
         JsonObject jobj = gson.fromJson(movie, JsonObject.class);
-
+        // get a random question/response
         int id = (int)(Math.random() * 1);
         switch (id) {
             case 1 :
@@ -48,20 +48,17 @@ public class ControlerOMDB {
                 poster = jobj.get("Poster").toString();
                 answers = jobj.get("Year").toString();
         }
-
-
-
+        // Register the changes
         final Map<String, String> valeurs = new HashMap<String, String>();
         valeurs.put("question", question);
         valeurs.put("poster", poster);
-
 
         this.addQuizz(login, gson.toJson(valeurs) , answers);
         return gson.toJson(valeurs);
     }
 
     /**
-     * Ajoute un quizz dans la mémoire locale
+     * add a quizz in the local memory
      * @param login
      * @param question
      * @param answers
@@ -71,13 +68,12 @@ public class ControlerOMDB {
     }
 
     /**
-     * retire un quizz de la mémoire locale
+     * delete a quizz from the local memory after register it in the database
      * @param login
      */
     public void disconnect(String login){
         this.actualsQuizz.remove(login);
     }
-
 
 
     /**
@@ -88,7 +84,6 @@ public class ControlerOMDB {
         Quizz quizz = this.actualsQuizz.get(login);
         if (quizz != null) return quizz.getQuestion();
         return  null;
-
     }
 
     /**
@@ -102,9 +97,7 @@ public class ControlerOMDB {
     }
 
     /**
-     *
      * @return a random movie in json
-     *
      */
     private String randomMovie(){
         String id = Integer.toString((int)(Math.random() * (900000))+1);

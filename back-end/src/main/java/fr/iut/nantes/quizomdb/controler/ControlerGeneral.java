@@ -61,7 +61,9 @@ public class ControlerGeneral {
      * @param token of the user
      */
     public void disconnect(String token) {
-        this.gamer.disconnect(getLoginFromToken(token));
+        String login = getLoginFromToken(token);
+        this.omdb.disconnect(login);
+        this.gamer.disconnect(login);
     }
 
     /**
