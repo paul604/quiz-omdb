@@ -96,7 +96,7 @@ public class ControlerOMDB {
      *
      */
     private String randomMovie(){
-        int nb = (int)(Math.random() * (90000));
+        int nb = (int)(Math.random() * (900000));
         String id = "tt0"+nb;
         String film= "";
         try {
