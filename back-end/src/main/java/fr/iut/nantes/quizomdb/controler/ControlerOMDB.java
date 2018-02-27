@@ -96,7 +96,7 @@ public class ControlerOMDB {
      *
      */
     private String randomMovie(){
-        String id = Integer.toString((int)(Math.random() * (900000)));
+        String id = Integer.toString((int)(Math.random() * (900000))+1);
         while (id.length()<6){
             id="0"+id;
         }
