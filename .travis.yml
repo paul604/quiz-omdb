@@ -22,10 +22,6 @@ addons:
 services:
   - mongodb
 
-before_script:
-  - mkdir -p /home/travis/data/db
-  - mongod --port 27017 --dbpath /home/travis/data/db
-
 script:
   - mvn -f ./back-end/pom.xml test
   - mvn -f ./back-end/pom.xml org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
