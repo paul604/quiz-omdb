@@ -35,7 +35,7 @@ public class ControlerGeneral {
      * @return true of false
      */
     public boolean isCorrectResponse(String token, String response) {
-        return response.equalsIgnoreCase("pingu");
+        return response.equalsIgnoreCase(this.omdb.getAnswers(getLoginFromToken(token)));
     }
 
     /**
