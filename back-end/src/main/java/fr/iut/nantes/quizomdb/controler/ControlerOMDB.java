@@ -31,14 +31,25 @@ public class ControlerOMDB {
     public String generateQuestion(String login) {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
-        String poster , question , answers, movie;
+        String poster="" , question , answers, movie;
 
         movie = this.randomMovie();
         JsonObject jobj = gson.fromJson(movie, JsonObject.class);
 
-        question = "What is the year of released of this movie ?" ;
-        poster = jobj.get("Poster").toString();
-        answers = jobj.get("Year").toString();;
+        int id = (int)(Math.random() * 1);
+        switch (id) {
+            case 1 :
+                question = jobj.get("Plot").toString() +
+                        "\n What is the title of this movie ?" ;
+                answers = jobj.get("Title").toString();
+                break;
+            default :
+                question = "What is the year of released of this movie ?" ;
+                poster = jobj.get("Poster").toString();
+                answers = jobj.get("Year").toString();
+        }
+
+
 
         final Map<String, String> valeurs = new HashMap<String, String>();
         valeurs.put("question", question);
