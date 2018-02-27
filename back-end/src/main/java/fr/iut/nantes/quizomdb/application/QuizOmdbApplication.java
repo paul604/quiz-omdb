@@ -1,5 +1,7 @@
 package fr.iut.nantes.quizomdb.application;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import fr.iut.nantes.quizomdb.controler.ControlerGeneral;
 import fr.iut.nantes.quizomdb.entite.Config;
 import org.slf4j.Logger;
@@ -53,6 +55,7 @@ public class QuizOmdbApplication {
     @RequestMapping("/response")
     @ResponseBody
     String sendResponse(String token, @RequestParam("response") String response) {
+
         return "{ " +
                 "\"result\" : \""+ control.isCorrectResponse(token, response)
                 +"\" }";
