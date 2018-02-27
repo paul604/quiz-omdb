@@ -2,6 +2,7 @@ package fr.iut.nantes.quizomdb.controler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import fr.iut.nantes.quizomdb.entite.Quizz;
 
 import java.io.BufferedReader;
@@ -30,20 +31,18 @@ public class ControlerOMDB {
     public String generateQuestion(String login) {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
+        String poster , question , answers, movie;
 
-        String image , question , answers, film;
+        movie = this.randomMovie();
+        JsonObject jobj = gson.fromJson(movie, JsonObject.class);
 
-        question = this.questionAlea() ;
-
-//        film = this.filmAlea();
-//        String filmjson = gson.toJson(film);
-
-        image = "http://vignette2.wikia.nocookie.net/pingufan/images/2/2e/Pingu_the_movie_xxlg.png/revision/latest?cb=20170221164619";
-        answers = "Pingu";
+        question = "What is the year of released of this movie ?" ;
+        poster = jobj.get("Poster").toString();
+        answers = jobj.get("Year").toString();;
 
         final Map<String, String> valeurs = new HashMap<String, String>();
         valeurs.put("question", question);
-        valeurs.put("image", image);
+        valeurs.put("poster", poster);
 
 
         this.addQuizz(login, gson.toJson(valeurs) , answers);
@@ -91,27 +90,17 @@ public class ControlerOMDB {
         return  null;
     }
 
-
     /**
      *
-     * @return a random question
-     */
-    private String questionAlea(){
-        return "What is the year of released of this movie ?";
-    }
-
-    /**
+     * @return a random movie in json
      *
-     * @return a random title of film
      */
-    private String filmAlea(){
-        String [] titles = new String[]{
-                "Pingu",
-        };
-        int nb = (int)(Math.random() * (titles.length));
-        String film= null;
+    private String randomMovie(){
+        int nb = (int)(Math.random() * (90000));
+        String id = "tt0"+nb;
+        String film= "";
         try {
-            film = getHTML("http://www.omdbapi.com/?t="+titles[nb]);
+            film = getHTML("http://www.omdbapi.com/?i="+id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,7 +115,7 @@ public class ControlerOMDB {
      */
     private String getHTML(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();
-        URL url = new URL(urlToRead);
+        URL url = new URL(urlToRead+"&apikey=1666e2ee");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
