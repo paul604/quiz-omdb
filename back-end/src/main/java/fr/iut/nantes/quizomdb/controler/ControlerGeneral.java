@@ -35,7 +35,11 @@ public class ControlerGeneral {
      * @return true of false
      */
     public boolean isCorrectResponse(String token, String response) {
-        return response.equalsIgnoreCase(this.omdb.getAnswers(getLoginFromToken(token)));
+        String login = getLoginFromToken(token);
+        this.gamer.getGamer(login).incrementAnswers();
+        boolean isCorrect = response.equalsIgnoreCase(this.omdb.getAnswers(login));
+        if (isCorrect) this.gamer.getGamer(login).incrementGoodAnswers();
+        return isCorrect;
     }
 
     /**
