@@ -31,9 +31,14 @@ public class DbObject implements Idb {
     }
 
     @Override
-    public boolean addGamer(String pseudo, String pwd) throws Exception {
-        //Gamer gamer = new Gamer(pseudo, pwd);
-        //listGamers.put(pseudo, gamer);
+    public boolean addGamer(Gamer gamer, String pwd) {
+        listGamers.put(gamer.getLogin(), gamer);
+        return true;
+    }
+
+    @Override
+    public boolean supGamer(String pseudo) {
+        listGamers.remove(pseudo);
         return true;
     }
 

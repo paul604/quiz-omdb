@@ -1,6 +1,7 @@
 package fr.iut.nantes.quizomdb.controler;
 
 import fr.iut.nantes.quizomdb.db.DbMongo;
+import fr.iut.nantes.quizomdb.db.ExceptionDB;
 import fr.iut.nantes.quizomdb.db.Idb;
 import fr.iut.nantes.quizomdb.entite.Constants;
 import fr.iut.nantes.quizomdb.entite.Gamer;
@@ -26,7 +27,12 @@ public class ControlerGamer {
      */
     public ControlerGamer() {
         this.gamers = new HashMap<>();
-        this.db = new DbMongo();
+        try {
+            this.db = new DbMongo();
+        } catch (ExceptionDB exceptionDB) {
+            exceptionDB.printStackTrace();
+            System.exit(1);
+        }
     }
 
     /**

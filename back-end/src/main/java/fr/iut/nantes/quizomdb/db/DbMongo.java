@@ -1,9 +1,11 @@
 package fr.iut.nantes.quizomdb.db;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import fr.iut.nantes.quizomdb.entite.Gamer;
 import org.bson.Document;
@@ -27,11 +29,22 @@ public class DbMongo implements Idb {
     /**
      * init mongoDb
      */
-    public DbMongo() {
-        log.debug("create mongodb");
-        mongoClient = new MongoClient(new MongoClientURI("mongodb://"+config.getMongo_url()+":"+config.getMongo_port()));
-        database = mongoClient.getDatabase(config.getMongo_db_name());
-        gamerCollection = database.getCollection(config.getMongo_collection_gamer());
+    public DbMongo() throws ExceptionDB {
+        try {
+            log.debug("create mongodb ...");
+            mongoClient = new MongoClient(
+                    config.getMongo_url()+":"+config.getMongo_port(),
+                    MongoClientOptions.builder().retryWrites(false).build());
+            log.debug("mongodbClient OK");
+            database = mongoClient.getDatabase(config.getMongo_db_name());
+            log.debug("database OK");
+            gamerCollection = database.getCollection(config.getMongo_collection_gamer());
+            log.debug("gamerCollection OK");
+            log.debug("create mongodb OK");
+        } catch (Exception e) {
+            log.error("MongoDb error", e);
+            throw new  ExceptionDB("MongoDb error: "+e.getLocalizedMessage());
+        }
     }
 
     /**
@@ -49,11 +62,10 @@ public class DbMongo implements Idb {
     }
 
     @Override
-    public boolean setAnswers(String pseudo, int val) {
+    public boolean setAnswers(String pseudo, int val) throws ExceptionDB {
         Document documents = gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first();
         if (documents == null) {
-            log.warn("setAnswers: value not found for update");
-            return false;
+            throw new ExceptionDB("setAnswers: value not found for update");
         }
 
         gamerCollection.updateOne(
@@ -65,11 +77,10 @@ public class DbMongo implements Idb {
     }
 
     @Override
-    public boolean setGoodAnswers(String pseudo, int val) {
+    public boolean setGoodAnswers(String pseudo, int val) throws ExceptionDB {
         Document documents = gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first();
         if (documents == null) {
-            log.warn("setGoodAnswers: value not found for update");
-            return false;
+            throw new ExceptionDB("setAnswers: value not found for update");
         }
 
         UpdateResult result = gamerCollection.updateOne(
@@ -81,25 +92,44 @@ public class DbMongo implements Idb {
     }
 
     @Override
-    public boolean addGamer(String pseudo, String pwd) {
-//        try {
-//            Document document = toDocument(new Gamer(pseudo, pwd), pwd);
-//            gamerCollection.insertOne(document);
-//        } catch (Exception e) {
-//            log.error("error add gamer in DB", e);
-//        }
+    public boolean addGamer(Gamer gamer, String pwd){
+        try {
+            gamerCollection.insertOne(toDocument(gamer, pwd));
+        } catch (Exception e) {
+            log.warn("addGamer error", e);
+            return false;
+        }
         return true;
     }
 
     @Override
-    public int getAnswers(String pseudo) {
-        return (int) gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first().get(DB_GAMER_ANSWERS);
+    public boolean supGamer(String pseudo) {
+        try {
+            DeleteResult deleteResult = gamerCollection.deleteOne(eq(DB_GAMER_LOGIN, pseudo));
+            return deleteResult.getDeletedCount()==1;
+        } catch (Exception e) {
+            log.warn("supGamer error", e);
+            return false;
+        }
+    }
+
+
+    @Override
+    public int getAnswers(String pseudo) throws ExceptionDB {
+        Document document = gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first();
+        if (document == null) {
+            throw new ExceptionDB("getAnswers: value not found for get");
+        }
+        return (int) document.get(DB_GAMER_ANSWERS);
     }
 
     @Override
-    public int getGoodAnswers(String pseudo) {
-
-        return (int) gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first().get(DB_GAMER_GOOD_ANSWERS);
+    public int getGoodAnswers(String pseudo) throws ExceptionDB {
+        Document document = gamerCollection.find(eq(DB_GAMER_LOGIN, pseudo)).first();
+        if (document == null) {
+            throw new ExceptionDB("getGoodAnswers: value not found for get");
+        }
+        return (int) document.get(DB_GAMER_GOOD_ANSWERS);
     }
 
     @Override
