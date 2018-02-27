@@ -1,5 +1,6 @@
 package fr.iut.nantes.quizomdb.controler;
 
+import fr.iut.nantes.quizomdb.Utils;
 import fr.iut.nantes.quizomdb.entite.Constants;
 import io.jsonwebtoken.Jwts;
 import org.junit.Before;
@@ -15,6 +16,7 @@ public class TestControlerGeneral {
 
     @Before
     public void initialize() {
+        Utils.setupConfig();
         control = new ControlerGeneral();
         ControlerGamer gamer = new ControlerGamer();
         token = gamer.addGamer("login", 0,0);

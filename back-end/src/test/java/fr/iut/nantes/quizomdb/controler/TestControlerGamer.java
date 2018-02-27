@@ -1,5 +1,6 @@
 package fr.iut.nantes.quizomdb.controler;
 
+import fr.iut.nantes.quizomdb.Utils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,8 @@ public class TestControlerGamer {
     ControlerGamer control;
 
 	 @Before
-	 public void initialize() {   
+	 public void initialize() {
+         Utils.setupConfig();
 		 control = new ControlerGamer();
 	    }
 	

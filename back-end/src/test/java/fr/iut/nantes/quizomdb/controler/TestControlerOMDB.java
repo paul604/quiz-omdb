@@ -1,5 +1,6 @@
 package fr.iut.nantes.quizomdb.controler;
 
+import fr.iut.nantes.quizomdb.Utils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ public class TestControlerOMDB {
 
     @Before
     public void initialize() {
+        Utils.setupConfig();
         control = new ControlerOMDB();
     }
 
