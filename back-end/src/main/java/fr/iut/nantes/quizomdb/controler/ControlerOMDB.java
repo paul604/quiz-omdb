@@ -96,11 +96,11 @@ public class ControlerOMDB {
      *
      */
     private String randomMovie(){
-        String nb = Integer.toString((int)(Math.random() * (900000)));
-        while (nb.length()<6){
-            nb="0"+nb;
+        String id = Integer.toString((int)(Math.random() * (900000)));
+        while (id.length()<6){
+            id="0"+id;
         }
-        String id = "tt0"+nb;
+        id = "tt0"+id;
         String film= "";
         try {
             film = getHTML("http://www.omdbapi.com/?i="+id);
