@@ -1,7 +1,13 @@
 package fr.iut.nantes.quizomdb.controler;
 
+import com.google.gson.*;
 import fr.iut.nantes.quizomdb.entite.Constants;
 import io.jsonwebtoken.Jwts;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * @version 1.0
@@ -37,7 +43,8 @@ public class ControlerGeneral {
     public boolean isCorrectResponse(String token, String response) {
         String login = getLoginFromToken(token);
         this.gamer.getGamer(login).incrementAnswers();
-        boolean isCorrect = response.equalsIgnoreCase(this.omdb.getAnswers(login));
+        String answers = this.omdb.getAnswers(login);
+        boolean isCorrect = new ControlerDatamuse().hasCloseSpelling(response, answers);
         if (isCorrect) this.gamer.getGamer(login).incrementGoodAnswers();
         return isCorrect;
     }

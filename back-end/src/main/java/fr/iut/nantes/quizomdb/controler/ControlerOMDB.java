@@ -107,7 +107,7 @@ public class ControlerOMDB {
         id = "tt0"+id;
         String film= "";
         try {
-            film = getHTML("http://www.omdbapi.com/?i="+id);
+            film = getFromOmdb(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,13 +116,13 @@ public class ControlerOMDB {
 
     /**
      * do a HTTP GET
-     * @param urlToRead
-     * @return
+     * @param id the id of movie to get
+     * @return a movie in format json
      * @throws Exception
      */
-    private String getHTML(String urlToRead) throws Exception {
+    private String getFromOmdb(String id) throws Exception {
         StringBuilder result = new StringBuilder();
-        URL url = new URL(urlToRead+"&apikey=1666e2ee");
+        URL url = new URL("http://www.omdbapi.com/?i="+id+"&apikey=1666e2ee");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
