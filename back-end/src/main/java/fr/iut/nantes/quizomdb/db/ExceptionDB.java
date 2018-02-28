@@ -9,6 +9,6 @@ import fr.iut.nantes.quizomdb.application.QuizOmdbApplication;
 public class ExceptionDB extends Exception {
     public ExceptionDB(String message) {
         super(message);
-        QuizOmdbApplication.log.error("ExceptionDB: "+message);
+        QuizOmdbApplication.log.error("ExceptionDB: " + message);
     }
 }

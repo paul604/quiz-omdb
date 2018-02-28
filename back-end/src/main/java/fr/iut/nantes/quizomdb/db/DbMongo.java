@@ -2,7 +2,6 @@ package fr.iut.nantes.quizomdb.db;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
@@ -33,7 +32,7 @@ public class DbMongo implements Idb {
         try {
             log.debug("create mongodb ...");
             mongoClient = new MongoClient(
-                    config.getMongo_url()+":"+config.getMongo_port(),
+                    config.getMongo_url() + ":" + config.getMongo_port(),
                     MongoClientOptions.builder().retryWrites(false).build());
             log.debug("mongodbClient OK");
             database = mongoClient.getDatabase(config.getMongo_db_name());
@@ -43,7 +42,7 @@ public class DbMongo implements Idb {
             log.debug("create mongodb OK");
         } catch (Exception e) {
             log.error("MongoDb error", e);
-            throw new  ExceptionDB("MongoDb error: "+e.getLocalizedMessage());
+            throw new ExceptionDB("MongoDb error: " + e.getLocalizedMessage());
         }
     }
 
@@ -92,7 +91,7 @@ public class DbMongo implements Idb {
     }
 
     @Override
-    public boolean addGamer(Gamer gamer, String pwd){
+    public boolean addGamer(Gamer gamer, String pwd) {
         try {
             gamerCollection.insertOne(toDocument(gamer, pwd));
         } catch (Exception e) {
@@ -106,7 +105,7 @@ public class DbMongo implements Idb {
     public boolean supGamer(String pseudo) {
         try {
             DeleteResult deleteResult = gamerCollection.deleteOne(eq(DB_GAMER_LOGIN, pseudo));
-            return deleteResult.getDeletedCount()==1;
+            return deleteResult.getDeletedCount() == 1;
         } catch (Exception e) {
             log.warn("supGamer error", e);
             return false;

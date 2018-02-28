@@ -10,16 +10,16 @@ public class Quizz {
 
     /**
      * Class constructor
+     *
      * @param question
      * @param answers
      */
     public Quizz(String question, String answers) {
-        this.question=question;
-        this.answers=answers;
+        this.question = question;
+        this.answers = answers;
     }
 
     /**
-     *
      * @return the question
      */
     public String getQuestion() {
@@ -28,6 +28,7 @@ public class Quizz {
 
     /**
      * Setter of question
+     *
      * @param question, the new question
      */
     public void setQuestion(String question) {
@@ -35,7 +36,6 @@ public class Quizz {
     }
 
     /**
-     *
      * @return the answers
      */
     public String getAnswers() {
@@ -44,6 +44,7 @@ public class Quizz {
 
     /**
      * Setter of answers
+     *
      * @param answers, the answers
      */
     public void setAnswers(String answers) {

@@ -1,13 +1,7 @@
 package fr.iut.nantes.quizomdb.controler;
 
-import com.google.gson.*;
 import fr.iut.nantes.quizomdb.entite.Constants;
 import io.jsonwebtoken.Jwts;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * @version 1.0
@@ -27,6 +21,7 @@ public class ControlerGeneral {
 
     /**
      * Change the actual question of a user
+     *
      * @param token
      * @return the new question
      */
@@ -36,7 +31,8 @@ public class ControlerGeneral {
 
     /**
      * Check if the response in parameter is close to the answers
-     * @param token of the user
+     *
+     * @param token    of the user
      * @param response
      * @return true of false
      */
@@ -51,6 +47,7 @@ public class ControlerGeneral {
 
     /**
      * Try to log in a user
+     *
      * @param login
      * @param password
      * @return the token of the user if sucessful, else 'err'
@@ -65,6 +62,7 @@ public class ControlerGeneral {
 
     /**
      * Delete the actual session of the user
+     *
      * @param token of the user
      */
     public void disconnect(String token) {
@@ -74,7 +72,6 @@ public class ControlerGeneral {
     }
 
     /**
-     *
      * @param token of the user
      * @return the number of good answers of the user
      */
@@ -83,7 +80,6 @@ public class ControlerGeneral {
     }
 
     /**
-     *
      * @param token of the user
      * @return the number of answers of the user
      */
@@ -93,6 +89,7 @@ public class ControlerGeneral {
 
     /**
      * get the login associated to the token
+     *
      * @param token of the user
      * @return the login if successful, else null
      */

@@ -37,14 +37,15 @@ public class ControlerGamer {
 
     /**
      * Try to authenticate the user
-     * @param login gamer
+     *
+     * @param login    gamer
      * @param password gamer
      * @return the token of the user
      * @throws Exception
      * @since 1.0
      */
     public String login(String login, String password) throws Exception {
-        if (!db.connect(login, password)){
+        if (!db.connect(login, password)) {
             throw new Exception();
         }
         return addGamer(login, db.getAnswers(login), db.getGoodAnswers(login));
@@ -52,12 +53,13 @@ public class ControlerGamer {
 
     /**
      * Add a user in the local memory
+     *
      * @param login
      * @param answers
      * @param goodAnswers
      * @return the token of the user
      */
-    public String addGamer(String login, int answers, int goodAnswers){
+    public String addGamer(String login, int answers, int goodAnswers) {
         Gamer gamer = new Gamer(login, answers, goodAnswers);
         this.gamers.put(login, gamer);
         return Jwts.builder()
@@ -66,7 +68,9 @@ public class ControlerGamer {
                 .compact();
     }
 
-    /** Delete the user from the local memory
+    /**
+     * Delete the user from the local memory
+     *
      * @param login of the user
      * @since 1.0
      */

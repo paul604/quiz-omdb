@@ -1,7 +1,5 @@
 package fr.iut.nantes.quizomdb.application;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import fr.iut.nantes.quizomdb.controler.ControlerGeneral;
 import fr.iut.nantes.quizomdb.entite.Config;
 import org.slf4j.Logger;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 @Controller
 public class QuizOmdbApplication extends SpringBootServletInitializer {
-    ControlerGeneral control= new ControlerGeneral();
 
     /**
      * log of application
@@ -32,6 +29,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
      */
     public static final Logger log = LoggerFactory.getLogger("QuizOmdb");
     public static Config config;
+    ControlerGeneral control = new ControlerGeneral();
 
     /**
      * @param args argument of application
@@ -58,14 +56,14 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     String sendResponse(String token, @RequestParam("response") String response) {
 
         return "{ " +
-                "\"result\" : \""+ control.isCorrectResponse(token, response)
-                +"\" }";
+                "\"result\" : \"" + control.isCorrectResponse(token, response)
+                + "\" }";
     }
 
     @RequestMapping("/login")
     @ResponseBody
-    String login(String login,  String password) {
-        return "Your token : "+control.login(login, password);
+    String login(String login, String password) {
+        return "Your token : " + control.login(login, password);
     }
 
     @RequestMapping("/disconnect")
@@ -104,12 +102,6 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     String quizz() {
         return "<h1>Quizz page</h1>";
     }
-
-
-
-
-
-
 
 
 }

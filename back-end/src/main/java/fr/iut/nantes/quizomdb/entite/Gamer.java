@@ -12,11 +12,12 @@ public class Gamer {
 
     /**
      * Class constructor
+     *
      * @param login
      * @param goodAnswers
      * @param answers
      */
-    public Gamer(String login, int goodAnswers, int answers){
+    public Gamer(String login, int goodAnswers, int answers) {
         this.login = login;
         this.goodAnswers = goodAnswers;
         this.answers = answers;
@@ -41,7 +42,7 @@ public class Gamer {
      * Add 1 to number of good answers
      */
     public void incrementGoodAnswers() {
-        this.goodAnswers +=1;
+        this.goodAnswers += 1;
     }
 
 
@@ -62,6 +63,7 @@ public class Gamer {
 
     /**
      * Override of the method equals
+     *
      * @param o
      * @return true of false
      */
