@@ -95,7 +95,7 @@ public class DbMongo implements Idb {
         try {
             gamerCollection.insertOne(toDocument(gamer, pwd));
         } catch (Exception e) {
-            log.warn("addGamer error", e);
+            log.warn("addGamer error");
             return false;
         }
         return true;
@@ -107,7 +107,7 @@ public class DbMongo implements Idb {
             DeleteResult deleteResult = gamerCollection.deleteOne(eq(DB_GAMER_LOGIN, pseudo));
             return deleteResult.getDeletedCount() == 1;
         } catch (Exception e) {
-            log.warn("supGamer error", e);
+            log.warn("supGamer error");
             return false;
         }
     }
