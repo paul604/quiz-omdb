@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,16 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
      */
     public static final Logger log = LoggerFactory.getLogger("QuizOmdb");
     public static Config config;
-    ControlerGeneral control = new ControlerGeneral();
+    ControlerGeneral control;
+
+    public QuizOmdbApplication() {
+        if (config == null) {
+            String configPath = QuizOmdbApplication.class.getResource("/config.properties").getPath();
+            log.info("path of config file: " + configPath);
+            config = new Config(configPath);
+        }
+        control = new ControlerGeneral();
+    }
 
     /**
      * @param args argument of application
@@ -44,6 +54,10 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         SpringApplication.run(QuizOmdbApplication.class, args);
     }
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(QuizOmdbApplication.class);
+    }
 
     @RequestMapping("/question")
     @ResponseBody
@@ -63,7 +77,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @RequestMapping("/login")
     @ResponseBody
     String login(String login, String password) {
-        return "Your token : " + control.login(login, password);
+        return "{ " +
+                "\"token\" : \"" + control.login(login, password)
+                + "\" }";
     }
 
     @RequestMapping("/disconnect")
