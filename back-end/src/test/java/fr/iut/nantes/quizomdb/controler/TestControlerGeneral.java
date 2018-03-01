@@ -47,8 +47,6 @@ public class TestControlerGeneral {
         assertEquals("err", control.login("",""));
     }
 
-    //TODO reste des requetes en attente de la BD
-
 
 
 
