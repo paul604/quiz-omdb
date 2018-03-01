@@ -103,4 +103,8 @@ public class ControlerGamer {
     }
 
 
+    public Idb getDb() {
+        return db;
+    }
+
 }
