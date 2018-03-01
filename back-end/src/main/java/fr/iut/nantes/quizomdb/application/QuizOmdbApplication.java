@@ -119,5 +119,13 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return "<h1>Quizz page</h1>";
     }
 
+    @RequestMapping("/createaccount")
+    @ResponseBody
+    String createAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
+
+        return control.createAccount(login, password);
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package fr.iut.nantes.quizomdb.controler;
 
 import fr.iut.nantes.quizomdb.entite.Constants;
+import fr.iut.nantes.quizomdb.entite.Gamer;
 import io.jsonwebtoken.Jwts;
 
 /**
@@ -99,6 +100,18 @@ public class ControlerGeneral {
             if (isValid) return login;
         }
         return null;
+    }
+
+    /**
+     * create a user in the database
+     * @param login
+     * @param password
+     */
+    public String createAccount(String login, String password){
+        boolean ok = this.gamer.getDb().addGamer(new Gamer(login, 0,0),password);
+        return "{ " +
+                "\"result\" : \"" + ok
+                + "\" }";
     }
 
 }
