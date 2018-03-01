@@ -75,6 +75,12 @@ public class ControlerGamer {
      * @since 1.0
      */
     public void disconnect(String login) {
+        try {
+            this.db.setAnswers(login, this.gamers.get(login).getAnswers());
+            this.db.setGoodAnswers(login, this.gamers.get(login).getGoodAnswers());
+        } catch (ExceptionDB exceptionDB) {
+            exceptionDB.printStackTrace();
+        }
         this.gamers.remove(login);
     }
 

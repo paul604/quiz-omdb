@@ -75,6 +75,7 @@ public class ControlerOMDB {
      * @param login
      */
     public void disconnect(String login) {
+
         this.actualsQuizz.remove(login);
     }
 
