@@ -43,8 +43,8 @@ public class TestControlerGamer {
 
     @Test
     public void testAddGamerReturn() throws Exception {
-        String value1 = control.addGamer("login", 0, 0);
-        String value2 = control.addGamer("login", 0, 0);
+        String value1 = control.addGamer("test", 0, 0);
+        String value2 = control.addGamer("test", 0, 0);
         assertTrue(value1.equals(value2));
     }
 
