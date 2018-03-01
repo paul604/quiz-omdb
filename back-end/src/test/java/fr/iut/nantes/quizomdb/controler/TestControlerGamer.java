@@ -4,9 +4,7 @@ import fr.iut.nantes.quizomdb.Utils;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TestControlerGamer {
     ControlerGamer control;
@@ -35,6 +33,16 @@ public class TestControlerGamer {
 
     }
 
-    //TODO testLogin(), test return of AddGamer()
+    @Test (expected = Exception.class)
+    public void testLoginInvalid() throws Exception {
+        control.login("falseLogin", "falsePassword");
+    }
+
+    @Test
+    public void testAddGamerReturn() throws Exception {
+        String value1 = control.addGamer("login", 0, 0);
+        String value2 = control.addGamer("login", 0, 0);
+        assertTrue(value1.equals(value2));
+    }
 
 }
