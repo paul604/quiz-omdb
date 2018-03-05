@@ -8,11 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Main class
@@ -22,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @SpringBootApplication
 @Controller
+@CrossOrigin
+@RequestMapping("/")
 public class QuizOmdbApplication extends SpringBootServletInitializer {
 
     /**
@@ -44,6 +44,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
 
     /**
      * @param args argument of application
+     *
      * @since 1.0
      */
     public static void main(String[] args) {
@@ -60,84 +61,87 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return application.sources(QuizOmdbApplication.class);
     }
 
-    @CrossOrigin
-    @RequestMapping("/question")
+    @GetMapping(value = "/question",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String generateQuestion(String token) {
-        return control.generateQuestion(token);
+    ResponseEntity generateQuestion(String token) {
+        ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
+        return res;
     }
 
-    @CrossOrigin
-    @RequestMapping("/response")
+    @PutMapping(value = "/response",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String sendResponse(String token, @RequestParam("response") String response) {
-
-        return "{ " +
+    ResponseEntity sendResponse(String token, @RequestParam("response") String response) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"result\" : \"" + control.isCorrectResponse(token, response)
-                + "\" }";
+                + "\" }");
+        return res;
     }
 
-    @CrossOrigin
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String login(String login, String password) {
-        return "{ " +
+    ResponseEntity login(String login, String password) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"token\" : \"" + control.login(login, password)
-                + "\" }";
+                + "\" }");
+        return res;
     }
 
-    @CrossOrigin
-    @RequestMapping("/disconnect")
+    @RequestMapping(value = "/disconnect",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String disconnect(String token) {
+    ResponseEntity disconnect(String token) {
         control.disconnect(token);
-        return "{ \"result\" : \"ok\" }";
+        ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
+        return res;
     }
 
-    @CrossOrigin
-    @RequestMapping("/goodanswers")
+    @GetMapping(value = "/goodanswers",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String getGoodAnswers(String token) {
-        return "{ " +
+    ResponseEntity getGoodAnswers(String token) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"goodanswers\" : \"" + control.getGoodAnswers(token)
-                + "\" }";
+                + "\" }");
+        return res;
     }
 
-    @CrossOrigin
-    @RequestMapping("/answers")
+    @GetMapping(value = "/answers",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String getAnswers(String token) {
-      return "{ " +
-              "\"answers\" : \"" + control.getAnswers(token)
-              + "\" }";
+    ResponseEntity getAnswers(String token) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
+                "\"answers\" : \"" + control.getAnswers(token)
+                + "\" }");
+        return res;
     }
 
-    @CrossOrigin
     @RequestMapping("/")
     @ResponseBody
     String home() {
         return "<h1>Welcome !</h1>";
     }
 
-    @CrossOrigin
     @RequestMapping("/register")
     @ResponseBody
     String register() {
         return "<h1>Inscription page</h1>";
     }
 
-    @CrossOrigin
     @RequestMapping("/quizz")
     @ResponseBody
     String quizz() {
         return "<h1>Quizz page</h1>";
     }
 
-    @CrossOrigin
-    @RequestMapping("/createaccount")
+    @RequestMapping(value = "/createaccount",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String createAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
-        return control.createAccount(login, password);
+    ResponseEntity createAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
+        ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
+        return res;
     }
 
 }
