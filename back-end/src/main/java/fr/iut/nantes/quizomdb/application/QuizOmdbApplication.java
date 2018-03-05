@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,12 +60,14 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return application.sources(QuizOmdbApplication.class);
     }
 
+    @CrossOrigin
     @RequestMapping("/question")
     @ResponseBody
     String generateQuestion(String token) {
         return control.generateQuestion(token);
     }
 
+    @CrossOrigin
     @RequestMapping("/response")
     @ResponseBody
     String sendResponse(String token, @RequestParam("response") String response) {
@@ -74,6 +77,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                 + "\" }";
     }
 
+    @CrossOrigin
     @RequestMapping("/login")
     @ResponseBody
     String login(String login, String password) {
@@ -82,6 +86,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                 + "\" }";
     }
 
+    @CrossOrigin
     @RequestMapping("/disconnect")
     @ResponseBody
     String disconnect(String token) {
@@ -89,36 +94,42 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return "You have been disconnected.";
     }
 
+    @CrossOrigin
     @RequestMapping("/goodanswers")
     @ResponseBody
     String getGoodAnswers(String token) {
         return "Number of good answers : " + control.getGoodAnswers(token);
     }
 
+    @CrossOrigin
     @RequestMapping("/answers")
     @ResponseBody
     String getAnswers(String token) {
         return "Number of answers : " + control.getAnswers(token);
     }
 
+    @CrossOrigin
     @RequestMapping("/")
     @ResponseBody
     String home() {
         return "<h1>Welcome !</h1>";
     }
 
+    @CrossOrigin
     @RequestMapping("/register")
     @ResponseBody
     String register() {
         return "<h1>Inscription page</h1>";
     }
 
+    @CrossOrigin
     @RequestMapping("/quizz")
     @ResponseBody
     String quizz() {
         return "<h1>Quizz page</h1>";
     }
 
+    @CrossOrigin
     @RequestMapping("/createaccount")
     @ResponseBody
     String createAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
