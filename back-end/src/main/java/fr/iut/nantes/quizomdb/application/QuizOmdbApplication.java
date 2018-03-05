@@ -63,14 +63,14 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @CrossOrigin
     @RequestMapping("/question")
     @ResponseBody
-    String generateQuestion(String token) {
+    String generateQuestion(@RequestParam("token") String token) {
         return control.generateQuestion(token);
     }
 
     @CrossOrigin
     @RequestMapping("/response")
     @ResponseBody
-    String sendResponse(String token, @RequestParam("response") String response) {
+    String sendResponse(@RequestParam("token") String token, @RequestParam("response") String response) {
 
         return "{ " +
                 "\"result\" : \"" + control.isCorrectResponse(token, response)
@@ -89,7 +89,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @CrossOrigin
     @RequestMapping("/disconnect")
     @ResponseBody
-    String disconnect(String token) {
+    String disconnect(@RequestParam("token") String token) {
         control.disconnect(token);
         return "{ \"result\" : \"ok\" }";
     }
@@ -97,7 +97,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @CrossOrigin
     @RequestMapping("/goodanswers")
     @ResponseBody
-    String getGoodAnswers(String token) {
+    String getGoodAnswers(@RequestParam("token") String token) {
         return "{ " +
                 "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                 + "\" }";
@@ -106,7 +106,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @CrossOrigin
     @RequestMapping("/answers")
     @ResponseBody
-    String getAnswers(String token) {
+    String getAnswers(@RequestParam("token") String token) {
       return "{ " +
               "\"answers\" : \"" + control.getAnswers(token)
               + "\" }";
