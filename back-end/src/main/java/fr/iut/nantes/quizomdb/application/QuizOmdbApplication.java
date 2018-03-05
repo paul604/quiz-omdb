@@ -91,21 +91,25 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @ResponseBody
     String disconnect(String token) {
         control.disconnect(token);
-        return "You have been disconnected.";
+        return "{ \"result\" : \"ok\" }";
     }
 
     @CrossOrigin
     @RequestMapping("/goodanswers")
     @ResponseBody
     String getGoodAnswers(String token) {
-        return "Number of good answers : " + control.getGoodAnswers(token);
+        return "{ " +
+                "\"goodanswers\" : \"" + control.getGoodAnswers(token)
+                + "\" }";
     }
 
     @CrossOrigin
     @RequestMapping("/answers")
     @ResponseBody
     String getAnswers(String token) {
-        return "Number of answers : " + control.getAnswers(token);
+      return "{ " +
+              "\"answers\" : \"" + control.getAnswers(token)
+              + "\" }";
     }
 
     @CrossOrigin
@@ -133,10 +137,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @RequestMapping("/createaccount")
     @ResponseBody
     String createAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
-
         return control.createAccount(login, password);
     }
-
-
 
 }
