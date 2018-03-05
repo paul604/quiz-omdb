@@ -64,7 +64,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/question",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity generateQuestion(String token) {
+    ResponseEntity generateQuestion(@RequestParam("token") String token) {
         ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
         return res;
     }
@@ -72,7 +72,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @PutMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity sendResponse(String token, @RequestParam("response") String response) {
+    ResponseEntity sendResponse(@RequestParam("token") String token, @RequestParam("response") String response) {
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"result\" : \"" + control.isCorrectResponse(token, response)
                 + "\" }");
@@ -92,7 +92,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @RequestMapping(value = "/disconnect",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity disconnect(String token) {
+    ResponseEntity disconnect(@RequestParam("token") String token) {
         control.disconnect(token);
         ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
         return res;
@@ -101,7 +101,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/goodanswers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getGoodAnswers(String token) {
+    ResponseEntity getGoodAnswers(@RequestParam("token") String token) {
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                 + "\" }");
@@ -111,7 +111,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/answers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getAnswers(String token) {
+    ResponseEntity getAnswers(@RequestParam("token") String token) {
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"answers\" : \"" + control.getAnswers(token)
                 + "\" }");
