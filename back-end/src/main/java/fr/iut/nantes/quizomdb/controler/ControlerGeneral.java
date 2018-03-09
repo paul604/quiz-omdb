@@ -57,7 +57,7 @@ public class ControlerGeneral {
         try {
             return this.gamer.login(login, password);
         } catch (Exception e) {
-            return "err";
+            return "Err";
         }
     }
 
