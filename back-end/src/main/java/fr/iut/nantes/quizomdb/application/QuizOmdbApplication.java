@@ -124,22 +124,10 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return "<h1>Welcome !</h1>";
     }
 
-    @RequestMapping("/register")
-    @ResponseBody
-    String register() {
-        return "<h1>Inscription page</h1>";
-    }
-
-    @RequestMapping("/quizz")
-    @ResponseBody
-    String quizz() {
-        return "<h1>Quizz page</h1>";
-    }
-
-    @RequestMapping(value = "/createaccount",
+    @RequestMapping(value = "/register",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity createAccount(@RequestParam("login") String login, @RequestParam("password") String password) {
+    ResponseEntity register(@RequestParam("login") String login, @RequestParam("password") String password) {
         ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
         return res;
     }
