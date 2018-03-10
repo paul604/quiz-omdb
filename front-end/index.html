@@ -6,32 +6,32 @@
     <title></title>
   </head>
   <body>
-    <div id="index">
+    <div id="vue">
 
       <transition name="fade" mode="out-in">
 
         <div class='header'>
           <div v-if='body === "quizTemp"' key="Statistics">
-            <button onClick={{index.toStats()}}>Statistics</button>
+            <button onClick={{vue.toStats()}}>Statistics</button>
           </div>
           <div v-else-if='body === "statsTemp"' key="Quiz">
-            <button onClick={{index.toQuiz()}}>Quiz</button>
+            <button onClick={{vue.toQuiz()}}>Quiz</button>
           </div>
           <div v-else-if='body === "legalTemp"' key="Back">
-            <button onClick={{index.toPrecedent()}}>Back</button>
+            <button onClick={{vue.toPrecedent()}}>Back</button>
           </div>
           <div v-else key="invisible">
             <button class='invisible'></button>
           </div>
           <h1>Quiz omdb</h1>
           <div v-if='body === "loginTemp"' key="Register">
-            <button onClick={{index.toRegister()}}>Register</button>
+            <button onClick={{vue.loginToRegister()}}>Register</button>
           </div>
           <div v-else-if='body === "registerTemp"' key="Login">
-            <button onClick={{index.toLogin()}}>Login</button>
+            <button onClick={{vue.toLogin()}}>Login</button>
           </div>
           <div v-else-if='body != "legalTemp"' key="Log out">
-            <button onClick={{index.toLogin()}}>Log out</button>
+            <button onClick={{vue.toLogin()}}>Log out</button>
           </div>
           <div v-else key="invisible2">
               <button class='invisible'></button>
@@ -48,7 +48,7 @@
 
           <div v-if="body === 'loginTemp'" key="login">
             <h2>Login</h2>
-            <form class='' action='javascript:index.toQuiz()'>
+            <form class='' action='javascript:vue.loginToQuiz()'>
               <table>
                 <tr>
                   <td>Login:</td>
@@ -65,7 +65,7 @@
 
           <div v-else-if="body === 'registerTemp'" key="register">
             <h2>Register</h2>
-            <form class='' action='javascript:index.toQuiz()'>
+            <form class='' action='javascript:vue.registerToQuiz()'>
               <table>
                 <tr>
                   <td>Login:</td>
@@ -87,7 +87,7 @@
               </div>
               <div class="question" v-html="question"></div>
             </div>
-            <form class='' action='javascript:index.answerQuestion()'>
+            <form class='' action='javascript:vue.answerQuestion()'>
               <table>
                 <tr>
                   <td>Answer:</td>
@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                   <td>Score:</td>
-                  <td class="score">{{index.score}}</td>
+                  <td class="score">{{vue.score}}</td>
                 </tr>
               </table>
               <input type='submit' value='Validate'></td>
@@ -107,11 +107,11 @@
             <table>
               <tr>
                 <td>Total score:</td>
-                <td>{{index.totalScore}}</td>
+                <td>{{vue.totalScore}}</td>
               </tr>
               <tr>
                 <td>Success rate:</td>
-                <td>{{index.successRate}}%</td>
+                <td>{{vue.successRate}}%</td>
               </tr>
             </table>
           </div>
@@ -170,13 +170,13 @@
         <a href="https://github.com/paul604/quiz-omdb">
           <img src="img/GitHub-Mark-Light-32px.png" alt="github's link to source code">
         </a>
-        <button onClick={{index.toLegal()}}>Legal</button>
+        <button onClick={{vue.toLegal()}}>Legal</button>
         <button class='invisible'></button>
       </div>
 
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="vue.js"></script>
   </body>
 </html>
