@@ -69,7 +69,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return res;
     }
 
-    @PutMapping(value = "/response",
+    @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity sendResponse(@RequestParam("token") String token, @RequestParam("response") String response) {
@@ -79,7 +79,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return res;
     }
 
-    @RequestMapping(value = "/login",
+    @PostMapping(value = "/login",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity login(String login, String password) {
@@ -89,7 +89,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return res;
     }
 
-    @RequestMapping(value = "/disconnect",
+    @PostMapping(value = "/disconnect",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity disconnect(@RequestParam("token") String token) {
@@ -124,7 +124,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return "<h1>Welcome !</h1>";
     }
 
-    @RequestMapping(value = "/register",
+    @PostMapping(value = "/register",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity register(@RequestParam("login") String login, @RequestParam("password") String password) {
