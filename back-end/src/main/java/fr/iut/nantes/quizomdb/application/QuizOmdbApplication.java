@@ -84,7 +84,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity login(String login, String password) {
         ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"value\" : \"" + control.login(login, password)
+                "\"token\" : \"" + control.login(login, password)
                 + "\" }");
         return res;
     }
