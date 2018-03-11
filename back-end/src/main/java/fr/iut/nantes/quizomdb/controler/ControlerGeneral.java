@@ -117,23 +117,4 @@ public class ControlerGeneral {
                 "\"result\" : \"" + ok
                 + "\" }";
     }
-
-    /**
-     * get index.html
-     */
-    public String home(){
-        String content = "";
-        try {
-            BufferedReader in = new BufferedReader(new FileReader("../../resources/index.html"));
-            String str;
-            while ((str = in.readLine()) != null) {
-                content +=str;
-            }
-            in.close();
-        } catch (IOException e) {
-            return "an error occured";
-        }
-        return content;
-    }
-
 }
