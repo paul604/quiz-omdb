@@ -4,6 +4,10 @@ import fr.iut.nantes.quizomdb.entite.Constants;
 import fr.iut.nantes.quizomdb.entite.Gamer;
 import io.jsonwebtoken.Jwts;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * @version 1.0
  * @since 1.0
@@ -112,6 +116,24 @@ public class ControlerGeneral {
         return "{ " +
                 "\"result\" : \"" + ok
                 + "\" }";
+    }
+
+    /**
+     * get index.html
+     */
+    public String home(){
+        String content = "";
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("../../resources/index.html"));
+            String str;
+            while ((str = in.readLine()) != null) {
+                content +=str;
+            }
+            in.close();
+        } catch (IOException e) {
+            return "an error occured";
+        }
+        return content;
     }
 
 }

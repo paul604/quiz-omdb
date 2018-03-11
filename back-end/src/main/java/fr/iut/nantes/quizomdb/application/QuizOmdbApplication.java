@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Main class
  *
@@ -121,7 +125,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        return "../front-end/index.html";
+        return control.home();
     }
 
     @PostMapping(value = "/register",
