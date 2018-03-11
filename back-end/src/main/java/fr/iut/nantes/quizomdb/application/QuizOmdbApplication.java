@@ -121,7 +121,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        return "<h1>Welcome !</h1>";
+        return "../front-end/index.html";
     }
 
     @PostMapping(value = "/register",
