@@ -22,10 +22,12 @@ var vue = new Vue({
   },
   methods: {
     toStats: function() {
-      this.httpGetAsync(adress+"/answers?token="+this.token, "", function(json){
-        this.totalQuestion = json;
-        this.httpGetAsync(adress+"/goodanswers?token="+this.token, "", function(json){
-          this.totalScore = json;
+      this.httpGetAsync(adress+"/answers?token="+this.token, function(json){
+        var jsonObject = JSON.parse(json);
+        this.totalQuestion = parseInt(jsonObject.answers);
+        this.httpGetAsync(adress+"/goodanswers?token="+this.token, function(json){
+          var jsonObject = JSON.parse(json);
+          this.totalScore = parseInt(jsonObject.goodanswers);
           this.body = "statsTemp";
         }.bind(this));
       }.bind(this));
@@ -45,8 +47,7 @@ var vue = new Vue({
     },
     registerToQuiz: function() {
       this.register(function(json) {
-        this.token = JSON.parse(json).token;
-        this.toQuiz();
+        this.body = "loginTemp";
       }.bind(this));
     },
     toRegister: function() {
@@ -78,8 +79,8 @@ var vue = new Vue({
       this.totalQuestion = 0;
     },
     connection: function(callback) {
-      var params = "login="+this.login+"&password="+this.password;
-      this.httpPostAsync(adress+"/login", params, callback);
+      var params = "?login="+this.login+"&password="+this.password;
+      this.httpPostAsync(adress+"/login"+params, "", callback);
     },
     register: function(callback) {
       var params = "?login="+this.login+"&password="+this.password;
@@ -88,11 +89,12 @@ var vue = new Vue({
     answerQuestion: function() {
       var params = "";
       this.httpPostAsync(adress+"/response?token="+this.token+"&response="+this.answer, params, function(json) {
-        console.log(json);
         var jsonObject = JSON.parse(json);
+        if(parseBoolean(jsonObject.result)) {
+          this.score ++;
+          this.totalScore ++;
+        }
         this.getQuestion();
-        this.score ++;
-        this.totalScore ++;
         this.totalQuestion ++;
       }.bind(this));
     },
