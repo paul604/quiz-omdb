@@ -82,7 +82,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/login",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity login(String login, String password) {
+    ResponseEntity login(@RequestParam("login") String login, @RequestParam("password") String password) {
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"token\" : \"" + control.login(login, password)
                 + "\" }");
