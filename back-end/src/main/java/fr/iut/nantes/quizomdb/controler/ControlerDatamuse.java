@@ -55,12 +55,6 @@ public class ControlerDatamuse {
             JsonArray possibilities = gson.fromJson(this.getFromDatamuse(answersWord), JsonArray.class);
             for (JsonElement json : possibilities) {
                 String possibility = json.getAsJsonObject().get("word").toString();
-                QuizOmdbApplication.log.debug("*****************************************************************");
-                QuizOmdbApplication.log.debug("*****************************************************************");
-                QuizOmdbApplication.log.debug("possibility : "+ possibility);
-                QuizOmdbApplication.log.debug("*****************************************************************");
-                QuizOmdbApplication.log.debug("*****************************************************************");
-
                 if (possibility.equalsIgnoreCase(responseWord)) {
                     return true;
                 }
