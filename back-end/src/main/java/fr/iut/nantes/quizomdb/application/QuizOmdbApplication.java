@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -70,64 +71,93 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity generateQuestion(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
+            return res;
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity sendResponse(@RequestParam("response") String response, HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"result\" : \"" + control.isCorrectResponse(token, response)
-                + "\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"result\" : \"" + control.isCorrectResponse(token, response)
+                    + "\" }");
+            return res;
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PostMapping(value = "/login",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity login(HttpServletRequest request) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"token\" : \"" + control.login(login, password)
-                + "\" }");
-        return res;
+        try {
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"token\" : \"" + control.login(login, password)
+                    + "\" }");
+            return res;
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PostMapping(value = "/disconnect",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity disconnect(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        control.disconnect(token);
-        ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            control.disconnect(token);
+            ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
+            return res;
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(value = "/goodanswers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity getGoodAnswers(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"goodanswers\" : \"" + control.getGoodAnswers(token)
-                + "\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"goodanswers\" : \"" + control.getGoodAnswers(token)
+                    + "\" }");
+            return res;
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(value = "/answers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity getAnswers(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"answers\" : \"" + control.getAnswers(token)
-                + "\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"answers\" : \"" + control.getAnswers(token)
+                    + "\" }");
+            return res;
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping("/")
@@ -140,10 +170,14 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity register(HttpServletRequest request) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
-        return res;
+        try {
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
+            return res;
+        }catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
