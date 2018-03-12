@@ -75,9 +75,9 @@ public class TestControlerGeneral {
      * @see ControlerGeneral#login(String, String)
      * @since 1.0
      */
-    @Test
+    @Test (expected = Exception.class)
     public void loginFailed() throws Exception {
-        assertEquals("Err", control.login("", ""));
+        control.login("", "");
     }
 
 
