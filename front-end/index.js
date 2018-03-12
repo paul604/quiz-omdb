@@ -1,3 +1,5 @@
+var adress = "https://lp-miar-groupe01-cloned-paul604.c9users.io/";
+
 var index = new Vue({
   el: '#index',
   data: {
@@ -9,7 +11,7 @@ var index = new Vue({
     login: "",
     password: "",
     questionPicture: "",
-    question: "<b>Question :</b>Explicabo non iure non quasi doloremque. Deleniti sit rerum repellat cumque in ?",
+    question: "",
     answer: ""
   },
   computed: {
@@ -56,13 +58,21 @@ var index = new Vue({
       this.totalQuestion ++;
     },
     getQuestion: function() {
-      if(this.questionPicture === "") {
-        this.questionPicture = "http://vignette2.wikia.nocookie.net/pingufan/images/2/2e/Pingu_the_movie_xxlg.png/revision/latest?cb=20170221164619";
-        this.question = "NOOT NOOT ?"
-      } else {
-        this.questionPicture = "";
-        this.question = "<b>Question :</b>Explicabo non iure non quasi doloremque. Deleniti sit rerum repellat cumque in ?"
+      this.httpGetAsync(adress+"/question", function(json) {
+        var jsonObject = JSON.parse(json);
+        this.question = "<b>Question: </b>"+jsonObject.question;
+        this.questionPicture = jsonObject.image;
+      });
+    },
+    httpGetAsync: function(theUrl, callback) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          callback(xmlHttp.responseText);
+        }
       }
+      xmlHttp.open("GET", theUrl, true);
+      xmlHttp.send(null);
     }
   }
-})
+});

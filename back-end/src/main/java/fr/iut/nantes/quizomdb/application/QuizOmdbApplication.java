@@ -8,10 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * Main class
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @SpringBootApplication
 @Controller
+@CrossOrigin
+@RequestMapping("/")
 public class QuizOmdbApplication extends SpringBootServletInitializer {
 
     /**
@@ -43,6 +48,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
 
     /**
      * @param args argument of application
+     *
      * @since 1.0
      */
     public static void main(String[] args) {
@@ -59,65 +65,74 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
         return application.sources(QuizOmdbApplication.class);
     }
 
-    @RequestMapping("/question")
+    @GetMapping(value = "/question",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String generateQuestion(String token) {
-        return control.generateQuestion(token);
+    ResponseEntity generateQuestion(@RequestParam("token") String token) {
+        ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
+        return res;
     }
 
-    @RequestMapping("/response")
+    @PostMapping(value = "/response",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String sendResponse(String token, @RequestParam("response") String response) {
-
-        return "{ " +
+    ResponseEntity sendResponse(@RequestParam("token") String token, @RequestParam("response") String response) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"result\" : \"" + control.isCorrectResponse(token, response)
-                + "\" }";
+                + "\" }");
+        return res;
     }
 
-    @RequestMapping("/login")
+    @PostMapping(value = "/login",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String login(String login, String password) {
-        return "{ " +
+    ResponseEntity login(@RequestParam("login") String login, @RequestParam("password") String password) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"token\" : \"" + control.login(login, password)
-                + "\" }";
+                + "\" }");
+        return res;
     }
 
-    @RequestMapping("/disconnect")
+    @PostMapping(value = "/disconnect",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String disconnect(String token) {
+    ResponseEntity disconnect(@RequestParam("token") String token) {
         control.disconnect(token);
-        return "You have been disconnected.";
+        ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
+        return res;
     }
 
-    @RequestMapping("/goodanswers")
+    @GetMapping(value = "/goodanswers",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String getGoodAnswers(String token) {
-        return "Number of good answers : " + control.getGoodAnswers(token);
+    ResponseEntity getGoodAnswers(@RequestParam("token") String token) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
+                "\"goodanswers\" : \"" + control.getGoodAnswers(token)
+                + "\" }");
+        return res;
     }
 
-    @RequestMapping("/answers")
+    @GetMapping(value = "/answers",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String getAnswers(String token) {
-        return "Number of answers : " + control.getAnswers(token);
+    ResponseEntity getAnswers(@RequestParam("token") String token) {
+        ResponseEntity res = ResponseEntity.ok("{ " +
+                "\"answers\" : \"" + control.getAnswers(token)
+                + "\" }");
+        return res;
     }
 
     @RequestMapping("/")
-    @ResponseBody
-    String home() {
-        return "<h1>Welcome !</h1>";
+    String index() {
+        return "index";
     }
 
-    @RequestMapping("/register")
+    @PostMapping(value = "/register",
+            produces = "application/json; charset=utf-8")
     @ResponseBody
-    String register() {
-        return "<h1>Inscription page</h1>";
+    ResponseEntity register(@RequestParam("login") String login, @RequestParam("password") String password) {
+        ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
+        return res;
     }
-
-    @RequestMapping("/quizz")
-    @ResponseBody
-    String quizz() {
-        return "<h1>Quizz page</h1>";
-    }
-
 
 }

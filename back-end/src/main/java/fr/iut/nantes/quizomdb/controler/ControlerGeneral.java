@@ -1,7 +1,12 @@
 package fr.iut.nantes.quizomdb.controler;
 
 import fr.iut.nantes.quizomdb.entite.Constants;
+import fr.iut.nantes.quizomdb.entite.Gamer;
 import io.jsonwebtoken.Jwts;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * @version 1.0
@@ -56,7 +61,7 @@ public class ControlerGeneral {
         try {
             return this.gamer.login(login, password);
         } catch (Exception e) {
-            return "err";
+            return "Err";
         }
     }
 
@@ -101,4 +106,15 @@ public class ControlerGeneral {
         return null;
     }
 
+    /**
+     * create a user in the database
+     * @param login
+     * @param password
+     */
+    public String createAccount(String login, String password){
+        boolean ok = this.gamer.getDb().addGamer(new Gamer(login, 0,0),password);
+        return "{ " +
+                "\"result\" : \"" + ok
+                + "\" }";
+    }
 }
