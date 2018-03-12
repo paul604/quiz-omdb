@@ -30,8 +30,8 @@ public class TestControlerDatamuse {
      */
     @Test
     public void hasCloseSpelling1() throws Exception {
-        String response = "response", answers = "response";
-        assertTrue(control.hasCloseSpelling(response, answers));
+        String proposed = "response", response = "response";
+        assertTrue(control.hasCloseSpelling(proposed, response));
 
     }
 
@@ -42,8 +42,8 @@ public class TestControlerDatamuse {
      */
     @Test
     public void hasCloseSpelling2() throws Exception {
-        String response = "respons", answers = "response";
-        assertFalse(control.hasCloseSpelling(response, answers));
+        String proposed = "respons", response = "response";
+        assertFalse(control.hasCloseSpelling(proposed, response));
 
     }
 
@@ -55,8 +55,8 @@ public class TestControlerDatamuse {
      */
     @Test
     public void hasCloseSpelling3() throws Exception {
-        String response = "response answers", answers = "response response";
-        assertFalse(control.hasCloseSpelling(response, answers));
+        String proposed = "response answers", response = "response response";
+        assertFalse(control.hasCloseSpelling(proposed, response));
 
     }
 
@@ -68,8 +68,8 @@ public class TestControlerDatamuse {
      */
     @Test
     public void hasCloseSpelling4() throws Exception {
-        String response = "legend", answers = "lagend";
-        assertTrue(control.hasCloseSpelling(response, answers));
+        String proposed = "lagend", response = "legend";
+        assertTrue(control.hasCloseSpelling(proposed, response));
 
     }
 }
