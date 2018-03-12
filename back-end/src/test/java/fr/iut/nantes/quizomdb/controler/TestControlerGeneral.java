@@ -44,7 +44,7 @@ public class TestControlerGeneral {
 
     @Test
     public void loginFailed(){
-        assertEquals("err", control.login("",""));
+        assertEquals("Err", control.login("",""));
     }
 
 

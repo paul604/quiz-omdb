@@ -1,8 +1,10 @@
 package fr.iut.nantes.quizomdb.controler;
 
 import fr.iut.nantes.quizomdb.Utils;
+import fr.iut.nantes.quizomdb.application.QuizOmdbApplication;
 import fr.iut.nantes.quizomdb.db.ExceptionDB;
 import fr.iut.nantes.quizomdb.entite.Gamer;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,10 +18,16 @@ public class TestControlerGamer {
          Utils.setupConfig();
 		 control = new ControlerGamer();
 		 control.getDb().addGamer(new Gamer("test",0,0), "test");
+         control.getDb().addGamer(new Gamer("login",0,0), "login");
 	    }
-	
-	
-	@Test
+
+    @After
+    public void tearDown() throws Exception {
+        control.getDb().supGamer("test");
+        control.getDb().supGamer("login");
+    }
+
+    @Test
 	public void testAddGamerAndDisconnect(){
 		assertNull(control.getGamer("login"));
 		control.addGamer("login", 0,0);
@@ -51,15 +59,18 @@ public class TestControlerGamer {
     @Test
     public void testDisconnectChangeValue(){
         String pseudo = "test";
-        int valBd = 0;
         try {
-            valBd = control.getDb().getAnswers(pseudo);
-            control.addGamer(pseudo, -1, 0);
+            control.addGamer(pseudo, 0, 0);
+
+            int valBd = control.getDb().getAnswers(pseudo);
             int valLocal = control.getGamer(pseudo).getAnswers();
             assertTrue(valBd==valLocal);
+
             control.getGamer(pseudo).incrementAnswers();
             valBd = control.getDb().getAnswers(pseudo);
+            valLocal = control.getGamer(pseudo).getAnswers();
             assertTrue(valBd!=valLocal);
+
             control.disconnect(pseudo);
             valBd = control.getDb().getAnswers(pseudo);
             assertTrue(valBd==valLocal);

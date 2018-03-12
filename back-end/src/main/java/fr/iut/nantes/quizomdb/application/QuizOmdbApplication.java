@@ -126,8 +126,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     }
 
     @RequestMapping("/")
-    String index() {
-        return "OK";
+    @ResponseBody
+    ResponseEntity index() {
+        return ResponseEntity.ok("{ \"server\" : \"OK\" }");
     }
 
     @PostMapping(value = "/register",

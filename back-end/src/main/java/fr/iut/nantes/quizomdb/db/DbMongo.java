@@ -95,7 +95,7 @@ public class DbMongo implements Idb {
         try {
             gamerCollection.insertOne(toDocument(gamer, pwd));
         } catch (Exception e) {
-            log.warn("addGamer error");
+            log.error("addGamer error", e);
             return false;
         }
         return true;

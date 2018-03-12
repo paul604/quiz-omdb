@@ -60,7 +60,7 @@ public class ControlerGamer {
      * @return the token of the user
      */
     public String addGamer(String login, int answers, int goodAnswers) {
-        Gamer gamer = new Gamer(login, answers, goodAnswers);
+        Gamer gamer = new Gamer(login, goodAnswers, answers);
         this.gamers.put(login, gamer);
         return Jwts.builder()
                 .setSubject(login)

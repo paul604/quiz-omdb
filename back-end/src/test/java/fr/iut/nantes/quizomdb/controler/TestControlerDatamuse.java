@@ -27,14 +27,14 @@ public class TestControlerDatamuse {
     @Test
     public void hasCloseSpelling2() throws Exception {
         String response = "respons", answers = "response";
-        assertTrue(!control.hasCloseSpelling(response, answers));
+        assertFalse(control.hasCloseSpelling(response, answers));
 
     }
 
     @Test
     public void hasCloseSpelling3() throws Exception {
         String response = "response answers", answers = "response response";
-        assertTrue(!control.hasCloseSpelling(response, answers));
+        assertFalse(control.hasCloseSpelling(response, answers));
 
     }
 
