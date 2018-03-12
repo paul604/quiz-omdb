@@ -54,7 +54,7 @@ public class ControlerDatamuse {
         try {
             JsonArray possibilities = gson.fromJson(this.getFromDatamuse(answersWord), JsonArray.class);
             for (JsonElement json : possibilities) {
-                String possibility = json.getAsJsonObject().get("word").toString();
+                String possibility = json.getAsJsonObject().get("word").getAsString();
                 if (possibility.equalsIgnoreCase(responseWord)) {
                     return true;
                 }
