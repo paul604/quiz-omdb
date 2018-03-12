@@ -74,6 +74,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             return res;
         }catch (TokenException e) {
             return e.getResponseEntity();
+        }catch (Exception e) {
+            String json = "{ \"error\" : \" Error not defined\" }";
+            return new ResponseEntity<>(json,HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -90,6 +93,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             return res;
         }catch (TokenException e) {
             return e.getResponseEntity();
+        }catch (Exception e) {
+            String json = "{ \"error\" : \" Error not defined\" }";
+            return new ResponseEntity<>(json,HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -121,8 +127,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             control.disconnect(token);
             ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
             return res;
-        }catch (TokenException e) {
-
+        } catch (TokenException e) {
             return e.getResponseEntity();
         }
     }
@@ -138,7 +143,6 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     + "\" }");
             return res;
         }catch (TokenException e) {
-
             return e.getResponseEntity();
         }
     }
@@ -153,7 +157,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     "\"answers\" : \"" + control.getAnswers(token)
                     + "\" }");
             return res;
-        }catch (TokenException e) {
+        } catch (TokenException e) {
             return e.getResponseEntity();
         }
     }
