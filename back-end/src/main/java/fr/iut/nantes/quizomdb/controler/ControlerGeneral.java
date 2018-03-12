@@ -2,6 +2,7 @@ package fr.iut.nantes.quizomdb.controler;
 
 import fr.iut.nantes.quizomdb.entite.Constants;
 import fr.iut.nantes.quizomdb.entite.Gamer;
+import fr.iut.nantes.quizomdb.entite.TokenException;
 import io.jsonwebtoken.Jwts;
 
 import java.io.BufferedReader;
@@ -20,7 +21,7 @@ public class ControlerGeneral {
      * @param token
      * @return the actual question of the user
      */
-    public String getQuestion(String token) {
+    public String getQuestion(String token) throws TokenException {
         return this.omdb.getQuestion(getLoginFromToken(token));
     }
 
@@ -30,7 +31,7 @@ public class ControlerGeneral {
      * @param token
      * @return the new question
      */
-    public String generateQuestion(String token) {
+    public String generateQuestion(String token) throws TokenException {
         return this.omdb.generateQuestion(getLoginFromToken(token));
     }
 
@@ -41,7 +42,7 @@ public class ControlerGeneral {
      * @param response
      * @return true of false
      */
-    public boolean isCorrectResponse(String token, String response) {
+    public boolean isCorrectResponse(String token, String response) throws TokenException {
         String login = getLoginFromToken(token);
         this.gamer.getGamer(login).incrementAnswers();
         String answers = this.omdb.getAnswers(login);
@@ -70,7 +71,7 @@ public class ControlerGeneral {
      *
      * @param token of the user
      */
-    public void disconnect(String token) {
+    public void disconnect(String token) throws TokenException {
         String login = getLoginFromToken(token);
         this.omdb.disconnect(login);
         this.gamer.disconnect(login);
@@ -80,7 +81,7 @@ public class ControlerGeneral {
      * @param token of the user
      * @return the number of good answers of the user
      */
-    public int getGoodAnswers(String token) {
+    public int getGoodAnswers(String token) throws TokenException {
         return this.gamer.getGamer(getLoginFromToken(token)).getGoodAnswers();
     }
 
@@ -88,7 +89,7 @@ public class ControlerGeneral {
      * @param token of the user
      * @return the number of answers of the user
      */
-    public int getAnswers(String token) {
+    public int getAnswers(String token) throws TokenException {
         return this.gamer.getGamer(getLoginFromToken(token)).getAnswers();
     }
 
@@ -98,9 +99,14 @@ public class ControlerGeneral {
      * @param token of the user
      * @return the login if successful, else null
      */
-    public String getLoginFromToken(String token) {
+    public String getLoginFromToken(String token) throws TokenException {
         for (String login : this.gamer.getLogins()) {
-            boolean isValid = Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals(login);
+            boolean isValid;
+            try {
+                isValid = Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals(login);
+            }catch (Exception e){
+                throw new TokenException();
+            }
             if (isValid) return login;
         }
         return null;

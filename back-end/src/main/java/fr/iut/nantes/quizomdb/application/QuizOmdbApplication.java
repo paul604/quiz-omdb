@@ -2,6 +2,7 @@ package fr.iut.nantes.quizomdb.application;
 
 import fr.iut.nantes.quizomdb.controler.ControlerGeneral;
 import fr.iut.nantes.quizomdb.entite.Config;
+import fr.iut.nantes.quizomdb.entite.TokenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -75,10 +76,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             String token = request.getParameter("token");
             ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
             return res;
-        }
-        catch (Exception e) {
-            String json = "{ \"error\" : \" Invalid Token\" }";
-            return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
+        }catch (TokenException e) {
+            return e.getResponseEntity();
         }
 
     }
@@ -93,10 +92,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     "\"result\" : \"" + control.isCorrectResponse(token, response)
                     + "\" }");
             return res;
-        }
-        catch (Exception e) {
-            String json = "{ \"error\" : \" Invalid Token\" }";
-            return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
+        }catch (TokenException e) {
+            return e.getResponseEntity();
         }
 
     }
@@ -128,9 +125,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             control.disconnect(token);
             ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
             return res;
-        }catch (Exception e) {
-            String json = "{ \"error\" : \" Invalid Token\" }";
-            return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
+        }catch (TokenException e) {
+            return e.getResponseEntity();
         }
     }
 
@@ -144,9 +140,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                     + "\" }");
             return res;
-        }catch (Exception e) {
-            String json = "{ \"error\" : \" Invalid Token\" }";
-            return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
+        }catch (TokenException e) {
+            return e.getResponseEntity();
         }
     }
 
@@ -160,9 +155,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     "\"answers\" : \"" + control.getAnswers(token)
                     + "\" }");
             return res;
-        }catch (Exception e) {
-            String json = "{ \"error\" : \" Invalid Token\" }";
-            return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
+        }catch (TokenException e) {
+            return e.getResponseEntity();
         }
     }
 
