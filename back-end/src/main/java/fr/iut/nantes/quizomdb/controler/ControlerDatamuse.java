@@ -31,7 +31,7 @@ public class ControlerDatamuse {
         String[] responseWords = response.split(" ");
         String[] responseAnswers = answers.split(" ");
         if (responseAnswers.length == 1) return this.compareWithDatamuse(responseWords[0], responseAnswers[0]);
-        if (responseWords.length == responseAnswers.length) return false;
+        if (responseWords.length != responseAnswers.length) return false;
         for (int i = 0; i < responseAnswers.length; i++) {
             if (!this.compareWithDatamuse(responseWords[i], responseAnswers[i])) return false;
         }
