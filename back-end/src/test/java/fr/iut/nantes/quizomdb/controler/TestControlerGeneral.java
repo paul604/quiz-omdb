@@ -26,7 +26,7 @@ public class TestControlerGeneral {
      * @since 1.0
      */
     @Before
-    public void initialize() {
+    public void initialize() throws Exception {
         Utils.setupConfig();
         control = new ControlerGeneral();
         gamer = new ControlerGamer();
@@ -76,7 +76,7 @@ public class TestControlerGeneral {
      * @since 1.0
      */
     @Test
-    public void loginFailed() {
+    public void loginFailed() throws Exception {
         assertEquals("Err", control.login("", ""));
     }
 
