@@ -30,16 +30,17 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
+deploy:
+  provider: pages
+  local_dir: ./front-end/
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
+
 branches:
   only:
     - master
     - dev
 
-deploy:
-  provider: pages
-  local_dir: ./front-end/
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
-  on:
-    branch: master
