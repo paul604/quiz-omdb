@@ -32,9 +32,9 @@ public class TestControlerGeneral {
         gamer.getDb().supGamer("test");
     }
 
-    @Test
+    @Test (expected = Exception.class)
     public void getLoginFromToken(){
-        assertNull(control.getLoginFromToken(""));
+        control.getLoginFromToken("");
     }
 
     @Test
