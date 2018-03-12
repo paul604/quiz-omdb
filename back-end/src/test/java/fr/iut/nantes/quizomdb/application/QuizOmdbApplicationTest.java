@@ -30,7 +30,16 @@ public class QuizOmdbApplicationTest {
     @Test
     public void testHome() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$").value("<h1>Welcome !</h1>"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$").value("OK"));
 
     }
+
+    @Test
+    public void testQuestion() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").value("OK"));
+
+    }
+
+
 }
