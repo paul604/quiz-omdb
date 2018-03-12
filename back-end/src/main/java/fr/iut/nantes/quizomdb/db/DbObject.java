@@ -15,6 +15,9 @@ public class DbObject implements Idb {
 
     private Map<String, Gamer> listGamers;
 
+    /**
+     * @since 1.0
+     */
     public DbObject() {
         QuizOmdbApplication.log.debug("create DB Object");
         listGamers = new HashMap<>();

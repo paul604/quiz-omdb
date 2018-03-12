@@ -3,25 +3,39 @@ package fr.iut.nantes.quizomdb.entite;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Created by E155722N on 22/02/18.
+ * @version 1.0
+ * @see Quizz
+ * @since 1.0
  */
 public class QuizzTest {
+
     Quizz quizz;
 
-	 @Before
-	 public void initialize() {
-		 quizz = new Quizz("question", "answers");
-	    }
+    /**
+     * @since 1.0
+     */
+    @Before
+    public void initialize() {
+        quizz = new Quizz("question", "answers");
+    }
 
+    /**
+     * @throws Exception
+     * @since 1.0
+     */
     @Test
     public void getQuestion() throws Exception {
-	     assertEquals("question", quizz.getQuestion());
+        assertEquals("question", quizz.getQuestion());
 
     }
 
+    /**
+     * @throws Exception
+     * @since 1.0
+     */
     @Test
     public void setQuestion() throws Exception {
         Quizz quizz2 = new Quizz("question", "answers");
@@ -30,11 +44,19 @@ public class QuizzTest {
         assertEquals("otherQuestion", quizz2.getQuestion());
     }
 
+    /**
+     * @throws Exception
+     * @since 1.0
+     */
     @Test
     public void getAnswers() throws Exception {
         assertEquals("answers", quizz.getAnswers());
     }
 
+    /**
+     * @throws Exception
+     * @since 1.0
+     */
     @Test
     public void setAnswers() throws Exception {
         Quizz quizz2 = new Quizz("answers", "answers");

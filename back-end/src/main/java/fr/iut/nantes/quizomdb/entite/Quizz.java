@@ -5,6 +5,7 @@ package fr.iut.nantes.quizomdb.entite;
  * @since 1.0
  */
 public class Quizz {
+
     private String question;
     private String answers;
 
@@ -13,6 +14,7 @@ public class Quizz {
      *
      * @param question
      * @param answers
+     * @since 1.0
      */
     public Quizz(String question, String answers) {
         this.question = question;
@@ -21,6 +23,7 @@ public class Quizz {
 
     /**
      * @return the question
+     * @since 1.0
      */
     public String getQuestion() {
         return question;
@@ -30,6 +33,7 @@ public class Quizz {
      * Setter of question
      *
      * @param question, the new question
+     * @since 1.0
      */
     public void setQuestion(String question) {
         this.question = question;
@@ -37,6 +41,7 @@ public class Quizz {
 
     /**
      * @return the answers
+     * @since 1.0
      */
     public String getAnswers() {
         return answers;
@@ -46,6 +51,7 @@ public class Quizz {
      * Setter of answers
      *
      * @param answers, the answers
+     * @since 1.0
      */
     public void setAnswers(String answers) {
         this.answers = answers;

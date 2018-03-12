@@ -15,9 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * Main class
@@ -51,7 +48,6 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
 
     /**
      * @param args argument of application
-     *
      * @since 1.0
      */
     public static void main(String[] args) {
@@ -109,9 +105,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     "\"token\" : \"" + control.login(login, password)
                     + "\" }");
             return res;
-        }catch (Exception e) {
+        } catch (Exception e) {
             String json = "{ \"error\" : \" Login or password invalid\" }";
-            return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(json, HttpStatus.UNAUTHORIZED);
         }
 
     }
@@ -126,6 +122,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
             return res;
         }catch (TokenException e) {
+
             return e.getResponseEntity();
         }
     }
@@ -141,6 +138,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     + "\" }");
             return res;
         }catch (TokenException e) {
+
             return e.getResponseEntity();
         }
     }
@@ -175,9 +173,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             String password = request.getParameter("password");
             ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
             return res;
-        }catch (Exception e) {
+        } catch (Exception e) {
             String json = "{ \"error\" : \" login already used\" }";
-            return new ResponseEntity<>(json,HttpStatus.CONFLICT);
+            return new ResponseEntity<>(json, HttpStatus.CONFLICT);
         }
     }
 

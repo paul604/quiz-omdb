@@ -5,21 +5,19 @@ import fr.iut.nantes.quizomdb.entite.Gamer;
 import fr.iut.nantes.quizomdb.entite.TokenException;
 import io.jsonwebtoken.Jwts;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 /**
  * @version 1.0
  * @since 1.0
  */
 public class ControlerGeneral {
+
     private ControlerOMDB omdb = new ControlerOMDB();
     private ControlerGamer gamer = new ControlerGamer();
 
     /**
      * @param token
      * @return the actual question of the user
+     * @since 1.0
      */
     public String getQuestion(String token) throws TokenException {
         return this.omdb.getQuestion(getLoginFromToken(token));
@@ -30,6 +28,7 @@ public class ControlerGeneral {
      *
      * @param token
      * @return the new question
+     * @since 1.0
      */
     public String generateQuestion(String token) throws TokenException {
         return this.omdb.generateQuestion(getLoginFromToken(token));
@@ -41,6 +40,7 @@ public class ControlerGeneral {
      * @param token    of the user
      * @param response
      * @return true of false
+     * @since 1.0
      */
     public boolean isCorrectResponse(String token, String response) throws TokenException {
         String login = getLoginFromToken(token);
@@ -57,6 +57,7 @@ public class ControlerGeneral {
      * @param login
      * @param password
      * @return the token of the user if sucessful, else 'err'
+     * @since 1.0
      */
     public String login(String login, String password) {
         try {
@@ -70,6 +71,7 @@ public class ControlerGeneral {
      * Delete the actual session of the user
      *
      * @param token of the user
+     * @since 1.0
      */
     public void disconnect(String token) throws TokenException {
         String login = getLoginFromToken(token);
@@ -80,6 +82,7 @@ public class ControlerGeneral {
     /**
      * @param token of the user
      * @return the number of good answers of the user
+     * @since 1.0
      */
     public int getGoodAnswers(String token) throws TokenException {
         return this.gamer.getGamer(getLoginFromToken(token)).getGoodAnswers();
@@ -88,6 +91,7 @@ public class ControlerGeneral {
     /**
      * @param token of the user
      * @return the number of answers of the user
+     * @since 1.0
      */
     public int getAnswers(String token) throws TokenException {
         return this.gamer.getGamer(getLoginFromToken(token)).getAnswers();
@@ -98,6 +102,7 @@ public class ControlerGeneral {
      *
      * @param token of the user
      * @return the login if successful, else null
+     * @since 1.0
      */
     public String getLoginFromToken(String token) throws TokenException {
         for (String login : this.gamer.getLogins()) {
@@ -114,11 +119,13 @@ public class ControlerGeneral {
 
     /**
      * create a user in the database
+     *
      * @param login
      * @param password
+     * @since 1.0
      */
-    public String createAccount(String login, String password){
-        boolean ok = this.gamer.getDb().addGamer(new Gamer(login, 0,0),password);
+    public String createAccount(String login, String password) {
+        boolean ok = this.gamer.getDb().addGamer(new Gamer(login, 0, 0), password);
         return "{ " +
                 "\"result\" : \"" + ok
                 + "\" }";

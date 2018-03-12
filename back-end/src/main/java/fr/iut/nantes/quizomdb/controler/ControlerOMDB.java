@@ -20,6 +20,9 @@ import java.util.Random;
 public class ControlerOMDB {
     private HashMap<String, Quizz> actualsQuizz;
 
+    /**
+     * @since 1.0
+     */
     public ControlerOMDB() {
         this.actualsQuizz = new HashMap<>();
     }
@@ -29,6 +32,7 @@ public class ControlerOMDB {
      *
      * @param login of the user
      * @return the new question
+     * @since 1.0
      */
     public String generateQuestion(String login) {
         final GsonBuilder builder = new GsonBuilder();
@@ -67,6 +71,7 @@ public class ControlerOMDB {
      * @param login
      * @param question
      * @param answers
+     * @since 1.0
      */
     public void addQuizz(String login, String question, String answers) {
         this.actualsQuizz.put(login, new Quizz(question, answers));
@@ -76,6 +81,7 @@ public class ControlerOMDB {
      * delete a quizz from the local memory after register it in the database
      *
      * @param login
+     * @since 1.0
      */
     public void disconnect(String login) {
 
@@ -86,6 +92,7 @@ public class ControlerOMDB {
     /**
      * @param login of the user
      * @return the actual question of the user
+     * @since 1.0
      */
     public String getQuestion(String login) {
         Quizz quizz = this.actualsQuizz.get(login);
@@ -96,6 +103,7 @@ public class ControlerOMDB {
     /**
      * @param login of the user
      * @return the actual answers
+     * @since 1.0
      */
     public String getAnswers(String login) {
         Quizz quizz = this.actualsQuizz.get(login);
@@ -105,6 +113,7 @@ public class ControlerOMDB {
 
     /**
      * @return a random movie in json
+     * @since 1.0
      */
     private String randomMovie() {
         String id = Integer.toString((int) (Math.random() * (900000)) + 90000);
@@ -127,6 +136,7 @@ public class ControlerOMDB {
      * @param id the id of movie to get
      * @return a movie in format json
      * @throws Exception
+     * @since 1.0
      */
     private String getFromOmdb(String id) throws Exception {
         StringBuilder result = new StringBuilder();

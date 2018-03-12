@@ -5,10 +5,10 @@ package fr.iut.nantes.quizomdb.entite;
  * @since 1.0
  */
 public class Gamer {
+
     private String login;
     private int goodAnswers;
     private int answers;
-
 
     /**
      * Class constructor
@@ -16,6 +16,7 @@ public class Gamer {
      * @param login
      * @param goodAnswers
      * @param answers
+     * @since 1.0
      */
     public Gamer(String login, int goodAnswers, int answers) {
         this.login = login;
@@ -25,6 +26,7 @@ public class Gamer {
 
     /**
      * @return the login
+     * @since 1.0
      */
     public String getLogin() {
         return login;
@@ -32,6 +34,7 @@ public class Gamer {
 
     /**
      * @return the number of good answers
+     * @since 1.0
      */
     public int getGoodAnswers() {
         return goodAnswers;
@@ -40,6 +43,8 @@ public class Gamer {
 
     /**
      * Add 1 to number of good answers
+     *
+     * @since 1.0
      */
     public void incrementGoodAnswers() {
         this.goodAnswers += 1;
@@ -48,6 +53,7 @@ public class Gamer {
 
     /**
      * @return the number of answers
+     * @since 1.0
      */
     public int getAnswers() {
         return answers;
@@ -56,17 +62,13 @@ public class Gamer {
 
     /**
      * Add 1 to number of good answers
+     *
+     * @since 1.0
      */
     public void incrementAnswers() {
         this.answers += 1;
     }
 
-    /**
-     * Override of the method equals
-     *
-     * @param o
-     * @return true of false
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

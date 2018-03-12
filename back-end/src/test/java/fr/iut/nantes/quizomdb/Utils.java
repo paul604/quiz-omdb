@@ -7,7 +7,8 @@ import static fr.iut.nantes.quizomdb.application.QuizOmdbApplication.config;
 import static fr.iut.nantes.quizomdb.application.QuizOmdbApplication.log;
 
 /**
- * Created by Paul on 27/02/18.
+ * @version 1.0
+ * @since 1.0
  */
 public class Utils {
     public static void setupConfig() {
