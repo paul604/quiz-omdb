@@ -41,9 +41,9 @@ public class QuizOmdbApplicationTest {
     @Before
     public void setUp() throws Exception {
         //decom if data clear
-//        mvc.perform(MockMvcRequestBuilders.post("/register")
-//                .param("login", "loginTest")
-//                .param("password", "pwdLoginTest"));
+        mvc.perform(MockMvcRequestBuilders.post("/register")
+                .param("login", "loginTest")
+                .param("password", "pwdLoginTest"));
         Utils.setupConfig();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
                 .param("login", "loginTest")
