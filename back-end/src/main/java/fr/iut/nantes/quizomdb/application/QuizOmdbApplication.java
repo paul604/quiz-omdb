@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -86,7 +87,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/login",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity login(@RequestParam("login") String login, @RequestParam("password") String password) {
+    ResponseEntity login(HttpServletRequest request) {
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"token\" : \"" + control.login(login, password)
                 + "\" }");
