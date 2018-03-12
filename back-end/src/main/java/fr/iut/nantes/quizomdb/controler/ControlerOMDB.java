@@ -35,6 +35,7 @@ public class ControlerOMDB {
         String poster = "", question, answers, movie;
         // get a random movie
         movie = this.randomMovie();
+
         JsonObject jobj = gson.fromJson(movie, JsonObject.class);
         // get a random question/response
         int id = (int) (Math.random() * 1);

@@ -84,42 +84,4 @@ public class ControlerDatamuse {
         return result.toString();
     }
 
-    // CODE NON FONCTIONNEL : Connexion refusée
-    private String getFromDatamuse2(String word) throws Exception {
-        int port = 80;
-
-            try {
-                URL u = new URL("https://api.datamuse.com/words?sp=" + word);
-                if (u.getPort() != -1) port = u.getPort();
-                if (!(u.getProtocol().equalsIgnoreCase("https"))) {
-                    System.err.println("Sorry. I only understand http.");
-                }else {
-
-                    Socket s = new Socket(u.getHost(), port);
-                    OutputStream theOutput = s.getOutputStream();
-                    // no auto-flushing
-                    PrintWriter pw = new PrintWriter(theOutput, false);
-                    // native line endings are uncertain so add them manually
-                    pw.print("GET " + u.getFile() + " HTTP/1.0\r\n");
-                    pw.print("Accept: text/plain, text/html, text/*\r\n");
-                    pw.print("\r\n");
-                    pw.flush();
-                    InputStream in = s.getInputStream();
-                    InputStreamReader isr = new InputStreamReader(in);
-                    BufferedReader br = new BufferedReader(isr);
-                    int c;
-                    while ((c = br.read()) != -1) {
-                        System.out.print((char) c);
-                    }
-                }
-            }
-            catch (MalformedURLException ex) {
-                System.err.println("https://api.datamuse.com/words?sp=" + word + " is not a valid URL");
-            }
-            catch (IOException ex) {
-                System.err.println(ex);
-            }
-        return "coucou";
-    }
-
 }

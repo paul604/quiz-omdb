@@ -69,7 +69,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/question",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity generateQuestion(@RequestParam("token") String token) {
+    ResponseEntity generateQuestion(HttpServletRequest request) {
+        String token = request.getParameter("token");
         ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
         return res;
     }
@@ -77,7 +78,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity sendResponse(@RequestParam("token") String token, @RequestParam("response") String response) {
+    ResponseEntity sendResponse(@RequestParam("response") String response, HttpServletRequest request) {
+        String token = request.getParameter("token");
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"result\" : \"" + control.isCorrectResponse(token, response)
                 + "\" }");
@@ -99,7 +101,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/disconnect",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity disconnect(@RequestParam("token") String token) {
+    ResponseEntity disconnect(HttpServletRequest request) {
+        String token = request.getParameter("token");
         control.disconnect(token);
         ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
         return res;
@@ -108,7 +111,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/goodanswers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getGoodAnswers(@RequestParam("token") String token) {
+    ResponseEntity getGoodAnswers(HttpServletRequest request) {
+        String token = request.getParameter("token");
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                 + "\" }");
@@ -118,7 +122,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/answers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getAnswers(@RequestParam("token") String token) {
+    ResponseEntity getAnswers(HttpServletRequest request) {
+        String token = request.getParameter("token");
         ResponseEntity res = ResponseEntity.ok("{ " +
                 "\"answers\" : \"" + control.getAnswers(token)
                 + "\" }");
@@ -134,7 +139,9 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/register",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity register(@RequestParam("login") String login, @RequestParam("password") String password) {
+    ResponseEntity register(HttpServletRequest request) {
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
         ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
         return res;
     }
