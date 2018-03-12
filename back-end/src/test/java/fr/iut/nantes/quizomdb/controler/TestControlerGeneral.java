@@ -23,7 +23,8 @@ public class TestControlerGeneral {
         control = new ControlerGeneral();
         gamer = new ControlerGamer();
         gamer.getDb().addGamer(new Gamer("test",0,0), "test");
-        token = gamer.addGamer("login", 0,0);
+        token = control.login("test","test");
+
     }
 
     @After
@@ -38,12 +39,12 @@ public class TestControlerGeneral {
 
     @Test
     public void getLoginFromToken2(){
-        assertEquals("login",control.getLoginFromToken(token));
+        assertEquals("test",control.getLoginFromToken(token));
     }
 
     @Test
     public void isValideToken(){
-        assertTrue(Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals("login"));
+        assertTrue(Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals("test"));
         assertTrue(!Jwts.parser().setSigningKey(Constants.key).parseClaimsJws(token).getBody().getSubject().equals("log"));
     }
 

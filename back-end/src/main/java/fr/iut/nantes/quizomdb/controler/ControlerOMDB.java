@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @version 1.0
@@ -38,7 +39,8 @@ public class ControlerOMDB {
 
         JsonObject jobj = gson.fromJson(movie, JsonObject.class);
         // get a random question/response
-        int id = (int) (Math.random() * 1);
+        Random rand = new Random();
+        int id = rand.nextInt(2);
         switch (id) {
             case 1:
                 question = jobj.get("Plot").toString() +
@@ -105,7 +107,7 @@ public class ControlerOMDB {
      * @return a random movie in json
      */
     private String randomMovie() {
-        String id = Integer.toString((int) (Math.random() * (900000)) + 1);
+        String id = Integer.toString((int) (Math.random() * (900000)) + 90000);
         while (id.length() < 6) {
             id = "0" + id;
         }
