@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import fr.iut.nantes.quizomdb.application.QuizOmdbApplication;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -54,6 +55,12 @@ public class ControlerDatamuse {
             JsonArray possibilities = gson.fromJson(this.getFromDatamuse(answersWord), JsonArray.class);
             for (JsonElement json : possibilities) {
                 String possibility = json.getAsJsonObject().get("word").toString();
+                QuizOmdbApplication.log.debug("*****************************************************************");
+                QuizOmdbApplication.log.debug("*****************************************************************");
+                QuizOmdbApplication.log.debug("possibility : "+ possibility);
+                QuizOmdbApplication.log.debug("*****************************************************************");
+                QuizOmdbApplication.log.debug("*****************************************************************");
+
                 if (possibility.equalsIgnoreCase(responseWord)) {
                     return true;
                 }
