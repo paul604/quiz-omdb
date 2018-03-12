@@ -77,7 +77,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             return res;
         }
         catch (Exception e) {
-            String json = "{ \"error\" : \" token invalid\" }";
+            String json = "{ \"error\" : \" Invalid Token\" }";
             return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
         }
 
@@ -95,7 +95,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             return res;
         }
         catch (Exception e) {
-            String json = "{ \"error\" : \" token invalid\" }";
+            String json = "{ \"error\" : \" Invalid Token\" }";
             return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
         }
 
@@ -113,7 +113,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     + "\" }");
             return res;
         }catch (Exception e) {
-            String json = "{ \"error\" : \" login or password invalid\" }";
+            String json = "{ \"error\" : \" Login or password invalid\" }";
             return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
         }
 
@@ -129,7 +129,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
             return res;
         }catch (Exception e) {
-            String json = "{ \"error\" : \" token invalid\" }";
+            String json = "{ \"error\" : \" Invalid Token\" }";
             return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
         }
     }
@@ -145,7 +145,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     + "\" }");
             return res;
         }catch (Exception e) {
-            String json = "{ \"error\" : \" token invalid\" }";
+            String json = "{ \"error\" : \" Invalid Token\" }";
             return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
         }
     }
@@ -161,7 +161,7 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
                     + "\" }");
             return res;
         }catch (Exception e) {
-            String json = "{ \"error\" : \" token invalid\" }";
+            String json = "{ \"error\" : \" Invalid Token\" }";
             return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
         }
     }
@@ -182,8 +182,8 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
             return res;
         }catch (Exception e) {
-            String json = "{ \"error\" : \" token invalid\" }";
-            return new ResponseEntity<>(json,HttpStatus.UNAUTHORIZED);
+            String json = "{ \"error\" : \" login already used\" }";
+            return new ResponseEntity<>(json,HttpStatus.CONFLICT);
         }
     }
 
