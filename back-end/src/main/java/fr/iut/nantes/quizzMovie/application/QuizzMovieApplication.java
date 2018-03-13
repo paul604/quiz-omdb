@@ -72,9 +72,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/question",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity generateQuestion(HttpServletRequest request) {
+    ResponseEntity generateQuestion(HttpEntity<String> httpEntity) {
         try {
-            String token = request.getParameter("token");
+            String token = getJsonFromBody(httpEntity).get("token").getAsString();
             ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
             return res;
         }catch (TokenException e) {
@@ -89,9 +89,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity sendResponse(@RequestParam("response") String response, HttpServletRequest request) {
+    ResponseEntity sendResponse(@RequestParam("response") String response, HttpEntity<String> httpEntity) {
         try {
-            String token = request.getParameter("token");
+            String token = getJsonFromBody(httpEntity).get("token").getAsString();
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"result\" : \"" + control.isCorrectResponse(token, response)
                     + "\" }");
@@ -130,9 +130,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/disconnect",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity disconnect(HttpServletRequest request) {
+    ResponseEntity disconnect(HttpEntity<String> httpEntity) {
         try {
-            String token = request.getParameter("token");
+            String token = getJsonFromBody(httpEntity).get("token").getAsString();
             control.disconnect(token);
             ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
             return res;
@@ -144,9 +144,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/goodanswers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getGoodAnswers(HttpServletRequest request) {
+    ResponseEntity getGoodAnswers(HttpEntity<String> httpEntity) {
         try {
-            String token = request.getParameter("token");
+            String token = getJsonFromBody(httpEntity).get("token").getAsString();
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                     + "\" }");
@@ -159,9 +159,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/answers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getAnswers(HttpServletRequest request) {
+    ResponseEntity getAnswers(HttpEntity<String> httpEntity) {
         try {
-            String token = request.getParameter("token");
+            String token = getJsonFromBody(httpEntity).get("token").getAsString();
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"answers\" : \"" + control.getAnswers(token)
                     + "\" }");
@@ -180,16 +180,23 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/register",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity register(HttpServletRequest request) {
+    ResponseEntity register(HttpEntity<String> httpEntity) {
         try {
-            String login = request.getParameter("login");
-            String password = request.getParameter("password");
+            JsonObject jsonObj = getJsonFromBody(httpEntity);
+            String login = jsonObj.get("login").getAsString();
+            String password = jsonObj.get("password").getAsString();
             ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
             return res;
         } catch (Exception e) {
             String json = "{ \"error\" : \" login already used\" }";
             return new ResponseEntity<>(json, HttpStatus.CONFLICT);
         }
+    }
+
+    private JsonObject getJsonFromBody(HttpEntity<String> httpEntity){
+        Gson gson = new Gson();
+        JsonElement element = gson.fromJson (httpEntity.getBody(), JsonElement.class);
+        return element.getAsJsonObject();
     }
 
 }

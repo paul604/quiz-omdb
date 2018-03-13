@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -42,8 +43,7 @@ public class QuizzMovieApplicationTest {
     public void setUp() throws Exception {
         //decom if data clear
         mvc.perform(MockMvcRequestBuilders.post("/register")
-                .param("login", "loginTest")
-                .param("password", "pwdLoginTest"));
+                .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}"));
         Utils.setupConfig();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
                 .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}")).andReturn();
@@ -54,20 +54,20 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#generateQuestion(HttpServletRequest)
+     * @see QuizzMovieApplication#generateQuestion(HttpEntity)
      * @since 1.0
      */
     @Test
     public void generateQuestion() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .param("token", token))
+                .content("{\"token\":\""+token+"\"}"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
     }
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#sendResponse(String, HttpServletRequest)
+     * @see QuizzMovieApplication#sendResponse(String, HttpEntity)
      * @since 1.0
      */
     @Test
@@ -78,24 +78,24 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#sendResponse(String, HttpServletRequest)
+     * @see QuizzMovieApplication#sendResponse(String, HttpEntity)
      * @since 1.0
      */
     @Test
     public void sendResponse() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .param("token", token))
+                .content("{\"token\":\""+token+"\"}"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .param("token", token)
+                .content("{\"token\":\""+token+"\"}")
                 .param("response", "................"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
     }
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#disconnect(HttpServletRequest)
+     * @see QuizzMovieApplication#disconnect(HttpEntity)
      * @since 1.0
      */
     @Test
@@ -105,7 +105,7 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#getGoodAnswers(HttpServletRequest)
+     * @see QuizzMovieApplication#getGoodAnswers(HttpEntity)
      * @since 1.0
      */
     @Test
@@ -114,7 +114,7 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#getAnswers(HttpServletRequest)
+     * @see QuizzMovieApplication#getAnswers(HttpEntity)
      * @since 1.0
      */
     @Test
@@ -134,7 +134,7 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#register(HttpServletRequest)
+     * @see QuizzMovieApplication#register(HttpEntity)
      * @since 1.0
      */
     @Test
