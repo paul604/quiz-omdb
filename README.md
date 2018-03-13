@@ -32,6 +32,11 @@ Mettre le war dans le dossier webapps du serveur tomcat, puis le lancer.
    
 Une fois un 1er lancement effectué, vous pourrez (sans obligation) paramétrer la base de données dans le fichier application.properties. Cependant, toute modification implique un redémarrage du serveur tomcat.
 
+# Developers
+* @crowlas
+* @Kl000
+* @paul604
+
 
 # Legal
 
