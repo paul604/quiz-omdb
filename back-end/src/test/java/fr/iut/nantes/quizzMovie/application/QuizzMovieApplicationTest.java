@@ -120,6 +120,7 @@ public class QuizzMovieApplicationTest {
     public void getGoodAnswers() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/goodanswers")
                 .content("{\"token\":\"" + token + "\"}"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.goodanswers").isNotEmpty());
     }
@@ -133,6 +134,7 @@ public class QuizzMovieApplicationTest {
     public void getAnswers() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/answers")
                 .content("{\"token\":\"" + token + "\"}"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.answers").isNotEmpty());
 
@@ -146,6 +148,7 @@ public class QuizzMovieApplicationTest {
     @Test
     public void index() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.server").value("OK"));
     }
 
@@ -159,8 +162,8 @@ public class QuizzMovieApplicationTest {
         mvc.perform(MockMvcRequestBuilders.post("/register")
                 .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
-        .andExpect(MockMvcResultMatchers.jsonPath("$result").value("true"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("true"));
     }
 
 
