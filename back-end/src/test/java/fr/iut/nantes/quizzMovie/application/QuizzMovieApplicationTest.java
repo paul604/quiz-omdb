@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.iut.nantes.quizzMovie.Utils;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class QuizzMovieApplicationTest {
      * @throws Exception
      * @since 1.0
      */
-    @Before
+    @BeforeClass
     public void setUp() throws Exception {
         //decom if data clear
         mvc.perform(MockMvcRequestBuilders.post("/register")
