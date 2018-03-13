@@ -26,8 +26,8 @@ Enfin, la base de données est une base de données mongoDB. Elle stock les stat
 
 ## Déploiement
 Pre-requis :
-   * serveur tomcat
-   * serveur mongo DB
+   * serveur tomcat 7
+   * serveur mongo DB 3.6.2
    * le war du projet.
    
 Mettre le war dans le dossier webapps du serveur tomcat, puis le lancer.
