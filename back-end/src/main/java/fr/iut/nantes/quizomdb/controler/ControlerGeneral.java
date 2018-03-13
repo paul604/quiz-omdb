@@ -15,7 +15,7 @@ public class ControlerGeneral {
     private ControlerGamer gamer = new ControlerGamer();
 
     /**
-     * @param token
+     * @param token of the user
      * @return the actual question of the user
      * @since 1.0
      */
@@ -26,7 +26,7 @@ public class ControlerGeneral {
     /**
      * Change the actual question of a user
      *
-     * @param token
+     * @param token of the user
      * @return the new question
      * @since 1.0
      */
@@ -37,8 +37,8 @@ public class ControlerGeneral {
     /**
      * Check if the response in parameter is close to the answers
      *
-     * @param token    of the user
-     * @param response
+     * @param token of the user
+     * @param response of the user
      * @return true of false
      * @since 1.0
      */
@@ -120,8 +120,8 @@ public class ControlerGeneral {
     /**
      * create a user in the database
      *
-     * @param login
-     * @param password
+     * @param login of the user
+     * @param password of the user
      * @since 1.0
      */
     public String createAccount(String login, String password) {

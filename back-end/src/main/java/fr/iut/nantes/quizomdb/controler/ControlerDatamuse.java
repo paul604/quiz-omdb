@@ -23,7 +23,7 @@ public class ControlerDatamuse {
      * Check if response has a spelling close to answers
      *
      * @param response proposed
-     * @param answers  that we want
+     * @param answers that we want
      * @return true or false
      * @since 1.0
      */
@@ -42,8 +42,8 @@ public class ControlerDatamuse {
     /**
      * Check if the 2 words in parameter has a close spelling
      *
-     * @param responseWord
-     * @param answersWord
+     * @param responseWord proposed
+     * @param answersWord that we want
      * @return true of false
      * @since 1.0
      */

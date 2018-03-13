@@ -52,9 +52,9 @@ public class ControlerGamer {
     /**
      * Add a user in the local memory
      *
-     * @param login
-     * @param answers
-     * @param goodAnswers
+     * @param login of the user
+     * @param answers , the number of answers of the user
+     * @param goodAnswers , the number of good answers of the user
      * @return the token of the user
      */
     public String addGamer(String login, int answers, int goodAnswers) {

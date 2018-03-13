@@ -12,8 +12,8 @@ public class Quizz {
     /**
      * Class constructor
      *
-     * @param question
-     * @param answers
+     * @param question , the actual question of the quizz
+     * @param answers , the actual answers of the quizz
      * @since 1.0
      */
     public Quizz(String question, String answers) {
