@@ -33,7 +33,7 @@ after_success:
 before_deploy:
   - wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
   - java -jar swagger-codegen-cli-2.3.1.jar generate -i ./back-end/docApi/swagger.yml -l html2 -o ./docs/doc
-  - mv ./front-end/ ./docs/
+  - mv ./front-end/* ./docs/
 
 deploy:
   provider: pages
