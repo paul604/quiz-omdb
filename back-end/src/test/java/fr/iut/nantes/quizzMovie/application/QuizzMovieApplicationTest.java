@@ -100,6 +100,7 @@ public class QuizzMovieApplicationTest {
      */
     @Test
     public void disconnect() throws Exception {
+
     }
 
     /**

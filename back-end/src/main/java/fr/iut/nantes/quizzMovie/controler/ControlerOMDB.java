@@ -45,10 +45,9 @@ public class ControlerOMDB {
         // get a random question/response
         Random rand = new Random();
         int id = rand.nextInt(2);
-        try {
             switch (id) {
                 case 1:
-                    String the_plot = jobj.get("Plot").toString();
+                    String the_plot = jobj.get("Plot").getAsString();
                     if (the_plot=="N/A") return this.generateQuestion(login);
                     question = the_plot + "\n What is the title of this movie ?";
                     answers = jobj.get("Title").toString();
@@ -59,9 +58,6 @@ public class ControlerOMDB {
                     question = "What is the year of released of this movie ?";
                     answers = jobj.get("Year").toString();
             }
-        }catch (Exception e){
-            return this.generateQuestion(login);
-        }
 
         // Register the changes
         final Map<String, String> valeurs = new HashMap<String, String>();
