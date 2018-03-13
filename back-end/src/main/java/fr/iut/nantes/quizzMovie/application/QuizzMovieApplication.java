@@ -88,9 +88,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity sendResponse(HttpEntity<String> httpEntity) {
+    ResponseEntity sendResponse(HttpEntity<String> httpEntity, @RequestParam String token) {
         try {
-            String token = getParamFromBody(httpEntity, "token");
             String response = getParamFromBody(httpEntity, "response");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"result\" : \"" + control.isCorrectResponse(token, response)
@@ -126,9 +125,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/disconnect",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity disconnect(HttpEntity<String> httpEntity) {
+    ResponseEntity disconnect(@RequestParam String token) {
         try {
-            String token = getParamFromBody(httpEntity, "token");
             control.disconnect(token);
             ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
             return res;
