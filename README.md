@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.org/paul604/quiz-omdb.svg?branch=master)](https://travis-ci.org/paul604/quiz-omdb)
 [![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=fr.iut.nantes%3Aquiz-omdb&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.iut.nantes%3Aquiz-omdb)
-[![codecov](https://codecov.io/gh/paul604/quiz-omdb/branch/master/graph/badge.svg)](https://codecov.io/gh/paul604/quiz-omdb)
-[![GitHub tag](https://img.shields.io/github/tag/paul604/quiz-omdb.svg)](https://github.com/paul604/quiz-omdb/releases)
-[![GitHub issues](https://img.shields.io/github/issues/paul604/quiz-omdb.svg)](https://github.com/paul604/quiz-omdb/issues)
-[![license](https://img.shields.io/github/license/paul604/quiz-omdb.svg)](https://github.com/paul604/quiz-omdb/blob/master/LICENSE)
+[![codecov](https://codecov.io/gh/paul604/quizz-movie/branch/master/graph/badge.svg)](https://codecov.io/gh/paul604/quizz-movie)
+[![GitHub tag](https://img.shields.io/github/tag/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/releases)
+[![GitHub issues](https://img.shields.io/github/issues/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/issues)
+[![license](https://img.shields.io/github/license/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/blob/master/LICENSE)
 
 # Quizz movie
 
