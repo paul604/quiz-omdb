@@ -17,7 +17,7 @@
           <div v-else-if='body === "statsTemp"' key="Quiz">
             <button onClick={{vue.toQuiz()}}>Quiz</button>
           </div>
-          <div v-else-if='body === "legalTemp"' key="Back">
+          <div v-else-if='body === "legalTemp" || body === "errorTemp"' key="Back">
             <button onClick={{vue.toPrecedent()}}>Back</button>
           </div>
           <div v-else key="invisible">
@@ -30,7 +30,7 @@
           <div v-else-if='body === "registerTemp"' key="Login">
             <button onClick={{vue.toLogin()}}>Login</button>
           </div>
-          <div v-else-if='body != "legalTemp"' key="Log out">
+          <div v-else-if='body != "legalTemp" || body != "errorTemp"' key="Log out">
             <button onClick={{vue.toLogin()}}>Log out</button>
           </div>
           <div v-else key="invisible2">
@@ -159,6 +159,11 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <div v-else-if='body === "errorTemp"' key="error">
+            <h2>{{vue.textError}}</h2>
+            <img v-bind:src="imageError" alt="the error's image" height="290" width="264">
           </div>
 
         <transition>

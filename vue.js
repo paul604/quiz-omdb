@@ -13,7 +13,9 @@ var vue = new Vue({
     token: "",
     questionPicture: "",
     question: "",
-    answer: ""
+    answer: "",
+    imageError: "",
+    textError: "",
   },
   computed: {
     successRate: function() {
@@ -22,10 +24,10 @@ var vue = new Vue({
   },
   methods: {
     toStats: function() {
-      this.httpGetAsync(adress+"/answers?token="+this.token, function(json){
+      this.httpRequestAsync("GET", adress+"/answers?token="+this.token, "", function(json){
         var jsonObject = JSON.parse(json);
         this.totalQuestion = parseInt(jsonObject.answers);
-        this.httpGetAsync(adress+"/goodanswers?token="+this.token, function(json){
+        this.httpRequestAsync("GET", adress+"/goodanswers?token="+this.token, "", function(json){
           var jsonObject = JSON.parse(json);
           this.totalScore = parseInt(jsonObject.goodanswers);
           this.body = "statsTemp";
@@ -64,11 +66,19 @@ var vue = new Vue({
         this.body = "legalTemp";
       }
     },
+    toError: function(statusCode, statusText) {
+      if(this.body != "errorTemp") {
+        this.precedentPage = this.body;
+        this.imageError = "https://http.cat/"+statusCode;
+        this.textError = statusText;
+        this.body = "errorTemp";
+      }
+    },
     toPrecedent: function() {
       this.body = this.precedentPage
     },
     disconnection: function(){
-      this.httpPostAsync(adress+"/disconnect?token="+this.token, "", this.resetConnection.bind(this));
+      this.httpRequestAsync("POST", adress+"/disconnect?token="+this.token, "", this.resetConnection.bind(this));
     },
     resetConnection: function() {
       this.login = "";
@@ -80,17 +90,17 @@ var vue = new Vue({
     },
     connection: function(callback) {
       var params = "?login="+this.login+"&password="+this.password;
-      this.httpPostAsync(adress+"/login"+params, "", callback);
+      this.httpRequestAsync("POST", adress+"/login"+params, "", callback);
     },
     register: function(callback) {
       var params = "?login="+this.login+"&password="+this.password;
-      this.httpPostAsync(adress+"/register"+params, "", callback);
+      this.httpRequestAsync("POST", adress+"/register"+params, "", callback);
     },
     answerQuestion: function() {
       var params = "";
-      this.httpPostAsync(adress+"/response?token="+this.token+"&response="+this.answer, params, function(json) {
+      this.httpRequestAsync("POST", adress+"/response?token="+this.token+"&response="+this.answer, params, function(json) {
         var jsonObject = JSON.parse(json);
-        if(parseBoolean(jsonObject.result)) {
+        if(jsonObject.result==="true") {
           this.score ++;
           this.totalScore ++;
         }
@@ -99,34 +109,30 @@ var vue = new Vue({
       }.bind(this));
     },
     getQuestion: function() {
-      this.httpGetAsync(adress+"/question?token="+this.token, function(json) {
+      this.httpRequestAsync("GET", adress+"/question?token="+this.token, "", function(json) {
         var jsonObject = JSON.parse(json);
         this.question = "<b>Question: </b>"+jsonObject.question;
         this.questionPicture = jsonObject.poster;
       }.bind(this));
     },
-    httpGetAsync: function(theUrl, callback) {
+    httpRequestAsync: function(type, theUrl, params, callback) {
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-          callback(xmlHttp.responseText);
+        console.log("xmlHttp.status :");
+        console.log(xmlHttp.status);
+        console.log("xmlHttp.statusText :");
+        console.log(xmlHttp.statusText);
+        if (xmlHttp.readyState == 4) {
+          if(xmlHttp.status == 200) {
+            callback(xmlHttp.responseText);
+          } else if(xmlHttp.status != 0) {
+            this.toError(xmlHttp.status, xmlHttp.statusText);
+          }
         }
-      }
-      xmlHttp.open("GET", theUrl, true);
-      xmlHttp.send(null);
-    },
-    httpPostAsync: function(theUrl, params, callback) {
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.onreadystatechange = function() {
-      	if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-      		callback(xmlHttp.responseText);
-      	}
-      }
-      xmlHttp.open("POST", theUrl, true);
-
-      //xmlHttp.setRequestHeader("Content-length", params.length);
-
-      xmlHttp.send(params);
+      }.bind(this)
+      xmlHttp.open(type, theUrl, true);
+      var send = type === "GET" ? null : params;
+      xmlHttp.send(send);
     }
   }
 });
