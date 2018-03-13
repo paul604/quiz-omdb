@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/paul604/quiz-omdb.svg?branch=master)](https://travis-ci.org/paul604/quiz-omdb)
+[![Build Status](https://travis-ci.org/paul604/quizz-movie.svg?branch=master)](https://travis-ci.org/paul604/quizz-movie)
 [![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=fr.iut.nantes%3Aquizz-movie&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.iut.nantes%3Aquizz-movie)
 [![codecov](https://codecov.io/gh/paul604/quizz-movie/branch/master/graph/badge.svg)](https://codecov.io/gh/paul604/quizz-movie)
 [![GitHub tag](https://img.shields.io/github/tag/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/releases)
@@ -11,7 +11,7 @@
 Quizz movie est une application distributrice de service en JSON, permettant de
 jouer à un quiz sur les films de la base de données d’OMDB et de noter les statistiques des joueurs.
 
-Notre application se découpe en 3 parties majeurs : le [front](#Front-Folder), [Spring](#Spring-Folder), et la [base de données](#Base-de-données-Folder).
+Notre application se découpe en 3 parties majeurs : le [front](#front-folder), [Spring](#spring-folder), et la [base de données](#base-de-données-web).
 
 ### Front ([Folder](./front-end/))
 Le front est composé de vues permettant à un utilisateurs de comprendre facilement le fonctionnement du programme. Il peut s’y authentifier, créer un compte, demander une question et y répondre. Il est paramétré pour utiliser les services du back afin de les rendre accessible à un utilisateur lambda.
