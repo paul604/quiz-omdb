@@ -53,20 +53,20 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#generateQuestion(HttpEntity)
+     * @see QuizzMovieApplication#generateQuestion(String)
      * @since 1.0
      */
     @Test
     public void generateQuestion() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .content("{\"token\":\"" + token + "\"}"))
+                .param("token", token))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
     }
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#sendResponse(String, HttpEntity)
+     * @see QuizzMovieApplication#sendResponse(HttpEntity, String)
      * @since 1.0
      */
     @Test
@@ -77,24 +77,24 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#sendResponse(String, HttpEntity)
+     * @see QuizzMovieApplication#sendResponse(HttpEntity, String)
      * @since 1.0
      */
     @Test
     public void sendResponse() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .content("{\"token\":\"" + token + "\"}"))
+                .param("token", token))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .content("{\"token\":\"" + token + "\"}")
+                .param("token", token)
                 .param("response", "................"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
     }
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#disconnect(HttpEntity)
+     * @see QuizzMovieApplication#disconnect(String)
      * @since 1.0
      */
     @Test
@@ -113,13 +113,13 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#getGoodAnswers(HttpEntity)
+     * @see QuizzMovieApplication#getGoodAnswers(String)
      * @since 1.0
      */
     @Test
     public void getGoodAnswers() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/goodanswers")
-                .content("{\"token\":\"" + token + "\"}"))
+                .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.goodanswers").isNotEmpty());
@@ -127,13 +127,13 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#getAnswers(HttpEntity)
+     * @see QuizzMovieApplication#getanswers(String)
      * @since 1.0
      */
     @Test
     public void getAnswers() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/answers")
-                .content("{\"token\":\"" + token + "\"}"))
+                .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.answers").isNotEmpty());

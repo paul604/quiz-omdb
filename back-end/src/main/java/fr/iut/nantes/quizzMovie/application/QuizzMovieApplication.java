@@ -98,7 +98,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
         }catch (TokenException e) {
             return e.getResponseEntity();
         }catch (Exception e) {
-            String json = "{ \"error\" : \" Error not defined\" }";
+            String json = "{ \"error\" : \" "+e.getMessage()+"\" }";
             return new ResponseEntity<>(json,HttpStatus.BAD_REQUEST);
         }
 

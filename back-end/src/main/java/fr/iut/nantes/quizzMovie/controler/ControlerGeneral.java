@@ -42,11 +42,16 @@ public class ControlerGeneral {
      * @return true of false
      * @since 1.0
      */
-    public boolean isCorrectResponse(String token, String response) throws TokenException {
+    public boolean isCorrectResponse(String token, String response) throws Exception {
         String login = getLoginFromToken(token);
         this.gamer.getGamer(login).incrementAnswers();
         String answers = this.omdb.getAnswers(login);
-        boolean isCorrect = new ControlerDatamuse().hasCloseSpelling(response, answers);
+        boolean isCorrect=false;
+        try{
+            isCorrect = new ControlerDatamuse().hasCloseSpelling(response, answers);
+        }catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
         if (isCorrect) this.gamer.getGamer(login).incrementGoodAnswers();
         return isCorrect;
     }
