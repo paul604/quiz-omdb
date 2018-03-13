@@ -14,10 +14,12 @@ jouer à un quiz sur les films de la base de données d’OMDB et de noter les s
 Notre application se découpe en 3 parties majeurs : le [front](#front-folder), [Spring](#spring-folder), et la [base de données](#base-de-données-web).
 
 ### Front ([Folder](./front-end/))
-Le front est composé de vues permettant à un utilisateurs de comprendre facilement le fonctionnement du programme. Il peut s’y authentifier, créer un compte, demander une question et y répondre. Il est paramétré pour utiliser les services du back afin de les rendre accessible à un utilisateur lambda.
+Le front est composé de vues permettant à un utilisateurs de comprendre facilement le fonctionnement du programme. Il peut s’y authentifier, créer un compte, demander une question et y répondre. Il est paramétré pour utiliser les services du back afin de les rendre accessible à un utilisateur lambda.   
+https://paul604.github.io/quizz-movie/
 
 ### Spring ([Folder](./back-end/))
-Spring est une partie composé à la fois de spring mvc qui met en place les service du serveur et des contrôleurs qui sont les opérateurs du programme. Les contrôleurs permettre d’accéder à la partie base de données et d’effectuer des appels sur des API externes.
+Spring est une partie composé à la fois de spring mvc qui met en place les service du serveur et des contrôleurs qui sont les opérateurs du programme. Les contrôleurs permettre d’accéder à la partie base de données et d’effectuer des appels sur des API externes.   
+API doc: https://paul604.github.io/quizz-movie/doc
 
 ### Base de données ([web](https://www.mongodb.com))
 Enfin, la base de données est une base de données mongoDB. Elle stock les statistiques sur les joueurs et est appelée par les contrôleurs.
