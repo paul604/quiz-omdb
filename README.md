@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/paul604/quiz-omdb.svg?branch=master)](https://travis-ci.org/paul604/quiz-omdb)
-[![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=fr.iut.nantes%3Aquiz-omdb&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.iut.nantes%3Aquiz-omdb)
+[![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=fr.iut.nantes%3Aquizz-movie&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.iut.nantes%3Aquizz-movie)
 [![codecov](https://codecov.io/gh/paul604/quizz-movie/branch/master/graph/badge.svg)](https://codecov.io/gh/paul604/quizz-movie)
 [![GitHub tag](https://img.shields.io/github/tag/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/releases)
 [![GitHub issues](https://img.shields.io/github/issues/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/issues)
