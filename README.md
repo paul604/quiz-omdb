@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/paul604/quiz-omdb.svg?branch=master)](https://travis-ci.org/paul604/quiz-omdb)
-[![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=fr.iut.nantes%3Aquiz-omdb&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.iut.nantes%3Aquiz-omdb)
+[![Build Status](https://travis-ci.org/paul604/quizz-movie.svg?branch=master)](https://travis-ci.org/paul604/quizz-movie)
+[![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=fr.iut.nantes%3Aquizz-movie&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.iut.nantes%3Aquizz-movie)
 [![codecov](https://codecov.io/gh/paul604/quizz-movie/branch/master/graph/badge.svg)](https://codecov.io/gh/paul604/quizz-movie)
 [![GitHub tag](https://img.shields.io/github/tag/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/releases)
 [![GitHub issues](https://img.shields.io/github/issues/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/issues)
@@ -11,13 +11,15 @@
 Quizz movie est une application distributrice de service en JSON, permettant de
 jouer à un quiz sur les films de la base de données d’OMDB et de noter les statistiques des joueurs.
 
-Notre application se découpe en 3 parties majeurs : le front, Spring, et la base de données.
+Notre application se découpe en 3 parties majeurs : le [front](#front-folder), [Spring](#spring-folder), et la [base de données](#base-de-données-web).
 
 ### Front ([Folder](./front-end/))
-Le front est composé de vues permettant à un utilisateurs de comprendre facilement le fonctionnement du programme. Il peut s’y authentifier, créer un compte, demander une question et y répondre. Il est paramétré pour utiliser les services du back afin de les rendre accessible à un utilisateur lambda.
+Le front est composé de vues permettant à un utilisateurs de comprendre facilement le fonctionnement du programme. Il peut s’y authentifier, créer un compte, demander une question et y répondre. Il est paramétré pour utiliser les services du back afin de les rendre accessible à un utilisateur lambda.   
+https://paul604.github.io/quizz-movie/
 
 ### Spring ([Folder](./back-end/))
-Spring est une partie composé à la fois de spring mvc qui met en place les service du serveur et des contrôleurs qui sont les opérateurs du programme. Les contrôleurs permettre d’accéder à la partie base de données et d’effectuer des appels sur des API externes.
+Spring est une partie composé à la fois de spring mvc qui met en place les service du serveur et des contrôleurs qui sont les opérateurs du programme. Les contrôleurs permettre d’accéder à la partie base de données et d’effectuer des appels sur des API externes.   
+API doc: https://paul604.github.io/quizz-movie/doc
 
 ### Base de données ([web](https://www.mongodb.com))
 Enfin, la base de données est une base de données mongoDB. Elle stock les statistiques sur les joueurs et est appelée par les contrôleurs.

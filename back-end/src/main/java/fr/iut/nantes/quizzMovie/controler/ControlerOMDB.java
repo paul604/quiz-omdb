@@ -48,14 +48,14 @@ public class ControlerOMDB {
         try {
             switch (id) {
                 case 1:
-                    String the_plot = jobj.get("Plot").toString();
-                    if (the_plot=="N/A") return this.generateQuestion(login);
+                    String the_plot = jobj.get("Plot").getAsString();
+                    if (the_plot.equalsIgnoreCase("N/A")) return this.generateQuestion(login);
                     question = the_plot + "\n What is the title of this movie ?";
                     answers = jobj.get("Title").toString();
                     break;
                 default:
-                    poster = jobj.get("Poster").toString();
-                    if (poster=="N/A")return this.generateQuestion(login);
+                    poster = jobj.get("Poster").getAsString();
+                    if (poster.equalsIgnoreCase("N/A"))return this.generateQuestion(login);
                     question = "What is the year of released of this movie ?";
                     answers = jobj.get("Year").toString();
             }
