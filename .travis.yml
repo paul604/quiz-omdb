@@ -30,9 +30,14 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
+before_deploy:
+  - wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar
+  - java -jar swagger-codegen-cli-2.3.1.jar generate -i ./back-end/docApi/swagger.yml -l html2 -o ./docs/doc
+  - mv ./front-end/ ./docs/
+
 deploy:
   provider: pages
-  local_dir: ./front-end/
+  local_dir: ./docs/
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
