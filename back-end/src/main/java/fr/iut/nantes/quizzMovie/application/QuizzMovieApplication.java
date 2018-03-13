@@ -72,9 +72,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/question",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity generateQuestion(HttpEntity<String> httpEntity) {
+    ResponseEntity generateQuestion(@RequestParam String token) {
         try {
-            String token = getParamFromBody(httpEntity, "token");
             ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
             return res;
         }catch (TokenException e) {
@@ -89,9 +88,10 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity sendResponse(@RequestParam("response") String response, HttpEntity<String> httpEntity) {
+    ResponseEntity sendResponse(HttpEntity<String> httpEntity) {
         try {
             String token = getParamFromBody(httpEntity, "token");
+            String response = getParamFromBody(httpEntity, "response");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"result\" : \"" + control.isCorrectResponse(token, response)
                     + "\" }");
@@ -140,9 +140,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/goodanswers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getGoodAnswers(HttpEntity<String> httpEntity) {
+    ResponseEntity getGoodAnswers(@RequestParam String token) {
         try {
-            String token = getParamFromBody(httpEntity, "token");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                     + "\" }");
@@ -155,9 +154,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @GetMapping(value = "/answers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity getAnswers(HttpEntity<String> httpEntity) {
+    ResponseEntity getanswers(@RequestParam String token) {
         try {
-            String token = getParamFromBody(httpEntity, "token");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"answers\" : \"" + control.getAnswers(token)
                     + "\" }");
