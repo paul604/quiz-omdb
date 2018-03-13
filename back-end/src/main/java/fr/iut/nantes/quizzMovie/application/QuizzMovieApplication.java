@@ -74,7 +74,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity generateQuestion(HttpEntity<String> httpEntity) {
         try {
-            String token = getJsonFromBody(httpEntity).get("token").getAsString();
+            String token = getParamFromBody(httpEntity, "token");
             ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
             return res;
         }catch (TokenException e) {
@@ -91,7 +91,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity sendResponse(@RequestParam("response") String response, HttpEntity<String> httpEntity) {
         try {
-            String token = getJsonFromBody(httpEntity).get("token").getAsString();
+            String token = getParamFromBody(httpEntity, "token");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"result\" : \"" + control.isCorrectResponse(token, response)
                     + "\" }");
@@ -110,12 +110,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity login(HttpEntity<String> httpEntity) {
         try {
-            Gson gson = new Gson();
-            JsonElement element = gson.fromJson (httpEntity.getBody(), JsonElement.class);
-            JsonObject jsonObj = element.getAsJsonObject();
-            String login = jsonObj.get("login").getAsString();
-            String password = jsonObj.get("password").getAsString();
-
+            String login = getParamFromBody(httpEntity, "login");
+            String password = getParamFromBody(httpEntity, "password");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"token\" : \"" + control.login(login, password)
                     + "\" }");
@@ -132,7 +128,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity disconnect(HttpEntity<String> httpEntity) {
         try {
-            String token = getJsonFromBody(httpEntity).get("token").getAsString();
+            String token = getParamFromBody(httpEntity, "token");
             control.disconnect(token);
             ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
             return res;
@@ -146,7 +142,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity getGoodAnswers(HttpEntity<String> httpEntity) {
         try {
-            String token = getJsonFromBody(httpEntity).get("token").getAsString();
+            String token = getParamFromBody(httpEntity, "token");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                     + "\" }");
@@ -161,7 +157,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity getAnswers(HttpEntity<String> httpEntity) {
         try {
-            String token = getJsonFromBody(httpEntity).get("token").getAsString();
+            String token = getParamFromBody(httpEntity, "token");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"answers\" : \"" + control.getAnswers(token)
                     + "\" }");
@@ -182,9 +178,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity register(HttpEntity<String> httpEntity) {
         try {
-            JsonObject jsonObj = getJsonFromBody(httpEntity);
-            String login = jsonObj.get("login").getAsString();
-            String password = jsonObj.get("password").getAsString();
+            String login = getParamFromBody(httpEntity, "login");
+            String password = getParamFromBody(httpEntity, "password");
             ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
             return res;
         } catch (Exception e) {
@@ -193,10 +188,17 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
         }
     }
 
-    private JsonObject getJsonFromBody(HttpEntity<String> httpEntity){
+    /**
+     *
+     * @param httpEntity the request received
+     * @param param to find in body
+     * @return the String value of the param
+     */
+    private String getParamFromBody(HttpEntity<String> httpEntity, String param){
         Gson gson = new Gson();
         JsonElement element = gson.fromJson (httpEntity.getBody(), JsonElement.class);
-        return element.getAsJsonObject();
+        JsonObject jsonObj = element.getAsJsonObject();
+        return jsonObj.get(param).getAsString();
     }
 
 }
