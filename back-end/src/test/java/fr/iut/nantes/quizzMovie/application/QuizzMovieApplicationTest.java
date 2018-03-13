@@ -106,7 +106,7 @@ public class QuizzMovieApplicationTest {
         String tokenForDisconnect = parse.getAsJsonObject().get("token").getAsString();
 
         mvc.perform(MockMvcRequestBuilders.get("/disconnect")
-                .content("{\"token\":\"" + tokenForDisconnect + "\"}"))
+                .param("token", tokenForDisconnect))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
@@ -160,7 +160,7 @@ public class QuizzMovieApplicationTest {
     @Test
     public void register() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/register")
-                .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}"))
+                .content("{\"login\":\"loginTest2\", \"password\":\"pwdLoginTest2\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("true"));
