@@ -11,7 +11,7 @@
 Quizz movie est une application distributrice de service en JSON, permettant de
 jouer à un quiz sur les films de la base de données d’OMDB et de noter les statistiques des joueurs.
 
-Notre application se découpe en 3 parties majeurs : le front, Spring, et la base de données.
+Notre application se découpe en 3 parties majeurs : le [front](#Front-Folder), [Spring](#Spring-Folder), et la [base de données](#Base-de-données-Folder).
 
 ### Front ([Folder](./front-end/))
 Le front est composé de vues permettant à un utilisateurs de comprendre facilement le fonctionnement du programme. Il peut s’y authentifier, créer un compte, demander une question et y répondre. Il est paramétré pour utiliser les services du back afin de les rendre accessible à un utilisateur lambda.
