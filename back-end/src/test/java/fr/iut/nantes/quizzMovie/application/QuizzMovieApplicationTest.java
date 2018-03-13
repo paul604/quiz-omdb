@@ -60,7 +60,7 @@ public class QuizzMovieApplicationTest {
     @Test
     public void generateQuestion() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .param("token", token))
+                .content("{\"token\":\""+token+"\"}"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
     }
@@ -84,11 +84,11 @@ public class QuizzMovieApplicationTest {
     @Test
     public void sendResponse() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .param("token", token))
+                .content("{\"token\":\""+token+"\"}"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .param("token", token)
+                .content("{\"token\":\""+token+"\"}")
                 .param("response", "................"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
     }
