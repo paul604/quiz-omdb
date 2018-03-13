@@ -2,7 +2,8 @@ swagger: "2.0"
 info:
   version: "1.0.0"
   title: "Quizz movie"
-host: "localhost:8090"
+  description: "https://github.com/paul604/quizz-movie"
+host: "https://lp-miar-groupe01-cloned-paul604.c9users.io/quiz-omdb-1.0-SNAPSHOT"
 basePath: "/"
 paths:
   /question:
