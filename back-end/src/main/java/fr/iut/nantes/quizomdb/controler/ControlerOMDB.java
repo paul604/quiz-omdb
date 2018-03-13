@@ -75,9 +75,9 @@ public class ControlerOMDB {
     /**
      * add a quizz in the local memory
      *
-     * @param login
-     * @param question
-     * @param answers
+     * @param login of the user
+     * @param question to save locally
+     * @param answers to save locally
      * @since 1.0
      */
     public void addQuizz(String login, String question, String answers) {
@@ -87,7 +87,7 @@ public class ControlerOMDB {
     /**
      * delete a quizz from the local memory after register it in the database
      *
-     * @param login
+     * @param login of the user to disconnect
      * @since 1.0
      */
     public void disconnect(String login) {

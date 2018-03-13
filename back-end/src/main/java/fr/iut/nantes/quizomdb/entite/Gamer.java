@@ -13,9 +13,9 @@ public class Gamer {
     /**
      * Class constructor
      *
-     * @param login
-     * @param goodAnswers
-     * @param answers
+     * @param login of the user
+     * @param goodAnswers , the number of answers
+     * @param answers, the number of good answers
      * @since 1.0
      */
     public Gamer(String login, int goodAnswers, int answers) {
