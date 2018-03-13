@@ -144,7 +144,7 @@ public class ControlerOMDB {
      */
     private String getFromOmdb(String id) throws Exception {
         StringBuilder result = new StringBuilder();
-        URL url = new URL("http://www.omdbapi.com/?i=" + id + "&apikey=1666e2ee");
+        URL url = new URL("http://www.omdbapi.com/?i=" + id + "&plot=full&apikey=1666e2ee");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
