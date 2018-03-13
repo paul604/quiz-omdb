@@ -45,19 +45,24 @@ public class ControlerOMDB {
         // get a random question/response
         Random rand = new Random();
         int id = rand.nextInt(2);
-        switch (id) {
-            case 1:
-                String the_plot = jobj.get("Plot").toString();
-                if (the_plot=="N/A") return this.generateQuestion(login);
-                question = the_plot + "\n What is the title of this movie ?";
-                answers = jobj.get("Title").toString();
-                break;
-            default:
-                poster = jobj.get("Poster").toString();
-                if (poster=="N/A")return this.generateQuestion(login);
-                question = "What is the year of released of this movie ?";
-                answers = jobj.get("Year").toString();
+        try {
+            switch (id) {
+                case 1:
+                    String the_plot = jobj.get("Plot").toString();
+                    if (the_plot=="N/A") return this.generateQuestion(login);
+                    question = the_plot + "\n What is the title of this movie ?";
+                    answers = jobj.get("Title").toString();
+                    break;
+                default:
+                    poster = jobj.get("Poster").toString();
+                    if (poster=="N/A")return this.generateQuestion(login);
+                    question = "What is the year of released of this movie ?";
+                    answers = jobj.get("Year").toString();
+            }
+        }catch (Exception e){
+            return this.generateQuestion(login);
         }
+
         // Register the changes
         final Map<String, String> valeurs = new HashMap<String, String>();
         valeurs.put("question", question);
