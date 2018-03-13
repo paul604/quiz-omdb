@@ -1,4 +1,4 @@
-var adress = "http://lp-miar-groupe01-cloned-paul604.c9users.io/quiz-omdb-1.0-SNAPSHOT";
+var adress = "https://lp-miar-groupe01-cloned-paul604.c9users.io/quiz-omdb-1.0-SNAPSHOT";
 
 var vue = new Vue({
   el: '#vue',
