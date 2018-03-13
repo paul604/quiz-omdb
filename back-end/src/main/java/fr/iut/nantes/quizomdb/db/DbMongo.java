@@ -27,17 +27,19 @@ public class DbMongo implements Idb {
 
     /**
      * init mongoDb
+     *
+     * @since 1.0
      */
     public DbMongo() throws ExceptionDB {
         try {
             log.debug("create mongodb ...");
             mongoClient = new MongoClient(
-                    config.getMongo_url() + ":" + config.getMongo_port(),
+                    config.getMongoUrl() + ":" + config.getMongoPort(),
                     MongoClientOptions.builder().retryWrites(false).build());
             log.debug("mongodbClient OK");
-            database = mongoClient.getDatabase(config.getMongo_db_name());
+            database = mongoClient.getDatabase(config.getMongoDbName());
             log.debug("database OK");
-            gamerCollection = database.getCollection(config.getMongo_collection_gamer());
+            gamerCollection = database.getCollection(config.getMongoCollectionGamer());
             log.debug("gamerCollection OK");
             log.debug("create mongodb OK");
         } catch (Exception e) {
@@ -52,6 +54,7 @@ public class DbMongo implements Idb {
      * @param gamer Gamer to transform
      * @param pwd   password of gamer
      * @return equivalent to gamer
+     * @since 1.0
      */
     private static Document toDocument(Gamer gamer, String pwd) {
         return new Document(DB_GAMER_LOGIN, gamer.getLogin())

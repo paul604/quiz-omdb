@@ -1,16 +1,20 @@
 package fr.iut.nantes.quizomdb.controler;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import fr.iut.nantes.quizomdb.application.QuizOmdbApplication;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
 
 
 /**
- * Created by E155722N on 28/02/18.
+ * @version 1.0
+ * @since 1.0
  */
 public class ControlerDatamuse {
 
@@ -21,13 +25,14 @@ public class ControlerDatamuse {
      * @param response proposed
      * @param answers  that we want
      * @return true or false
+     * @since 1.0
      */
-    public boolean hasCloseSpelling(String response, String answers){
+    public boolean hasCloseSpelling(String response, String answers) {
         if (response.equalsIgnoreCase(answers)) return true;
         String[] responseWords = response.split(" ");
         String[] responseAnswers = answers.split(" ");
-        if (responseAnswers.length==1) return this.compareWithDatamuse(responseWords[0], responseAnswers[0]);
-        if (responseWords.length==responseAnswers.length) return false;
+        if (responseAnswers.length == 1) return this.compareWithDatamuse(responseWords[0], responseAnswers[0]);
+        if (responseWords.length != responseAnswers.length) return false;
         for (int i = 0; i < responseAnswers.length; i++) {
             if (!this.compareWithDatamuse(responseWords[i], responseAnswers[i])) return false;
         }
@@ -40,15 +45,16 @@ public class ControlerDatamuse {
      * @param responseWord
      * @param answersWord
      * @return true of false
+     * @since 1.0
      */
-    private boolean compareWithDatamuse(String responseWord, String answersWord){
+    private boolean compareWithDatamuse(String responseWord, String answersWord) {
 
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
         try {
             JsonArray possibilities = gson.fromJson(this.getFromDatamuse(answersWord), JsonArray.class);
             for (JsonElement json : possibilities) {
-                String possibility = json.getAsJsonObject().get("word").toString();
+                String possibility = json.getAsJsonObject().get("word").getAsString();
                 if (possibility.equalsIgnoreCase(responseWord)) {
                     return true;
                 }
@@ -65,6 +71,7 @@ public class ControlerDatamuse {
      * @param word that we want to have the spelling words close.
      * @return array of json
      * @throws Exception
+     * @since 1.0
      */
     private String getFromDatamuse(String word) throws Exception {
         StringBuilder result = new StringBuilder();

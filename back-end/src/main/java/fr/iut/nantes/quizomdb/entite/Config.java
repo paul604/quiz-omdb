@@ -13,20 +13,26 @@ import java.util.Properties;
 public class Config {
 
     private String DB = "";
-    private String mongo_url = "";
-    private String mongo_port = "";
-    private String mongo_db_name = "";
-    private String mongo_collection_gamer = "";
+    private String mongoUrl = "";
+    private String mongoPort = "";
+    private String mongoDbName = "";
+    private String mongoCollectionGamer = "";
 
+    /**
+     * load config from file.
+     *
+     * @param url of config file
+     * @since 1.0
+     */
     public Config(String url) {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream(url));
             DB = properties.getProperty("db");
-            mongo_url = properties.getProperty("mongo_url");
-            mongo_port = properties.getProperty("mongo_port");
-            mongo_db_name = properties.getProperty("mongo_db_name");
-            mongo_collection_gamer = properties.getProperty("mongo_collection_gamer");
+            mongoUrl = properties.getProperty("mongo_url");
+            mongoPort = properties.getProperty("mongo_port");
+            mongoDbName = properties.getProperty("mongo_db_name");
+            mongoCollectionGamer = properties.getProperty("mongo_collection_gamer");
         } catch (IOException e) {
             QuizOmdbApplication.log.error("configFile", e);
         }
@@ -36,19 +42,19 @@ public class Config {
         return DB;
     }
 
-    public String getMongo_url() {
-        return mongo_url;
+    public String getMongoUrl() {
+        return mongoUrl;
     }
 
-    public String getMongo_port() {
-        return mongo_port;
+    public String getMongoPort() {
+        return mongoPort;
     }
 
-    public String getMongo_db_name() {
-        return mongo_db_name;
+    public String getMongoDbName() {
+        return mongoDbName;
     }
 
-    public String getMongo_collection_gamer() {
-        return mongo_collection_gamer;
+    public String getMongoCollectionGamer() {
+        return mongoCollectionGamer;
     }
 }

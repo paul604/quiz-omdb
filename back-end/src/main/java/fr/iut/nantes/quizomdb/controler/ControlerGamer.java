@@ -21,8 +21,6 @@ public class ControlerGamer {
     private Idb db;
 
     /**
-     * @version 1.0
-     * @see ControlerGamer
      * @since 1.0
      */
     public ControlerGamer() {
@@ -103,6 +101,10 @@ public class ControlerGamer {
     }
 
 
+    /**
+     * @return implementation of db
+     * @since 1.0
+     */
     public Idb getDb() {
         return db;
     }

@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @version 1.0
@@ -19,6 +20,9 @@ import java.util.Map;
 public class ControlerOMDB {
     private HashMap<String, Quizz> actualsQuizz;
 
+    /**
+     * @since 1.0
+     */
     public ControlerOMDB() {
         this.actualsQuizz = new HashMap<>();
     }
@@ -28,6 +32,7 @@ public class ControlerOMDB {
      *
      * @param login of the user
      * @return the new question
+     * @since 1.0
      */
     public String generateQuestion(String login) {
         final GsonBuilder builder = new GsonBuilder();
@@ -38,18 +43,26 @@ public class ControlerOMDB {
 
         JsonObject jobj = gson.fromJson(movie, JsonObject.class);
         // get a random question/response
-        int id = (int) (Math.random() * 1);
-        switch (id) {
-            case 1:
-                question = jobj.get("Plot").toString() +
-                        "\n What is the title of this movie ?";
-                answers = jobj.get("Title").toString();
-                break;
-            default:
-                question = "What is the year of released of this movie ?";
-                poster = jobj.get("Poster").toString();
-                answers = jobj.get("Year").toString();
+        Random rand = new Random();
+        int id = rand.nextInt(2);
+        try {
+            switch (id) {
+                case 1:
+                    String the_plot = jobj.get("Plot").toString();
+                    if (the_plot=="N/A") return this.generateQuestion(login);
+                    question = the_plot + "\n What is the title of this movie ?";
+                    answers = jobj.get("Title").toString();
+                    break;
+                default:
+                    poster = jobj.get("Poster").toString();
+                    if (poster=="N/A")return this.generateQuestion(login);
+                    question = "What is the year of released of this movie ?";
+                    answers = jobj.get("Year").toString();
+            }
+        }catch (Exception e){
+            return this.generateQuestion(login);
         }
+
         // Register the changes
         final Map<String, String> valeurs = new HashMap<String, String>();
         valeurs.put("question", question);
@@ -65,6 +78,7 @@ public class ControlerOMDB {
      * @param login
      * @param question
      * @param answers
+     * @since 1.0
      */
     public void addQuizz(String login, String question, String answers) {
         this.actualsQuizz.put(login, new Quizz(question, answers));
@@ -74,6 +88,7 @@ public class ControlerOMDB {
      * delete a quizz from the local memory after register it in the database
      *
      * @param login
+     * @since 1.0
      */
     public void disconnect(String login) {
 
@@ -84,6 +99,7 @@ public class ControlerOMDB {
     /**
      * @param login of the user
      * @return the actual question of the user
+     * @since 1.0
      */
     public String getQuestion(String login) {
         Quizz quizz = this.actualsQuizz.get(login);
@@ -94,6 +110,7 @@ public class ControlerOMDB {
     /**
      * @param login of the user
      * @return the actual answers
+     * @since 1.0
      */
     public String getAnswers(String login) {
         Quizz quizz = this.actualsQuizz.get(login);
@@ -103,13 +120,11 @@ public class ControlerOMDB {
 
     /**
      * @return a random movie in json
+     * @since 1.0
      */
     private String randomMovie() {
-        String id = Integer.toString((int) (Math.random() * (900000)) + 1);
-        while (id.length() < 6) {
-            id = "0" + id;
-        }
-        id = "tt0" + id;
+        String id = Integer.toString((int) (Math.random() * (7000000)) + 1000000);
+        id = "tt" + id;
         String film = "";
         try {
             film = getFromOmdb(id);
@@ -125,6 +140,7 @@ public class ControlerOMDB {
      * @param id the id of movie to get
      * @return a movie in format json
      * @throws Exception
+     * @since 1.0
      */
     private String getFromOmdb(String id) throws Exception {
         StringBuilder result = new StringBuilder();

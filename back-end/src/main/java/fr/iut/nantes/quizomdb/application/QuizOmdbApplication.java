@@ -2,20 +2,19 @@ package fr.iut.nantes.quizomdb.application;
 
 import fr.iut.nantes.quizomdb.controler.ControlerGeneral;
 import fr.iut.nantes.quizomdb.entite.Config;
+import fr.iut.nantes.quizomdb.entite.TokenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * Main class
@@ -49,7 +48,6 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
 
     /**
      * @param args argument of application
-     *
      * @since 1.0
      */
     public static void main(String[] args) {
@@ -70,64 +68,98 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity generateQuestion(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
+            return res;
+        }catch (TokenException e) {
+            return e.getResponseEntity();
+        }catch (Exception e) {
+            String json = "{ \"error\" : \" Error not defined\" }";
+            return new ResponseEntity<>(json,HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity sendResponse(@RequestParam("response") String response, HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"result\" : \"" + control.isCorrectResponse(token, response)
-                + "\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"result\" : \"" + control.isCorrectResponse(token, response)
+                    + "\" }");
+            return res;
+        }catch (TokenException e) {
+            return e.getResponseEntity();
+        }catch (Exception e) {
+            String json = "{ \"error\" : \" Error not defined\" }";
+            return new ResponseEntity<>(json,HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PostMapping(value = "/login",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity login(HttpServletRequest request) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"token\" : \"" + control.login(login, password)
-                + "\" }");
-        return res;
+        try {
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"token\" : \"" + control.login(login, password)
+                    + "\" }");
+            return res;
+        } catch (Exception e) {
+            String json = "{ \"error\" : \" Login or password invalid\" }";
+            return new ResponseEntity<>(json, HttpStatus.UNAUTHORIZED);
+        }
+
     }
 
     @PostMapping(value = "/disconnect",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity disconnect(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        control.disconnect(token);
-        ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            control.disconnect(token);
+            ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
+            return res;
+        } catch (TokenException e) {
+            return e.getResponseEntity();
+        }
     }
 
     @GetMapping(value = "/goodanswers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity getGoodAnswers(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"goodanswers\" : \"" + control.getGoodAnswers(token)
-                + "\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"goodanswers\" : \"" + control.getGoodAnswers(token)
+                    + "\" }");
+            return res;
+        }catch (TokenException e) {
+            return e.getResponseEntity();
+        }
     }
 
     @GetMapping(value = "/answers",
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity getAnswers(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        ResponseEntity res = ResponseEntity.ok("{ " +
-                "\"answers\" : \"" + control.getAnswers(token)
-                + "\" }");
-        return res;
+        try {
+            String token = request.getParameter("token");
+            ResponseEntity res = ResponseEntity.ok("{ " +
+                    "\"answers\" : \"" + control.getAnswers(token)
+                    + "\" }");
+            return res;
+        } catch (TokenException e) {
+            return e.getResponseEntity();
+        }
     }
 
     @RequestMapping("/")
@@ -140,10 +172,15 @@ public class QuizOmdbApplication extends SpringBootServletInitializer {
             produces = "application/json; charset=utf-8")
     @ResponseBody
     ResponseEntity register(HttpServletRequest request) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
-        return res;
+        try {
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+            ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
+            return res;
+        } catch (Exception e) {
+            String json = "{ \"error\" : \" login already used\" }";
+            return new ResponseEntity<>(json, HttpStatus.CONFLICT);
+        }
     }
 
 }
