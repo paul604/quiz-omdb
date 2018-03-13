@@ -54,7 +54,7 @@ public class ControlerOMDB {
                     answers = jobj.get("Title").toString();
                     break;
                 default:
-                    poster = jobj.get("Poster").toString();
+                    poster = jobj.get("Poster").getAsString();
                     if (poster=="N/A")return this.generateQuestion(login);
                     question = "What is the year of released of this movie ?";
                     answers = jobj.get("Year").toString();

@@ -46,8 +46,7 @@ public class QuizzMovieApplicationTest {
                 .param("password", "pwdLoginTest"));
         Utils.setupConfig();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
-                .param("login", "loginTest")
-                .param("password", "pwdLoginTest")).andReturn();
+                .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}")).andReturn();
         JsonParser jsonParser = new JsonParser();
         JsonElement parse = jsonParser.parse(result.getResponse().getContentAsString());
         token = parse.getAsJsonObject().get("token").getAsString();
