@@ -1,4 +1,4 @@
-var adress = "https://lp-miar-groupe01-cloned-paul604.c9users.io/quiz-omdb-1.0-SNAPSHOT";
+var adress = "https://lp-miar-groupe01-cloned-paul604.c9users.io/quizz-movie-1.0-SNAPSHOT";
 
 var vue = new Vue({
   el: '#vue',
@@ -89,22 +89,25 @@ var vue = new Vue({
       this.totalQuestion = 0;
     },
     connection: function(callback) {
-      var params = "?login="+this.login+"&password="+this.password;
-      this.httpRequestAsync("POST", adress+"/login"+params, "", callback);
+      var params = "{\"login\":\""+this.login+"\", \"password\":\""+this.password+"\"}";
+      this.httpRequestAsync("POST", adress+"/login", params, callback);
     },
     register: function(callback) {
-      var params = "?login="+this.login+"&password="+this.password;
-      this.httpRequestAsync("POST", adress+"/register"+params, "", callback);
+      var params = "{\"login\":\""+this.login+"\", \"password\":\""+this.password+"\"}";
+      this.httpRequestAsync("POST", adress+"/register", params, callback);
     },
     answerQuestion: function() {
       var params = "";
-      this.httpRequestAsync("POST", adress+"/response?token="+this.token+"&response="+this.answer, params, function(json) {
+      this.httpRequestAsync("POST", adress+"/response?token="+this.token, "{\"response\":\""+this.answer+"\"}", function(json) {
         var jsonObject = JSON.parse(json);
         if(jsonObject.result==="true") {
           this.score ++;
           this.totalScore ++;
         }
         this.getQuestion();
+        this.answer = "";
+        this.question = "";
+        this.questionPicture = "";
         this.totalQuestion ++;
       }.bind(this));
     },
