@@ -118,10 +118,6 @@ var vue = new Vue({
     httpRequestAsync: function(type, theUrl, params, callback) {
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.onreadystatechange = function() {
-        console.log("xmlHttp.status :");
-        console.log(xmlHttp.status);
-        console.log("xmlHttp.statusText :");
-        console.log(xmlHttp.statusText);
         if (xmlHttp.readyState == 4) {
           if(xmlHttp.status == 200) {
             callback(xmlHttp.responseText);
