@@ -17,8 +17,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @version 1.0
  * @see QuizzMovieApplication
@@ -44,6 +42,7 @@ public class QuizzMovieApplicationTest {
         //decom if data clear
         mvc.perform(MockMvcRequestBuilders.post("/register")
                 .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}"));
+
         Utils.setupConfig();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
                 .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}")).andReturn();
@@ -60,7 +59,7 @@ public class QuizzMovieApplicationTest {
     @Test
     public void generateQuestion() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .content("{\"token\":\""+token+"\"}"))
+                .content("{\"token\":\"" + token + "\"}"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
     }
@@ -84,11 +83,11 @@ public class QuizzMovieApplicationTest {
     @Test
     public void sendResponse() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/question")
-                .content("{\"token\":\""+token+"\"}"))
+                .content("{\"token\":\"" + token + "\"}"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .content("{\"token\":\""+token+"\"}")
+                .content("{\"token\":\"" + token + "\"}")
                 .param("response", "................"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
     }
@@ -100,6 +99,15 @@ public class QuizzMovieApplicationTest {
      */
     @Test
     public void disconnect() throws Exception {
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
+                .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}")).andReturn();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement parse = jsonParser.parse(result.getResponse().getContentAsString());
+        String tokenForDisconnect = parse.getAsJsonObject().get("token").getAsString();
+
+        mvc.perform(MockMvcRequestBuilders.get("/disconnect")
+                .content("{\"token\":\"" + tokenForDisconnect + "\"}"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
 
@@ -110,6 +118,10 @@ public class QuizzMovieApplicationTest {
      */
     @Test
     public void getGoodAnswers() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/goodanswers")
+                .content("{\"token\":\"" + token + "\"}"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.goodanswers").isNotEmpty());
     }
 
     /**
@@ -119,6 +131,11 @@ public class QuizzMovieApplicationTest {
      */
     @Test
     public void getAnswers() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/answers")
+                .content("{\"token\":\"" + token + "\"}"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answers").isNotEmpty());
+
     }
 
     /**
@@ -139,6 +156,11 @@ public class QuizzMovieApplicationTest {
      */
     @Test
     public void register() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/register")
+                .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
+        .andExpect(MockMvcResultMatchers.jsonPath("$result").value("true"));
     }
 
 
