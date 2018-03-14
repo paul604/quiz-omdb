@@ -92,7 +92,7 @@ public class QuizzMovieApplicationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .content("{\"response\":\"testttttttttt\"")
+                .content("{\"response\":\"testttttttttt\"}")
                 .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
@@ -178,7 +178,7 @@ public class QuizzMovieApplicationTest {
                 .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .content("{\"response\":\"testttttttttt\"")
+                .content("{\"response\":\"testttttttttt\"}")
                 .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
