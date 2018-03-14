@@ -47,7 +47,7 @@ public class ControlerDatamuse {
      * @since 1.0
      */
     private boolean compareWithDatamuse(String responseWord, String answersWord) {
-
+        if (responseWord.equalsIgnoreCase(answersWord)) return true;
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
         try {
