@@ -142,7 +142,14 @@ public class DbMongo implements Idb {
         if (document == null) {
             throw new ExceptionDB("getAnswers: value not found for get");
         }
-        return (int)(double) document.get(DB_GAMER_ANSWERS);
+        Object o = document.get(DB_GAMER_ANSWERS);
+        int out = 0;
+        if(o instanceof Double){
+            out = (int)(double) o;
+        }else{
+            out = (int) o;
+        }
+        return out;
     }
 
     @Override
@@ -151,7 +158,14 @@ public class DbMongo implements Idb {
         if (document == null) {
             throw new ExceptionDB("getGoodAnswers: value not found for get");
         }
-        return (int)(double) document.get(DB_GAMER_GOOD_ANSWERS);
+        Object o = document.get(DB_GAMER_GOOD_ANSWERS);
+        int out = 0;
+        if(o instanceof Double){
+            out = (int)(double) o;
+        }else{
+            out = (int) o;
+        }
+        return out;
     }
 
     @Override
