@@ -96,8 +96,10 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
                     + "\" }");
             return res;
         }catch (TokenException e) {
+            log.error("/response TokenException", e);
             return e.getResponseEntity();
         }catch (Exception e) {
+            log.error("/response Exception", e);
             String json = "{ \"error\" : \" "+e.getMessage()+"\" }";
             return new ResponseEntity<>(json,HttpStatus.BAD_REQUEST);
         }
