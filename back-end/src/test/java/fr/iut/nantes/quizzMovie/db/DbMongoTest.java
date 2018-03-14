@@ -2,9 +2,7 @@ package fr.iut.nantes.quizzMovie.db;
 
 import fr.iut.nantes.quizzMovie.Utils;
 import fr.iut.nantes.quizzMovie.entite.Gamer;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static fr.iut.nantes.quizzMovie.application.QuizzMovieApplication.log;
 import static org.junit.Assert.*;
@@ -16,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class DbMongoTest {
 
-    private Idb db;
+    private static Idb db;
 
     /**
      * @throws Exception

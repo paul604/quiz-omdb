@@ -3,8 +3,8 @@ package fr.iut.nantes.quizzMovie.application;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.iut.nantes.quizzMovie.Utils;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +30,17 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class QuizzMovieApplicationTest {
 
     @Autowired
-    private static MockMvc mvc;
+    private MockMvc mvc;
 
-    private static String token;
+    private String token;
 
     /**
      * @throws Exception
      * @since 1.0
      */
-    @BeforeClass
-    public static void setUp() throws Exception {
-        //decom if data clear
-        mvc.perform(MockMvcRequestBuilders.post("/register")
-                .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}"));
+    @Before
+    public void setUp() throws Exception {
+        //db contains gamer whit {"login":"loginTest", "password":"pwdLoginTest"}
 
         Utils.setupConfig();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
@@ -50,6 +48,12 @@ public class QuizzMovieApplicationTest {
         JsonParser jsonParser = new JsonParser();
         JsonElement parse = jsonParser.parse(result.getResponse().getContentAsString());
         token = parse.getAsJsonObject().get("token").getAsString();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/disconnect")
+                .param("token", token));
     }
 
     /**

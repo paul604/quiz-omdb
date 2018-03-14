@@ -22,10 +22,12 @@ addons:
 services:
   - mongodb
 
+before_script:
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"login":"loginTest", "password":"pwdLoginTest"});'
+
 script:
   - mvn -f ./back-end/pom.xml test
-  - mvn -f ./back-end/pom.xml org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
-  - mvn -f ./back-end/pom.xml -P codecov cobertura:cobertura
+  - mvn -f ./back-end/pom.xml -P codecov org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar cobertura:cobertura
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
