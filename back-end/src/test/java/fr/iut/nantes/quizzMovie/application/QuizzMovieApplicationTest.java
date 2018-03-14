@@ -40,7 +40,7 @@ public class QuizzMovieApplicationTest {
      */
     @Before
     public void setUp() throws Exception {
-        //db contains gamer whit {"login":"loginTest", "password":"pwdLoginTest"}
+        //db contains gamer whit {"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers" : 0, "answers" : 0}
 
         Utils.setupConfig();
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
