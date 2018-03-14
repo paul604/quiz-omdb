@@ -1,6 +1,8 @@
 package fr.iut.nantes.quizzMovie;
 
 import fr.iut.nantes.quizzMovie.application.QuizzMovieApplication;
+import fr.iut.nantes.quizzMovie.db.DbMongo;
+import fr.iut.nantes.quizzMovie.db.ExceptionDB;
 import fr.iut.nantes.quizzMovie.entite.Config;
 
 import static fr.iut.nantes.quizzMovie.application.QuizzMovieApplication.config;
@@ -15,5 +17,10 @@ public class Utils {
         String configPath = QuizzMovieApplication.class.getResource("/configTest.properties").getPath();
         log.info("path of config file: " + configPath);
         config = new Config(configPath);
+        try {
+            DbMongo.upMongo();
+        } catch (ExceptionDB exceptionDB) {
+            exceptionDB.printStackTrace();
+        }
     }
 }

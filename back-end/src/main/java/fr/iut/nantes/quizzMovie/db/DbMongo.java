@@ -6,6 +6,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
+import fr.iut.nantes.quizzMovie.application.QuizzMovieApplication;
 import fr.iut.nantes.quizzMovie.entite.Gamer;
 import org.bson.Document;
 
@@ -21,9 +22,9 @@ import static fr.iut.nantes.quizzMovie.entite.Constants.*;
  */
 public class DbMongo implements Idb {
 
-    private MongoClient mongoClient;
-    private MongoDatabase database;
-    private MongoCollection<Document> gamerCollection;
+    public static MongoClient mongoClient;
+    public static MongoDatabase database;
+    public static MongoCollection<Document> gamerCollection;
 
     /**
      * init mongoDb
@@ -32,20 +33,39 @@ public class DbMongo implements Idb {
      */
     public DbMongo() throws ExceptionDB {
         try {
-            log.debug("create mongodb ...");
+            log.info("create mongodb ...");
             mongoClient = new MongoClient(
                     config.getMongoUrl() + ":" + config.getMongoPort(),
                     MongoClientOptions.builder().retryWrites(false).build());
-            log.debug("mongodbClient OK");
+            log.info("mongodbClient OK");
             database = mongoClient.getDatabase(config.getMongoDbName());
-            log.debug("database OK");
+            log.info("database OK");
             gamerCollection = database.getCollection(config.getMongoCollectionGamer());
-            log.debug("gamerCollection OK");
-            log.debug("create mongodb OK");
+            log.info("gamerCollection OK");
+            log.info("create mongodb OK");
         } catch (Exception e) {
             log.error("MongoDb error", e);
             throw new ExceptionDB("MongoDb error: " + e.getLocalizedMessage());
         }
+    }
+
+    public static void upMongo() throws ExceptionDB {
+        try {
+            log.info("up mongodb");
+            mongoClient = new MongoClient(
+                    config.getMongoUrl() + ":" + config.getMongoPort(),
+                    MongoClientOptions.builder().retryWrites(false).build());
+            log.info("mongodbClient UP");
+            database = mongoClient.getDatabase(config.getMongoDbName());
+            log.info("database UP");
+            gamerCollection = database.getCollection(config.getMongoCollectionGamer());
+            log.info("gamerCollection UP");
+            log.info("create mongodb UP");
+        } catch (Exception e) {
+            log.error("MongoDb UP error", e);
+            throw new ExceptionDB("MongoDb error: " + e.getLocalizedMessage());
+        }
+
     }
 
     /**
@@ -122,7 +142,7 @@ public class DbMongo implements Idb {
         if (document == null) {
             throw new ExceptionDB("getAnswers: value not found for get");
         }
-        return (int) document.get(DB_GAMER_ANSWERS);
+        return (int)(double) document.get(DB_GAMER_ANSWERS);
     }
 
     @Override
@@ -131,7 +151,7 @@ public class DbMongo implements Idb {
         if (document == null) {
             throw new ExceptionDB("getGoodAnswers: value not found for get");
         }
-        return (int) document.get(DB_GAMER_GOOD_ANSWERS);
+        return (int)(double) document.get(DB_GAMER_GOOD_ANSWERS);
     }
 
     @Override

@@ -116,6 +116,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
                     + "\" }");
             return res;
         } catch (Exception e) {
+            log.error("exception /Login", e);
             String json = "{ \"error\" : \" Login or password invalid\" }";
             return new ResponseEntity<>(json, HttpStatus.UNAUTHORIZED);
         }

@@ -3,6 +3,7 @@ package fr.iut.nantes.quizzMovie.application;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.iut.nantes.quizzMovie.Utils;
+import fr.iut.nantes.quizzMovie.db.DbMongo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
