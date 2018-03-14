@@ -49,14 +49,25 @@ public class ControlerOMDB {
             switch (id) {
                 case 1:
                     String the_plot = jobj.get("Plot").getAsString();
-                    if (the_plot.equalsIgnoreCase("N/A")) return this.generateQuestion(login);
+                    if (the_plot.equalsIgnoreCase("N/A")) {
+                        poster = jobj.get("Poster").getAsString();
+                        if (poster.equalsIgnoreCase("N/A"))return this.generateQuestion(login);
+                        else the_plot="";
+                    }
                     question = the_plot + "\n What is the title of this movie ?";
                     answers = jobj.get("Title").toString();
                     break;
                 default:
                     poster = jobj.get("Poster").getAsString();
-                    if (poster.equalsIgnoreCase("N/A"))return this.generateQuestion(login);
                     question = "What is the year of released of this movie ?";
+                    if (poster.equalsIgnoreCase("N/A")){
+                        String the_title = jobj.get("Title").getAsString();
+                        if (the_title.equalsIgnoreCase("N/A"))return this.generateQuestion(login);
+                        else {
+                            poster="";
+                            question = "What is the year of released of the movie "+the_title;
+                        }
+                    }
                     answers = jobj.get("Year").toString();
             }
         }catch (Exception e){
