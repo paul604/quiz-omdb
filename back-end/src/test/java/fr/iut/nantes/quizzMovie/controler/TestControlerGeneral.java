@@ -80,5 +80,18 @@ public class TestControlerGeneral {
         control.login("", "");
     }
 
+    /**
+     * @see ControlerGeneral#isCorrectResponse(String, String)
+     * @since 1.0
+     */
+    @Test
+    public void isCorrectResponseIncrementAnswers() throws Exception {
+        int answers = control.getAnswers(token);
+        control.isCorrectResponse(token, "sqwalala");
+        assertEquals(answers+1, control.getAnswers(token));
+    }
+
+
+
 
 }
