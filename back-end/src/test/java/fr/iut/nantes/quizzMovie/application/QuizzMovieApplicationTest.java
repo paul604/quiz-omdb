@@ -106,7 +106,7 @@ public class QuizzMovieApplicationTest {
     @Test
     public void disconnect() throws Exception {
         MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/login")
-                .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}")).andReturn();
+                .content("{\"login\":\"loginTestDisco\", \"password\":\"pwdLoginTestDisco\"}")).andReturn();
         JsonParser jsonParser = new JsonParser();
         JsonElement parse = jsonParser.parse(result.getResponse().getContentAsString());
         String tokenForDisconnect = parse.getAsJsonObject().get("token").getAsString();
@@ -124,7 +124,7 @@ public class QuizzMovieApplicationTest {
      */
     @Test
     public void getGoodAnswers() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/goodanswers")
+        mvc.perform(MockMvcRequestBuilders.get("/goodanswers")
                 .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
@@ -138,7 +138,7 @@ public class QuizzMovieApplicationTest {
      */
     @Test
     public void getAnswers() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/answers")
+        mvc.perform(MockMvcRequestBuilders.get("/answers")
                 .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
