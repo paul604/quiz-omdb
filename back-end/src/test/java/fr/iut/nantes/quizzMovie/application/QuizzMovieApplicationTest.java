@@ -40,6 +40,7 @@ public class QuizzMovieApplicationTest {
      */
     @Before
     public void setUp() throws Exception {
+        QuizzMovieApplication.log.info("+++++++++++++++++++++++++++++test GO");
         //db contains gamer whit {"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers" : 0, "answers" : 0}
 
         Utils.setupConfig();
@@ -52,7 +53,7 @@ public class QuizzMovieApplicationTest {
 
     @After
     public void tearDown() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/disconnect")
+        mvc.perform(MockMvcRequestBuilders.post("/disconnect")
                 .param("token", token));
     }
 
@@ -110,7 +111,7 @@ public class QuizzMovieApplicationTest {
         JsonElement parse = jsonParser.parse(result.getResponse().getContentAsString());
         String tokenForDisconnect = parse.getAsJsonObject().get("token").getAsString();
 
-        mvc.perform(MockMvcRequestBuilders.get("/disconnect")
+        mvc.perform(MockMvcRequestBuilders.post("/disconnect")
                 .param("token", tokenForDisconnect))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 

@@ -109,11 +109,15 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity login(HttpEntity<String> httpEntity) {
         try {
+            log.info("------------------------------------------------------------1");
             String login = getParamFromBody(httpEntity, "login");
+            log.info("------------------------------------------------------------2");
             String password = getParamFromBody(httpEntity, "password");
+            log.info("------------------------------------------------------------3");
             ResponseEntity res = ResponseEntity.ok("{ " +
                     "\"token\" : \"" + control.login(login, password)
                     + "\" }");
+            log.info("------------------------------------------------------------4");
             return res;
         } catch (Exception e) {
             String json = "{ \"error\" : \" Login or password invalid\" }";
