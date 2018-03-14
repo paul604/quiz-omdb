@@ -30,16 +30,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class QuizzMovieApplicationTest {
 
     @Autowired
-    private MockMvc mvc;
+    private static MockMvc mvc;
 
-    private String token;
+    private static String token;
 
     /**
      * @throws Exception
      * @since 1.0
      */
     @BeforeClass
-    public void setUp() throws Exception {
+    public static void setUp() throws Exception {
         //decom if data clear
         mvc.perform(MockMvcRequestBuilders.post("/register")
                 .content("{\"login\":\"loginTest\", \"password\":\"pwdLoginTest\"}"));
