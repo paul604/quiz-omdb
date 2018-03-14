@@ -178,7 +178,7 @@ public class QuizzMovieApplicationTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
         mvc.perform(MockMvcRequestBuilders.post("/response")
                 .param("token", token)
-                .param("response", "................"))
+                .param("response", "testttttttttt"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         mvc.perform(MockMvcRequestBuilders.get("/answers")
