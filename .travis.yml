@@ -23,6 +23,7 @@ services:
   - mongodb
 
 before_script:
+  - sleep 15
   - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers":0, "answers":0});'
 
 script:

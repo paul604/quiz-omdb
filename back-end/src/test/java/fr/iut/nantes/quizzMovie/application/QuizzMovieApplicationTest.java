@@ -40,7 +40,6 @@ public class QuizzMovieApplicationTest {
      */
     @Before
     public void setUp() throws Exception {
-        QuizzMovieApplication.log.info("+++++++++++++++++++++++++++++test GO");
         //db contains gamer whit {"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers" : 0, "answers" : 0}
 
         Utils.setupConfig();

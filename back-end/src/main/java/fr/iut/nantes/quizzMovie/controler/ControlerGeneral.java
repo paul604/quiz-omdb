@@ -65,11 +65,7 @@ public class ControlerGeneral {
      * @since 1.0
      */
     public String login(String login, String password) throws Exception {
-        try {
             return this.gamer.login(login, password);
-        } catch (Exception e) {
-            throw new Exception();
-        }
     }
 
     /**
