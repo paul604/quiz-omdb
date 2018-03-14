@@ -27,6 +27,7 @@ public class ControlerDatamuse {
      * @since 1.0
      */
     public boolean hasCloseSpelling(String response, String answers) {
+        if(answers == null || response == null) return false;
         if (response.equalsIgnoreCase(answers)) return true;
         String[] responseWords = response.split(" ");
         String[] responseAnswers = answers.split(" ");

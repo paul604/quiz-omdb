@@ -87,6 +87,7 @@ public class TestControlerGeneral {
     @Test
     public void isCorrectResponseIncrementAnswers() throws Exception {
         int answers = control.getAnswers(token);
+        control.generateQuestion(token);
         control.isCorrectResponse(token, "sqwalala");
         assertEquals(answers+1, control.getAnswers(token));
     }
