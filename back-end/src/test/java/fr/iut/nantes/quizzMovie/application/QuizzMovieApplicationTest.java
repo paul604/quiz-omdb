@@ -3,7 +3,6 @@ package fr.iut.nantes.quizzMovie.application;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import fr.iut.nantes.quizzMovie.Utils;
-import fr.iut.nantes.quizzMovie.db.DbMongo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -172,5 +171,21 @@ public class QuizzMovieApplicationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("true"));
     }
 
+    @Test
+    public void checkAnswersAfterQuestion() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/question")
+                .param("token", token))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        mvc.perform(MockMvcRequestBuilders.post("/response")
+                .param("token", token)
+                .param("response", "................"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
+        mvc.perform(MockMvcRequestBuilders.get("/answers")
+                .param("token", token))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answers").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.answers").value("1"));
+    }
 }
