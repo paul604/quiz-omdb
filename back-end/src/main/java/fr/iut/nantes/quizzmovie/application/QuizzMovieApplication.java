@@ -37,7 +37,8 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
      */
     public static final Logger log = LoggerFactory.getLogger("QuizOmdb");
     public static Config config;
-    ControlerGeneral control;
+
+    private ControlerGeneral control;
 
     public QuizzMovieApplication() {
         if (config == null) {
@@ -71,8 +72,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity generateQuestion(@RequestParam String token) {
         try {
-            ResponseEntity res = ResponseEntity.ok(control.generateQuestion(token));
-            return res;
+            return ResponseEntity.ok(control.generateQuestion(token));
         } catch (TokenException e) {
             return e.getResponseEntity();
         } catch (Exception e) {
@@ -88,10 +88,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     ResponseEntity sendResponse(@RequestParam String token, HttpEntity<String> httpEntity) {
         try {
             String response = getParamFromBody(httpEntity, "response");
-            ResponseEntity res = ResponseEntity.ok("{ " +
+            return ResponseEntity.ok("{ " +
                     "\"result\" : \"" + control.isCorrectResponse(token, response)
                     + "\" }");
-            return res;
         } catch (TokenException e) {
             log.error("/response TokenException", e);
             return e.getResponseEntity();
@@ -110,10 +109,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
         try {
             String login = getParamFromBody(httpEntity, "login");
             String password = getParamFromBody(httpEntity, "password");
-            ResponseEntity res = ResponseEntity.ok("{ " +
+            return ResponseEntity.ok("{ " +
                     "\"token\" : \"" + control.login(login, password)
                     + "\" }");
-            return res;
         } catch (Exception e) {
             log.error("exception /Login", e);
             String json = "{ \"error\" : \" Login or password invalid\" }";
@@ -128,8 +126,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     ResponseEntity disconnect(@RequestParam String token) {
         try {
             control.disconnect(token);
-            ResponseEntity res = ResponseEntity.ok("{ \"result\" : \"ok\" }");
-            return res;
+            return ResponseEntity.ok("{ \"result\" : \"ok\" }");
         } catch (TokenException e) {
             return e.getResponseEntity();
         }
@@ -140,10 +137,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity getGoodAnswers(@RequestParam String token) {
         try {
-            ResponseEntity res = ResponseEntity.ok("{ " +
+            return ResponseEntity.ok("{ " +
                     "\"goodanswers\" : \"" + control.getGoodAnswers(token)
                     + "\" }");
-            return res;
         } catch (TokenException e) {
             return e.getResponseEntity();
         }
@@ -154,10 +150,9 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @ResponseBody
     ResponseEntity getanswers(@RequestParam String token) {
         try {
-            ResponseEntity res = ResponseEntity.ok("{ " +
+            return ResponseEntity.ok("{ " +
                     "\"answers\" : \"" + control.getAnswers(token)
                     + "\" }");
-            return res;
         } catch (TokenException e) {
             return e.getResponseEntity();
         }
@@ -176,8 +171,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
         try {
             String login = getParamFromBody(httpEntity, "login");
             String password = getParamFromBody(httpEntity, "password");
-            ResponseEntity res = ResponseEntity.ok(control.createAccount(login, password));
-            return res;
+            return ResponseEntity.ok(control.createAccount(login, password));
         } catch (Exception e) {
             String json = "{ \"error\" : \" login already used\" }";
             return new ResponseEntity<>(json, HttpStatus.CONFLICT);

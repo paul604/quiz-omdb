@@ -4,7 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Created by E155722N on 12/03/18.
+ * @version 1.0
+ * @since 1.0
  */
 public class TokenException extends Exception {
 

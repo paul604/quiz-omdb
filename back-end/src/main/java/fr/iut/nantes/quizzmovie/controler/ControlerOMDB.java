@@ -18,6 +18,7 @@ import java.util.Random;
  * @since 1.0
  */
 public class ControlerOMDB {
+
     private HashMap<String, Quizz> actualsQuizz;
 
     /**
@@ -75,7 +76,7 @@ public class ControlerOMDB {
         }
 
         // Register the changes
-        final Map<String, String> valeurs = new HashMap<String, String>();
+        final Map<String, String> valeurs = new HashMap<>();
         valeurs.put("question", question);
         valeurs.put("poster", poster);
 

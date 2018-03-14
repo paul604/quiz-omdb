@@ -46,7 +46,7 @@ public class ControlerGeneral {
         String login = getLoginFromToken(token);
         this.gamer.getGamer(login).incrementAnswers();
         String answers = this.omdb.getAnswers(login);
-        boolean isCorrect = false;
+        boolean isCorrect;
         try {
             isCorrect = new ControlerDatamuse().hasCloseSpelling(response, answers);
         } catch (Exception e) {
@@ -59,8 +59,8 @@ public class ControlerGeneral {
     /**
      * Try to log in a user
      *
-     * @param login
-     * @param password
+     * @param login    of the user
+     * @param password of the user
      * @return the token of the user if sucessful, else 'err'
      * @since 1.0
      */

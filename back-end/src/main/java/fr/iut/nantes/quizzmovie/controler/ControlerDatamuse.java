@@ -80,7 +80,6 @@ public class ControlerDatamuse {
 
         conn.setRequestMethod("GET");
 
-        // TODO correct connection denied
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         String line;
 

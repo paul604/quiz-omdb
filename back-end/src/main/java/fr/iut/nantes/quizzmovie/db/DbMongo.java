@@ -21,9 +21,9 @@ import static fr.iut.nantes.quizzmovie.entite.Constants.*;
  */
 public class DbMongo implements Idb {
 
-    public static MongoClient mongoClient;
-    public static MongoDatabase database;
-    public static MongoCollection<Document> gamerCollection;
+    private static MongoClient mongoClient;
+    private static MongoDatabase database;
+    private static MongoCollection<Document> gamerCollection;
 
     /**
      * init mongoDb
@@ -142,7 +142,7 @@ public class DbMongo implements Idb {
             throw new ExceptionDB("getAnswers: value not found for get");
         }
         Object o = document.get(DB_GAMER_ANSWERS);
-        int out = 0;
+        int out;
         if (o instanceof Double) {
             out = (int) (double) o;
         } else {
@@ -158,7 +158,7 @@ public class DbMongo implements Idb {
             throw new ExceptionDB("getGoodAnswers: value not found for get");
         }
         Object o = document.get(DB_GAMER_GOOD_ANSWERS);
-        int out = 0;
+        int out;
         if (o instanceof Double) {
             out = (int) (double) o;
         } else {

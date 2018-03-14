@@ -10,6 +10,7 @@ import java.util.Map;
  * @version 1.0
  * @see Idb
  * @since 1.0
+ * @deprecated
  */
 public class DbObject implements Idb {
 
