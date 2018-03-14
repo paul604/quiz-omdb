@@ -71,7 +71,7 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#sendResponse(HttpEntity, String)
+     * @see QuizzMovieApplication#sendResponse(String, HttpEntity)
      * @since 1.0
      */
     @Test
@@ -82,7 +82,7 @@ public class QuizzMovieApplicationTest {
 
     /**
      * @throws Exception
-     * @see QuizzMovieApplication#sendResponse(HttpEntity, String)
+     * @see QuizzMovieApplication#sendResponse(String, HttpEntity)
      * @since 1.0
      */
     @Test
@@ -92,8 +92,8 @@ public class QuizzMovieApplicationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.question").isNotEmpty());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .param("token", token)
-                .content("{\"response\":\"testttttttttt\""))
+                .content("{\"response\":\"testttttttttt\"")
+                .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
     }
@@ -178,8 +178,8 @@ public class QuizzMovieApplicationTest {
                 .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
         mvc.perform(MockMvcRequestBuilders.post("/response")
-                .param("token", token)
-                .content("{\"response\":\"testttttttttt\""))
+                .content("{\"response\":\"testttttttttt\"")
+                .param("token", token))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         mvc.perform(MockMvcRequestBuilders.get("/answers")

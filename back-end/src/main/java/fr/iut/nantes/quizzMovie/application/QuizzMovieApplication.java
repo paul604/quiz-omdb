@@ -88,7 +88,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     @PostMapping(value = "/response",
             produces = "application/json; charset=utf-8")
     @ResponseBody
-    ResponseEntity sendResponse(@RequestParam String token, @RequestBody HttpEntity<String> httpEntity) {
+    ResponseEntity sendResponse(@RequestParam String token, HttpEntity<String> httpEntity) {
         try {
             String response = getParamFromBody(httpEntity, "response");
             ResponseEntity res = ResponseEntity.ok("{ " +
