@@ -23,7 +23,7 @@ services:
   - mongodb
 
 before_script:
-  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers": 0, "answers" : 0});'
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers":0, "answers":0});'
 
 script:
   - mvn -f ./back-end/pom.xml test
