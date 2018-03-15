@@ -19,7 +19,7 @@ var vue = new Vue({
   },
   computed: {
     successRate: function() {
-      return (this.totalQuestion == 0) ? 0 : ((this.score/this.totalQuestion)*100);
+      return (this.totalQuestion === 0) ? 0 : ((this.totalScore/this.totalQuestion)*100);
     }
   },
   methods: {
