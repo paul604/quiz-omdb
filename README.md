@@ -42,7 +42,7 @@ Mettre le war dans le dossier webapps du serveur tomcat, puis le lancer.
 Une fois un 1er lancement effectué, vous pourrez (sans obligation) paramétrer la base de données dans le fichier application.properties. Cependant, toute modification implique un redémarrage du serveur tomcat.
 
 ### Front-end
-
+Pour que le front end se connecte bien au serveur, il faut aller dans le fichier `front-end/vue.js`, pour modifier la variable `address` qui se trouve à la première ligne. La valeur à mettre est l'adresse du serveur (sans de '/' à la fin).
 
 # Developers
 * @crowlas
