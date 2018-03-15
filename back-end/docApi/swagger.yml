@@ -6,18 +6,18 @@ info:
   contact:
     name: Support
     email: NC
-    url: https://github.com/paul604/quizz-movie/issues
+    url: 'https://github.com/paul604/quizz-movie/issues'
   license:
     name: MIT
-    url: https://github.com/paul604/quizz-movie/blob/master/LICENSE
+    url: 'https://github.com/paul604/quizz-movie/blob/master/LICENSE'
 host: lp-miar-groupe01-cloned-paul604.c9users.io/quiz-omdb-1.0.0
 basePath: /
 tags:
   - name: API
-
 paths:
   /:
     get:
+      operationId: root
       summary: Home
       tags:
         - API
@@ -28,10 +28,12 @@ paths:
             properties:
               server:
                 type: string
-                example: OK
+                enum:
+                  - OK
   /question:
     get:
       summary: Get a new question
+      operationId: getQuestion
       tags:
         - API
       consumes:
@@ -40,7 +42,7 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: Token
+          name: token
           description: The token of the user
           type: string
           required: true
@@ -55,15 +57,17 @@ paths:
             properties:
               error:
                 type: string
-                enum: [error not defined]
+                enum:
+                  - error not defined
                 description: msg of error
         '405':
-          description: Invalid Token
+          description: Invalid token
           schema:
-            $ref: '#/definitions/405'
+            $ref: '#/definitions/E405'
   /response:
     post:
       summary: Verify an answers
+      operationId: postResponse
       tags:
         - API
       consumes:
@@ -72,7 +76,7 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: Token
+          name: token
           description: The token of the user
           required: true
           type: string
@@ -89,15 +93,17 @@ paths:
             properties:
               error:
                 type: string
-                enum: [error msg]
+                enum:
+                  - error msg
                 description: msg of error
         '405':
-          description: Invalid Token
+          description: Invalid token
           schema:
-            $ref: '#/definitions/405'
+            $ref: '#/definitions/E405'
   /login:
     post:
       summary: Login a user
+      operationId: postLogin
       tags:
         - API
       consumes:
@@ -126,18 +132,20 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Token'
+            $ref: '#/definitions/token'
         '401':
           description: Login or password invalid
           schema:
             properties:
               error:
                 type: string
-                enum: [Login or password invalid]
+                enum:
+                  - Login or password invalid
                 description: msg of error
   /register:
     post:
       summary: Register a user
+      operationId: postRegister
       tags:
         - API
       consumes:
@@ -169,18 +177,21 @@ paths:
             properties:
               result:
                 type: string
-                enum: [ok]
+                enum:
+                  - ok
         '409':
           description: Login already used
           schema:
             properties:
               error:
                 type: string
-                enum: [login already used]
+                enum:
+                  - login already used
                 description: msg of error
   /disconnect:
     post:
       summary: Disconnect user
+      operationId: post Disconnect
       tags:
         - API
       consumes:
@@ -189,7 +200,7 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: Token
+          name: token
           description: The token of the user
           required: true
           type: string
@@ -200,14 +211,16 @@ paths:
             properties:
               result:
                 type: string
-                enum: [ok]
+                enum:
+                  - ok
         '405':
-          description: Invalid Token
+          description: Invalid token
           schema:
-            $ref: '#/definitions/405'
+            $ref: '#/definitions/E405'
   /goodanswers:
     get:
       summary: Return the number of good answers of the user
+      operationId: getGoodanswers
       tags:
         - API
       consumes:
@@ -216,7 +229,7 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: Token
+          name: token
           description: The token of the user
           required: true
           type: string
@@ -229,12 +242,13 @@ paths:
                 type: number
                 description: number of good answers
         '405':
-          description: Invalid Token
+          description: Invalid token
           schema:
-            $ref: '#/definitions/405'
+            $ref: '#/definitions/E405'
   /answers:
     get:
       summary: Return the number of answers of the user
+      operationId: getAnswers
       tags:
         - API
       consumes:
@@ -243,7 +257,7 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: Token
+          name: token
           description: The token of the user
           required: true
           type: string
@@ -256,11 +270,19 @@ paths:
                 type: number
                 description: number of answers
         '405':
-          description: Invalid Token
+          description: Invalid token
           schema:
-            $ref: '#/definitions/405'
+            $ref: '#/definitions/E405'
 definitions:
-  Token:
+  E405:
+    type: object
+    properties:
+      error:
+        type: string
+        enum:
+          - error Invalid token
+        description: msg of error
+  token:
     type: object
     required:
       - token
@@ -279,12 +301,6 @@ definitions:
         example: When the movie XXX has been released?
       poster:
         type: string
-        enum: ['http://example.com/example.png', ""]
-
-  405:
-    type: object
-    properties:
-      error:
-        type: string
-        enum: [error Invalid Token]
-        description: msg of error
+        enum:
+          - 'http://example.com/example.png'
+          - ''
