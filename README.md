@@ -5,7 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/issues)
 [![license](https://img.shields.io/github/license/paul604/quizz-movie.svg)](https://github.com/paul604/quizz-movie/blob/master/LICENSE)
 
-# Quizz movie
+![Logo](./ressources/logo-quizz-movie.png)
 
 ## Description
 Quizz movie est une application distributrice de service en JSON, permettant de
@@ -25,15 +25,24 @@ API doc: https://paul604.github.io/quizz-movie/doc
 Enfin, la base de données est une base de données mongoDB. Elle stock les statistiques sur les joueurs et est appelée par les contrôleurs.
 
 ## Déploiement
+
+### Back-end
 Pre-requis :
    * serveur tomcat 7
    * serveur mongo DB 3.6.2
    * java SE 8
-   * le war du projet.
-   
+   * le `war` du projet.
+
+> Pour créer le `war` il faut, dans `./back-end/`, exécuter la commande suivante:   
+> * `mvn clean compile war:war` pour créer le war sans faire les tests.
+> * `mvn clean install war:war` pour créer le war avec les tests.
+
 Mettre le war dans le dossier webapps du serveur tomcat, puis le lancer.
-   
+
 Une fois un 1er lancement effectué, vous pourrez (sans obligation) paramétrer la base de données dans le fichier application.properties. Cependant, toute modification implique un redémarrage du serveur tomcat.
+
+### Front-end
+
 
 # Developers
 * @crowlas
