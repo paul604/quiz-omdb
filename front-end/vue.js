@@ -1,4 +1,4 @@
-var adress = "https://lp-miar-groupe01-cloned-paul604.c9users.io/quizz-movie-1.0-SNAPSHOT";
+var adress = "https://lp-miar-groupe01-cloned-paul604.c9users.io/quizz-movie-1.0.0";
 
 var vue = new Vue({
   el: '#vue',
@@ -78,7 +78,10 @@ var vue = new Vue({
       this.body = this.precedentPage
     },
     disconnection: function(){
-      this.httpRequestAsync("POST", adress+"/disconnect?token="+this.token, "", this.resetConnection.bind(this));
+      this.httpRequestAsync("POST", adress+"/disconnect?token="+this.token, "", function(json) {
+        this.resetConnection();
+        this.body = "loginTemp";
+      }.bind(this));
     },
     resetConnection: function() {
       this.login = "";
