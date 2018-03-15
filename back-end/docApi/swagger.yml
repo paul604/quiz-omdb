@@ -1,185 +1,290 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: "1.0.0"
-  title: "Quizz movie"
-  description: "https://github.com/paul604/quizz-movie"
-host: "https://lp-miar-groupe01-cloned-paul604.c9users.io/quiz-omdb-1.0-SNAPSHOT"
-basePath: "/"
+  version: 1.0.0
+  title: Quizz movie
+  description: 'https://github.com/paul604/quizz-movie'
+  contact:
+    name: Support
+    email: NC
+    url: https://github.com/paul604/quizz-movie/issues
+  license:
+    name: MIT
+    url: https://github.com/paul604/quizz-movie/blob/master/LICENSE
+host: lp-miar-groupe01-cloned-paul604.c9users.io/quiz-omdb-1.0.0
+basePath: /
+tags:
+  - name: API
+
 paths:
+  /:
+    get:
+      summary: Home
+      tags:
+        - API
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              server:
+                type: string
+                example: OK
   /question:
     get:
-      summary: "Get a new question"
+      summary: Get a new question
+      tags:
+        - API
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - in: "body"
-        name: "Token"
-        description: "The token of the user"
-        required: true
-        schema:
-          $ref: "#/definitions/Token"
+        - in: query
+          name: Token
+          description: The token of the user
+          type: string
+          required: true
       responses:
         '200':
-          description: "OK"
+          description: OK
           schema:
-            $ref: "#/definitions/Question"
-        '405':
-          description: "Invalid Token"
+            $ref: '#/definitions/Question'
         '400':
-          description: "Error not defined"
+          description: Error not defined
+          schema:
+            properties:
+              error:
+                type: string
+                enum: [error not defined]
+                description: msg of error
+        '405':
+          description: Invalid Token
+          schema:
+            $ref: '#/definitions/405'
   /response:
     post:
-      summary: "Verify an answers"
+      summary: Verify an answers
+      tags:
+        - API
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - in: "body"
-        name: "Token"
-        description: "The token of the user"
-        required: true
-        schema:
-          $ref: "#/definitions/Token"
+        - in: query
+          name: Token
+          description: The token of the user
+          required: true
+          type: string
       responses:
         '200':
-          description: "OK"
+          description: OK
           schema:
-            type: boolean
-        '405':
-          description: "Invalid Token"
+            properties:
+              result:
+                type: boolean
         '400':
-          description: "Error not defined"
+          description: Error not defined
+          schema:
+            properties:
+              error:
+                type: string
+                enum: [error msg]
+                description: msg of error
+        '405':
+          description: Invalid Token
+          schema:
+            $ref: '#/definitions/405'
   /login:
     post:
-      summary: "Login a user"
+      summary: Login a user
+      tags:
+        - API
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - in: "header"
-        name: "Login"
-        description: "The login of the user"
-        required: true
-        type: "string"
-      - in: "header"
-        name: "Password"
-        description: "The password of the user"
-        required: true
-        type: "string"
+        - in: body
+          name: login
+          description: login
+          required: true
+          schema:
+            required:
+              - Login
+              - Password
+            properties:
+              Login:
+                type: string
+                example: login
+                description: The login of the user
+              Password:
+                description: The password of the user
+                type: string
+                example: pwd
       responses:
         '200':
-          description: "OK"
+          description: OK
           schema:
-            $ref: "#/definitions/Token"
+            $ref: '#/definitions/Token'
         '401':
-          description: "Login or password invalid"
+          description: Login or password invalid
+          schema:
+            properties:
+              error:
+                type: string
+                enum: [Login or password invalid]
+                description: msg of error
   /register:
     post:
-      summary: "Register a user"
+      summary: Register a user
+      tags:
+        - API
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - in: "header"
-        name: "Login"
-        description: "The future login of the user"
-        required: true
-        type: "string"
-      - in: "header"
-        name: "Password"
-        description: "The future password of the user"
-        required: true
-        type: "string"
+        - in: body
+          name: Register
+          description: Register
+          required: true
+          schema:
+            required:
+              - Login
+              - Password
+            properties:
+              Login:
+                type: string
+                example: login
+                description: The future login of the user
+              Password:
+                description: The future password of the user
+                type: string
+                example: pwd
       responses:
         '200':
-          description: "OK"
+          description: OK
+          schema:
+            properties:
+              result:
+                type: string
+                enum: [ok]
         '409':
-          description: "Login already used"
+          description: Login already used
+          schema:
+            properties:
+              error:
+                type: string
+                enum: [login already used]
+                description: msg of error
   /disconnect:
     post:
-      summary: "Disconnect user"
+      summary: Disconnect user
+      tags:
+        - API
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - in: "body"
-        name: "Token"
-        description: "The token of the user"
-        required: true
-        schema:
-          $ref: "#/definitions/Token"
+        - in: query
+          name: Token
+          description: The token of the user
+          required: true
+          type: string
       responses:
         '200':
-          description: "OK"
+          description: OK
+          schema:
+            properties:
+              result:
+                type: string
+                enum: [ok]
         '405':
-          description: "Invalid Token"
+          description: Invalid Token
+          schema:
+            $ref: '#/definitions/405'
   /goodanswers:
     get:
-      summary: "Return the number of good answers of the user"
+      summary: Return the number of good answers of the user
+      tags:
+        - API
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - in: "body"
-        name: "Token"
-        description: "The token of the user"
-        required: true
-        schema:
-          $ref: "#/definitions/Token"
+        - in: query
+          name: Token
+          description: The token of the user
+          required: true
+          type: string
       responses:
         '200':
-          description: "OK"
+          description: OK
           schema:
-            type: "string"
-            example: "0"
+            properties:
+              goodanswers:
+                type: number
+                description: number of good answers
         '405':
-          description: "Invalid Token"
+          description: Invalid Token
+          schema:
+            $ref: '#/definitions/405'
   /answers:
     get:
-      summary: "Return the number of answers of the user"
+      summary: Return the number of answers of the user
+      tags:
+        - API
       consumes:
-      - "application/json"
+        - application/json
       produces:
-      - "application/json"
+        - application/json
       parameters:
-      - in: "body"
-        name: "Token"
-        description: "The token of the user"
-        required: true
-        schema:
-          $ref: "#/definitions/Token"
+        - in: query
+          name: Token
+          description: The token of the user
+          required: true
+          type: string
       responses:
         '200':
-          description: "OK"
+          description: OK
           schema:
-            type: "string"
-            example: "0"
+            properties:
+              answers:
+                type: number
+                description: number of answers
         '405':
-          description: "Invalid Token"
+          description: Invalid Token
+          schema:
+            $ref: '#/definitions/405'
 definitions:
   Token:
-    type: "object"
+    type: object
     required:
-    - "token"
+      - token
     properties:
       token:
-        type: "string"
-        example: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsb2dpbiJ9.7crGOpfi96uUsmDAZoPx-PAFktRU5vmQKIduEgx2PHz_K5NGC4uyvkX_PPDqS1_NZ2v9xJHtaWTQx8r-9Qa3zA"
+        type: string
+        example: >-
+          eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsb2dpbiJ9.7crGOpfi96uUsmDAZoPx-PAFktRU5vmQKIduEgx2PHz_K5NGC4uyvkX_PPDqS1_NZ2v9xJHtaWTQx8r-9Qa3zA
   Question:
-    type: "object"
+    type: object
     required:
-    - "value"
+      - value
     properties:
       question:
-        type: "string"
-        example: "When the movie XXX has been released?"
+        type: string
+        example: When the movie XXX has been released?
       poster:
-        type: "string"
-        example: "http://example.com/example.png"
+        type: string
+        enum: ['http://example.com/example.png', ""]
+
+  405:
+    type: object
+    properties:
+      error:
+        type: string
+        enum: [error Invalid Token]
+        description: msg of error
