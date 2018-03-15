@@ -99,7 +99,6 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
             String json = "{ \"error\" : \" " + e.getMessage() + "\" }";
             return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @PostMapping(value = "/login",
