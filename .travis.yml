@@ -22,9 +22,20 @@ addons:
 services:
   - mongodb
 
+before_script:
+  - sleep 15
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers":0, "answers":0});'
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTestDisco", "pwd":"pwdLoginTestDisco", "goodAnswers":0, "answers":0});'
+
 script:
   - mvn -f ./back-end/pom.xml test
+  - mongo DbQuizOmdbTest --eval 'db.dropDatabase();'
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers":0, "answers":0});'
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTestDisco", "pwd":"pwdLoginTestDisco", "goodAnswers":0, "answers":0});'
   - mvn -f ./back-end/pom.xml org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+  - mongo DbQuizOmdbTest --eval 'db.dropDatabase();'
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTest", "pwd":"pwdLoginTest", "goodAnswers":0, "answers":0});'
+  - mongo DbQuizOmdbTest --eval 'db.gamerTest.insert({"_id":"loginTestDisco", "pwd":"pwdLoginTestDisco", "goodAnswers":0, "answers":0});'
   - mvn -f ./back-end/pom.xml -P codecov cobertura:cobertura
 
 after_success:
