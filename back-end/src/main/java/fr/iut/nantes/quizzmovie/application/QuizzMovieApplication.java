@@ -43,7 +43,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
     public QuizzMovieApplication() {
         if (config == null) {
             String configPath = QuizzMovieApplication.class.getResource("/config.properties").getPath();
-            log.info("path of config file: " + configPath);
+            log.info("path of config file: {}", configPath);
             config = new Config(configPath);
         }
         control = new ControlerGeneral();
@@ -57,7 +57,7 @@ public class QuizzMovieApplication extends SpringBootServletInitializer {
         String configPath = args.length > 0 ?
                 QuizzMovieApplication.class.getResource(args[0]).getPath() :
                 QuizzMovieApplication.class.getResource("/config.properties").getPath();
-        log.info("path of config file: " + configPath);
+        log.info("path of config file: {}", configPath);
         config = new Config(configPath);
         SpringApplication.run(QuizzMovieApplication.class, args);
     }

@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 public class Config {
 
-    private String DB = "";
+    private String db = "";
     private String mongoUrl = "";
     private String mongoPort = "";
     private String mongoDbName = "";
@@ -28,7 +28,7 @@ public class Config {
         try {
             Properties properties = new Properties();
             properties.load(new FileInputStream(url));
-            DB = properties.getProperty("db");
+            db = properties.getProperty("db");
             mongoUrl = properties.getProperty("mongo_url");
             mongoPort = properties.getProperty("mongo_port");
             mongoDbName = properties.getProperty("mongo_db_name");
@@ -38,8 +38,8 @@ public class Config {
         }
     }
 
-    public String getDB() {
-        return DB;
+    public String getDb() {
+        return db;
     }
 
     public String getMongoUrl() {

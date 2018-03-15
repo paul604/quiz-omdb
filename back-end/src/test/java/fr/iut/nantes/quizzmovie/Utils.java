@@ -15,7 +15,7 @@ import static fr.iut.nantes.quizzmovie.application.QuizzMovieApplication.log;
 public class Utils {
     public static void setupConfig() {
         String configPath = QuizzMovieApplication.class.getResource("/configTest.properties").getPath();
-        log.info("path of config file: " + configPath);
+        log.info("path of config file: {}", configPath);
         config = new Config(configPath);
         try {
             DbMongo.upMongo();

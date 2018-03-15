@@ -10,8 +10,9 @@ import java.util.Map;
  * @version 1.0
  * @see Idb
  * @since 1.0
- * @deprecated
+ * @deprecated (since 1.0)
  */
+@Deprecated
 public class DbObject implements Idb {
 
     private Map<String, Gamer> listGamers;

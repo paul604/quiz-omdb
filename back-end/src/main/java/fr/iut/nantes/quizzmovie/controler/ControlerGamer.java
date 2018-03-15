@@ -11,6 +11,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.HashMap;
 import java.util.Set;
 
+import static fr.iut.nantes.quizzmovie.application.QuizzMovieApplication.log;
+
 /**
  * @version 1.0
  * @since 1.0
@@ -28,8 +30,7 @@ public class ControlerGamer {
         try {
             this.db = new DbMongo();
         } catch (ExceptionDB exceptionDB) {
-            exceptionDB.printStackTrace();
-            System.exit(1);
+            log.error("error ControlerGamer", exceptionDB);
         }
     }
 
@@ -77,7 +78,7 @@ public class ControlerGamer {
             this.db.setAnswers(login, this.gamers.get(login).getAnswers());
             this.db.setGoodAnswers(login, this.gamers.get(login).getGoodAnswers());
         } catch (ExceptionDB exceptionDB) {
-            exceptionDB.printStackTrace();
+            log.error("error disconnect", exceptionDB);
         }
         this.gamers.remove(login);
     }

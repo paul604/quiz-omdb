@@ -3,9 +3,11 @@ package fr.iut.nantes.quizzmovie.controler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import fr.iut.nantes.quizzmovie.application.QuizzMovieApplication;
 import fr.iut.nantes.quizzmovie.entite.Quizz;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -38,7 +40,10 @@ public class ControlerOMDB {
     public String generateQuestion(String login) {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
-        String poster = "", question, answers, movie;
+        String poster = "";
+        String question;
+        String answers;
+        String movie;
         // get a random movie
         movie = this.randomMovie();
 
@@ -49,24 +54,24 @@ public class ControlerOMDB {
         try {
             switch (id) {
                 case 1:
-                    String the_plot = jobj.get("Plot").getAsString();
-                    if (the_plot.equalsIgnoreCase("N/A")) {
+                    String thePlot = jobj.get("Plot").getAsString();
+                    if (thePlot.equalsIgnoreCase("N/A")) {
                         poster = jobj.get("Poster").getAsString();
                         if (poster.equalsIgnoreCase("N/A")) return this.generateQuestion(login);
-                        else the_plot = "";
+                        else thePlot = "";
                     }
-                    question = the_plot + "\n What is the title of this movie ?";
+                    question = thePlot + "\n What is the title of this movie ?";
                     answers = jobj.get("Title").toString();
                     break;
                 default:
                     poster = jobj.get("Poster").getAsString();
                     question = "What is the year of released of this movie ?";
                     if (poster.equalsIgnoreCase("N/A")) {
-                        String the_title = jobj.get("Title").getAsString();
-                        if (the_title.equalsIgnoreCase("N/A")) return this.generateQuestion(login);
+                        String theTitle = jobj.get("Title").getAsString();
+                        if (theTitle.equalsIgnoreCase("N/A")) return this.generateQuestion(login);
                         else {
                             poster = "";
-                            question = "What is the year of released of the movie " + the_title;
+                            question = "What is the year of released of the movie " + theTitle;
                         }
                     }
                     answers = jobj.get("Year").toString();
@@ -141,7 +146,7 @@ public class ControlerOMDB {
         try {
             film = getFromOmdb(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            QuizzMovieApplication.log.error("error whit randomMovie", e);
         }
         return film;
     }
@@ -151,10 +156,10 @@ public class ControlerOMDB {
      *
      * @param id the id of movie to get
      * @return a movie in format json
-     * @throws Exception
+     * @throws IOException
      * @since 1.0
      */
-    private String getFromOmdb(String id) throws Exception {
+    private String getFromOmdb(String id) throws IOException {
         StringBuilder result = new StringBuilder();
         URL url = new URL("http://www.omdbapi.com/?i=" + id + "&plot=full&apikey=1666e2ee");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

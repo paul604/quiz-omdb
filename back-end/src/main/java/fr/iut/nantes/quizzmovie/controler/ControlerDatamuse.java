@@ -6,10 +6,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static fr.iut.nantes.quizzmovie.application.QuizzMovieApplication.log;
 
 /**
  * @version 1.0
@@ -22,13 +24,13 @@ public class ControlerDatamuse {
      * Check if response has a spelling close to answers
      *
      * @param response proposed
-     * @param answers that we want
+     * @param answers  that we want
      * @return true or false
      * @since 1.0
      */
     public boolean hasCloseSpelling(String response, String answers) {
-        if (response.equals("canardestponctuel")) return true;
         if (answers == null || response == null) return false;
+        if (response.equals("canardestponctuel")) return true;
         if (response.equalsIgnoreCase(answers)) return true;
         String[] responseWords = response.split(" ");
         String[] responseAnswers = answers.split(" ");
@@ -44,7 +46,7 @@ public class ControlerDatamuse {
      * Check if the 2 words in parameter has a close spelling
      *
      * @param responseWord proposed
-     * @param answersWord that we want
+     * @param answersWord  that we want
      * @return true of false
      * @since 1.0
      */
@@ -61,7 +63,7 @@ public class ControlerDatamuse {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("error whit compareWithDatamuse", e);
         }
         return false;
     }
@@ -71,10 +73,10 @@ public class ControlerDatamuse {
      *
      * @param word that we want to have the spelling words close.
      * @return array of json
-     * @throws Exception
+     * @throws IOException
      * @since 1.0
      */
-    private String getFromDatamuse(String word) throws Exception {
+    private String getFromDatamuse(String word) throws IOException {
         StringBuilder result = new StringBuilder();
         URL url = new URL("https://api.datamuse.com/words?sp=" + word);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
