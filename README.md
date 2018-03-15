@@ -36,6 +36,7 @@ Pre-requis :
 > Pour créer le `war` il faut, dans `./back-end/`, exécuter la commande suivante:   
 > * `mvn clean compile war:war` pour créer le war sans faire les tests.
 > * `mvn clean install war:war` pour créer le war avec les tests.
+> * ou le prendre dans les [releases](https://github.com/paul604/quizz-movie/releases)
 
 Mettre le war dans le dossier webapps du serveur tomcat, puis le lancer.
 
